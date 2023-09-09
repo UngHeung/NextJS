@@ -1,0 +1,45 @@
+/* 게시글 상세 */
+
+.board-detail-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #d1d1d1;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.board-detail-no::before {
+  content: "No.";
+  margin-right: 3px;
+  font-size: 12px;
+}
+
+.board-detail-title {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.board-detail-writer {
+  font-weight: 500;
+}
+
+.board-detail-content {
+  padding-bottom: 30px;
+  border-bottom: 1px solid #d1d1d1;
+  white-space: pre-line;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.board-detail-main>a {
+  display: block;
+  width: 100px;
+  margin: 40px auto;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+}
