@@ -1,0 +1,61 @@
+/* 게시판 */
+
+.board-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.board-list>li {
+  width: 100%;
+  margin-bottom: 40px;
+  padding: 30px 10px;
+  border-bottom: 1px solid #d1d1d1;
+}
+
+.board-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.board-no {
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.board-no::before {
+  content: "No.";
+  margin-right: 3px;
+  font-size: 12px;
+}
+
+.board-writer {
+  font-size: 12px;
+}
+
+.board-title {
+  font-size: 14px;
+}
+
+.board-main {
+  font-size: 14px;
+  font-weight: 300;
+  white-space: pre-line;
+}
+
+.board-main>p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  width: 100%;
+  height: 20px;
+  overflow: hidden;
+  background-color: white;
+}
