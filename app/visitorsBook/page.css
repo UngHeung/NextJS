@@ -1,0 +1,49 @@
+/* 방명록 */
+
+.book-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.book-list>li {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 30px 10px;
+  border-bottom: 1px solid #d1d1d1;
+}
+
+.book-line {
+  width: 100%;
+  margin: 10px 0 20px;
+  border: 1px solid #f1f1f1;
+}
+
+.book-content,
+.book-writer {
+  display: block;
+  width: 100%;
+  font-size: 14px;
+  text-align: left;
+}
+
+.book-content {
+  font-weight: 300;
+  white-space: pre-line;
+}
+
+.book-writer {
+  font-weight: 700;
+}
+
+.book-date {
+  position: absolute;
+  top: 28px;
+  right: 10px;
+  font-size: 10px;
+  text-align: right;
+  white-space: pre-line;
+}
