@@ -79,7 +79,8 @@
   bottom: 0px;
   right: 10px;
   display: block;
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 600;
   text-align: center;
   line-height: 30px;
 }
