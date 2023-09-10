@@ -6,20 +6,12 @@ import Link from "next/link";
 import React from "react";
 import "./page.css";
 import { connectDB } from "@/utils/database";
+import { PostProps } from "@/utils/interface/boardInterface";
 
-export interface boardProps {
-  _id: string;
-  no: string;
-  writer: string;
-  title: string;
-  content: string;
-  date: string;
-}
-
-const newPage = async () => {
+const postList = async () => {
   const client = await connectDB;
   const db = client.db("simplepage");
-  const boardList: boardProps[] = await db.collection("board").find().toArray();
+  const boardList: PostProps[] = await db.collection("board").find().toArray();
 
   return (
     <>
@@ -37,6 +29,7 @@ const newPage = async () => {
                   </section>
                   <section className="board-main">
                     <p className="board-content">{item.content}</p>
+                    <span className="board-like">👍{item.likecount}</span>
                   </section>
                 </Link>
               </li>
@@ -48,4 +41,4 @@ const newPage = async () => {
   );
 };
 
-export default newPage;
+export default postList;

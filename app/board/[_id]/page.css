@@ -43,3 +43,11 @@
   font-size: 14px;
   font-weight: 400;
 }
+
+#board_detail_like {
+  display: none;
+}
+
+#board_detail_like {
+  text-align: center;
+}

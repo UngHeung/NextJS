@@ -1,18 +1,19 @@
 /**
  * 게시물 상세 페이지
  */
+// "use client";
 
 import { connectDB } from "@/utils/database";
-import React from "react";
+import React, { useState } from "react";
 import { ObjectId } from "mongodb";
 import "./page.css";
 import Link from "next/link";
-import { boardProps } from "../page";
+import { PostProps } from "@/utils/interface/boardInterface";
 
-const boardDetail = async ({ ...props }: { params: boardProps }) => {
+const postDetail = async ({ ...props }: { params: PostProps }) => {
   const client = await connectDB;
   const db = client.db("simplepage");
-  const detail = await db.collection("board").findOne({ _id: new ObjectId(props.params._id) });
+  const detail: PostProps = await db.collection("board").findOne({ _id: new ObjectId(props.params._id) });
 
   return (
     <>
@@ -23,10 +24,15 @@ const boardDetail = async ({ ...props }: { params: boardProps }) => {
           <span className="board-detail-writer">{detail?.writer}</span>
         </header>
         <p className="board-detail-content">{detail?.content}</p>
+        <input type="checkbox" name="board-like" id="board_detail_like" />
+        <label htmlFor="board_detail_like">
+          <span>{}</span>
+          <span>{detail.likecount}</span>
+        </label>
         <Link href={"/board"}>목록보기</Link>
       </main>
     </>
   );
 };
 
-export default boardDetail;
+export default postDetail;

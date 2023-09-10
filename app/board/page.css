@@ -45,12 +45,15 @@
 }
 
 .board-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 14px;
   font-weight: 300;
   white-space: pre-line;
 }
 
-.board-main>p {
+.board-content {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
@@ -58,4 +61,11 @@
   height: 20px;
   overflow: hidden;
   background-color: white;
+}
+
+.board-like {
+  display: block;
+  flex-basis: 100px;
+  text-align: right;
+  font-size: 12px;
 }
