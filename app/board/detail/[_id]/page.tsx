@@ -24,11 +24,10 @@ const postDetail = async ({ ...props }: { params: PostProps }) => {
         </header>
         <p className="board-detail-content">{detail?.content}</p>
         <input type="checkbox" name="board-like" id="board_detail_like" />
-        <label htmlFor="board_detail_like">
-          <span>{}</span>
-          <span>{detail?.like.length}</span>
+        <label className="board-detail-like" htmlFor="board_detail_like">
+          <span>{`👍 ${detail?.like.length}`}</span>
         </label>
-        <Link href={"/board"}>목록보기</Link>
+        <Link href={"/board"}>목록가기</Link>
       </main>
     </>
   );
