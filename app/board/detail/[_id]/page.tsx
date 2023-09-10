@@ -30,7 +30,7 @@ const postDetail = async ({ ...props }: { params: PostProps }) => {
           </label>
         </section>
         <section className="board-detail-link-wrap">
-          <Link href={"/board"}>수정</Link>
+          <Link href={`/board/update/${detail?._id}`}>수정</Link>
           <Link href={"/board"}>목록가기</Link>
         </section>
       </main>

@@ -1,5 +1,5 @@
 import { connectDB } from "@/utils/database";
-import React, { useState } from "react";
+import React from "react";
 import Form from "../common/Form";
 
 const postWrite = () => {
@@ -16,7 +16,7 @@ const postWrite = () => {
       <main className="board-write-main">
         <h3 className="title">글쓰기</h3>
         <header className="board-write-head">
-          <Form />
+          <Form type="write" />
         </header>
       </main>
     </>
