@@ -35,12 +35,15 @@
   font-weight: 300;
 }
 
-.board-detail-main>a {
-  display: block;
-  width: 100px;
-  margin: 10px auto;
+.board-detail-link-wrap {
+  text-align: right;
+}
+
+.board-detail-link-wrap>a {
+  display: inline-block;
+  margin: 10px 5px 0 0;
   text-align: center;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
 }
 
@@ -51,6 +54,7 @@
 .board-detail-like {
   display: block;
   margin: 10px 10px 0;
-  text-align: right;
+  text-align: left;
   font-size: 12px;
+  cursor: pointer;
 }

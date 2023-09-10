@@ -22,12 +22,17 @@ const postDetail = async ({ ...props }: { params: PostProps }) => {
           <h3 className="board-detail-title">{detail?.title}</h3>
           <span className="board-detail-writer">{detail?.writer}</span>
         </header>
-        <p className="board-detail-content">{detail?.content}</p>
-        <input type="checkbox" name="board-like" id="board_detail_like" />
-        <label className="board-detail-like" htmlFor="board_detail_like">
-          <span>{`👍 ${detail?.like.length}`}</span>
-        </label>
-        <Link href={"/board"}>목록가기</Link>
+        <section className="board-detail-content-wrap">
+          <p className="board-detail-content">{detail?.content}</p>
+          <input type="checkbox" name="board-like" id="board_detail_like" />
+          <label className="board-detail-like" htmlFor="board_detail_like">
+            <span>{`👍 ${detail?.like.length}`}</span>
+          </label>
+        </section>
+        <section className="board-detail-link-wrap">
+          <Link href={"/board"}>수정</Link>
+          <Link href={"/board"}>목록가기</Link>
+        </section>
       </main>
     </>
   );
