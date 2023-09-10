@@ -26,7 +26,7 @@ const postDetail = async ({ ...props }: { params: PostProps }) => {
         <input type="checkbox" name="board-like" id="board_detail_like" />
         <label htmlFor="board_detail_like">
           <span>{}</span>
-          <span>{detail.likecount}</span>
+          <span>{detail?.like.length}</span>
         </label>
         <Link href={"/board"}>목록보기</Link>
       </main>
