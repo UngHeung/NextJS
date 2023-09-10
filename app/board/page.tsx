@@ -21,7 +21,7 @@ const postList = async () => {
           {boardList.reverse().map((item) => {
             return (
               <li key={item._id}>
-                <Link href={`/board/${item._id}`}>
+                <Link href={`/board/detail/${item._id}`}>
                   <section className="board-head">
                     <span className="board-no">{item.no}</span>
                     <strong className="board-title">{item.title}</strong>
@@ -36,6 +36,8 @@ const postList = async () => {
             );
           })}
         </ul>
+
+        <Link href={"board/write/"}>글쓰기</Link>
       </section>
     </>
   );
