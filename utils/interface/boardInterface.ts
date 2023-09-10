@@ -4,7 +4,6 @@
 
 export interface PostProps {
   _id: string;
-  id?: string;
   no: number;
   writer: string;
   title: string;

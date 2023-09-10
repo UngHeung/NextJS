@@ -10,8 +10,7 @@ const postUpdate = async ({ ...props }: { params: PostProps }) => {
 
   const client = await connectDB;
   const db = client.db("simplepage");
-  const data = await db.collection("board").findOne({ _id: new ObjectId(props.params.id) });
-  data._id = props.params.id;
+  const data = await db.collection("board").findOne({ _id: new ObjectId(props.params._id) });
 
   return (
     <>
