@@ -6,7 +6,6 @@ import { PostProps } from "@/utils/interface/boardInterface";
 
 const postUpdate = async ({ ...props }: { params: PostProps }) => {
   const writer = "관리자";
-  console.log(props.params);
 
   const client = await connectDB;
   const db = client.db("simplepage");
