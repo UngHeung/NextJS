@@ -15,19 +15,23 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(500).json("내용이 없습니다.");
   }
 
-  const client = await connectDB;
-  const db = client.db("simplepage");
-  await db.collection("board").updateOne(
-    { _id: new ObjectId(req.body._id) },
-    {
-      $set: {
-        title: req.body.title,
-        content: req.body.content,
-      },
-    }
-  );
+  try {
+    const client = await connectDB;
+    const db = client.db("simplepage");
+    await db.collection("board").updateOne(
+      { _id: new ObjectId(req.body._id) },
+      {
+        $set: {
+          title: req.body.title,
+          content: req.body.content,
+        },
+      }
+    );
 
-  res.redirect(302, `/board/detail/${req.body._id}`);
+    res.redirect(302, `/board/detail/${req.body._id}`);
+  } catch (e) {
+    console.error(e);
+  }
 };
 
 export default handler;
