@@ -39,12 +39,21 @@
   text-align: right;
 }
 
-.board-detail-link-wrap>a {
+.board-detail-link-wrap>a,
+.board-detail-link-wrap>button {
   display: inline-block;
-  margin: 10px 5px 0 0;
+  margin: 10px 10px 0 0;
+  background-color: inherit;
+  border: none;
   text-align: center;
   font-size: 12px;
   font-weight: 400;
+}
+
+.board-detail-link-wrap>button {
+  font-weight: 600;
+  color: rgb(210, 68, 68);
+  cursor: pointer;
 }
 
 #board_detail_like {
