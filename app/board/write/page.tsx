@@ -1,6 +1,6 @@
 import { connectDB } from "@/utils/database";
 import React, { useState } from "react";
-import Form from "./Form";
+import Form from "../common/Form";
 
 const postWrite = () => {
   const writer = "관리자";

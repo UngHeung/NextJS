@@ -20,16 +20,16 @@ const postList = async () => {
         <ul className="board-list">
           {boardList.reverse().map((item) => {
             return (
-              <li key={item._id}>
-                <Link href={`/board/detail/${item._id}`}>
+              <li key={item?._id}>
+                <Link href={`/board/detail/${item?._id}`}>
                   <section className="board-head">
-                    <span className="board-no">{item.no}</span>
-                    <strong className="board-title">{item.title}</strong>
-                    <span className="board-writer">{item.writer}</span>
+                    <span className="board-no">{item?.no}</span>
+                    <strong className="board-title">{item?.title}</strong>
+                    <span className="board-writer">{item?.writer}</span>
                   </section>
                   <section className="board-main">
-                    <p className="board-content">{item.content}</p>
-                    <span className="board-like">👍{item.likecount}</span>
+                    <p className="board-content">{item?.content}</p>
+                    <span className="board-like">👍{item?.like.length}</span>
                   </section>
                 </Link>
               </li>
@@ -37,7 +37,9 @@ const postList = async () => {
           })}
         </ul>
 
-        <Link href={"board/write/"}>글쓰기</Link>
+        <Link className="board-write" href={"board/write/"}>
+          글쓰기
+        </Link>
       </section>
     </>
   );

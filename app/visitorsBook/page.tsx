@@ -21,14 +21,14 @@ const visitorsBook = async () => {
         <ul className="book-list">
           {visitorsBookList.reverse().map((item) => {
             return (
-              <li key={item.id}>
-                <strong className="book-writer">✏️ {item.writer}</strong>
+              <li key={item?.id}>
+                <strong className="book-writer">✏️ {item?.writer}</strong>
                 <span className="book-date">
-                  {`${item.date.split(" ")[0]}
-                  ${item.date.split(" ")[1]}`}
+                  {`${item?.date.split(" ")[0]}
+                  ${item?.date.split(" ")[1]}`}
                 </span>
                 <hr className="book-line" />
-                <span className="book-content">{`${item.content}`}</span>
+                <span className="book-content">{`${item?.content}`}</span>
               </li>
             );
           })}
