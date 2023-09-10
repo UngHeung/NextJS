@@ -8,6 +8,7 @@ import { ObjectId } from "mongodb";
 import "./page.css";
 import Link from "next/link";
 import { PostProps } from "@/utils/interface/boardInterface";
+import Button from "../../delete/Button";
 
 const postDetail = async ({ ...props }: { params: PostProps }) => {
   const client = await connectDB;
@@ -30,8 +31,9 @@ const postDetail = async ({ ...props }: { params: PostProps }) => {
           </label>
         </section>
         <section className="board-detail-link-wrap">
+          <Link href={"/board"}>목록</Link>
           <Link href={`/board/update/${detail?._id}`}>수정</Link>
-          <Link href={"/board"}>목록가기</Link>
+          <Button _id={detail?._id} />
         </section>
       </main>
     </>
