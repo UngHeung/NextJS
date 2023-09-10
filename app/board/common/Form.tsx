@@ -5,16 +5,24 @@ import "./Form.css";
 import Link from "next/link";
 import { PostProps } from "@/utils/interface/boardInterface";
 
-type PostReqType = "POST" | "PUT";
+type PostReqType = "write" | "update";
+interface BoardFormOption {
+  type: PostReqType;
+  data?: PostProps;
+}
 
-const Form = (type: PostReqType, { ...props }: PostProps) => {
-  const [title, setTitle] = useState(type === "PUT" ? props.title : "");
-  const [content, setContent] = useState(type === "PUT" ? props.content : "");
-  const [like, setLike] = useState(type === "PUT" ? props.like : []);
+const Form = ({ ...props }: BoardFormOption) => {
+  const type = props.type;
+  const data = props.data;
+
+  const [title, setTitle] = useState(type === "write" ? "" : data?.title);
+  const [content, setContent] = useState(type === "write" ? "" : data?.content);
+  const [like, setLike] = useState(type === "write" ? [] : data?.like);
 
   return (
-    <form action="/api/server" method="POST">
+    <form action={type === "write" ? "/api/board/post" : "/api/board/update"} method="POST">
       <section className="post-input-wrap">
+        {type === "update" && <input name="_id" type="text" defaultValue={data?._id} style={{ display: "none" }} />}
         <input name="title" id="post_title" onChange={(e) => setTitle(e.target.value)} value={title} placeholder="제목"></input>
         <textarea name="content" id="post_content" onChange={(e) => setContent(e.target.value)} value={content} placeholder="내용"></textarea>
       </section>
