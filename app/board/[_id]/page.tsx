@@ -1,7 +1,6 @@
 /**
  * 게시물 상세 페이지
  */
-// "use client";
 
 import { connectDB } from "@/utils/database";
 import React, { useState } from "react";

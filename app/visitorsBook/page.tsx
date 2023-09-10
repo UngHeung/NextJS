@@ -6,13 +6,7 @@ import React from "react";
 import { connectDB } from "@/utils/database";
 import "./page.css";
 import Link from "next/link";
-
-interface visitorsBookProps {
-  id: string;
-  writer: string;
-  content: string;
-  date: string;
-}
+import { visitorsBookProps } from "@/utils/interface/visitorsbookInterface";
 
 const visitorsBook = async () => {
   const client = await connectDB;
