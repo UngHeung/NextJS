@@ -3,10 +3,15 @@
 import React, { useState } from "react";
 import "./Form.css";
 import Link from "next/link";
+import { PostProps } from "@/utils/interface/boardInterface";
 
-const Form = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+type PostReqType = "POST" | "PUT";
+
+const Form = (type: PostReqType, { ...props }: PostProps) => {
+  const [title, setTitle] = useState(type === "PUT" ? props.title : "");
+  const [content, setContent] = useState(type === "PUT" ? props.content : "");
+  const [like, setLike] = useState(type === "PUT" ? props.like : []);
+
   return (
     <form action="/api/server" method="POST">
       <section className="post-input-wrap">

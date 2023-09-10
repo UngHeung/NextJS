@@ -23,6 +23,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const db = client.db("simplepage");
   let result;
 
+  req.body.writer = "관리자";
+  req.body.like = [];
+
   if (req.method === "GET") {
     result = await db.collection("board").find().toArray();
   } else if (req.method === "POST") {
