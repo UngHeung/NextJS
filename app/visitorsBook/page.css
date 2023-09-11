@@ -22,6 +22,12 @@
   box-sizing: border-box;
 }
 
+.book-list .btn-basic {
+  position: absolute;
+  bottom: 23px;
+  right: 0;
+}
+
 .book-line {
   width: 100%;
   margin: 10px 0 20px;
