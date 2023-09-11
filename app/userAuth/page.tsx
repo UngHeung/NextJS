@@ -1,5 +1,9 @@
+/**
+ * 로그인 페이지
+ */
+
 import React from "react";
-import Signin from "./signIn/Signin";
+import Login from "./login/Login";
 import "./page.css";
 
 const userAuth = () => {
@@ -7,7 +11,7 @@ const userAuth = () => {
     <>
       <section className="user-auth-wrap">
         <h3 className="title">로그인</h3>
-        <Signin />
+        <Login />
       </section>
     </>
   );
