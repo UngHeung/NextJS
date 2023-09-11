@@ -29,7 +29,7 @@ export const Form = () => {
   };
 
   return (
-    <form id="book_write_form" action={"/api/visitorsbook/post"} method="POST">
+    <form id="book_write_form" action={"/api/visitorsBook/post"} method="POST">
       <header className="book-write-head">
         <div>
           <label className="book-writer-input" htmlFor="book_writer_input">
