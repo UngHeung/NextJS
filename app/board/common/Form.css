@@ -33,9 +33,7 @@
   text-align: right;
 }
 
-.post-add-submit,
-.post-add-cancel {
+.post-add-button-wrap>button,
+.post-add-button-wrap>a {
   margin-right: 10px;
-  font-size: 12px;
-  font-weight: 400;
 }

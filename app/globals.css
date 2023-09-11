@@ -10,6 +10,10 @@
   box-sizing: border-box;
 }
 
+*::placeholder {
+  color: #999999;
+}
+
 body {
   position: relative;
   font-family: 'pretendard';
@@ -35,4 +39,12 @@ ul {
 a {
   text-decoration: none;
   color: inherit
+}
+
+input:focus,
+textarea:focus,
+button:focus,
+input:focus,
+a:focus {
+  outline: none;
 }

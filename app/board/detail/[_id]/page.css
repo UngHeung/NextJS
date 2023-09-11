@@ -1,7 +1,7 @@
 /* 게시글 상세 */
 
 .board-detail-main {
-  padding: 0 20px;
+  padding: 0 20px 30px;
 }
 
 .board-detail-head {
@@ -45,7 +45,7 @@
 
 .board-detail-link-wrap>a,
 .board-detail-link-wrap>button {
-  margin: 10px 10px 0 0;
+  margin: 10px 5px 0 0;
 }
 
 #board_detail_like {

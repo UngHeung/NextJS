@@ -18,15 +18,23 @@ const Signin = async () => {
           <section className="sns-login-wrap">
             <OauthLogin isAuth={false} />
           </section>
+          <hr className="login-quarter-line" />
           <section className="id-login-wrap">
-            <input name="userid" type="text" id="user_id" />
-            <input name="userpw" type="password" id="user_pw" />
+            <div>
+              <input name="userid" type="email" id="user_id" placeholder=" " />
+              <label htmlFor="user_id">이메일</label>
+            </div>
+            <div>
+              <input name="userpw" type="password" id="user_pw" placeholder=" " />
+              <label htmlFor="user_pw">비밀번호</label>
+            </div>
           </section>
           <section className="signin-button-wrap">
-            <button>로그인</button>
-            <Link href={"/"}>회원가입</Link>
+            <button className="button btn-login">로그인</button>
+            <Link className="button btn-normal" href={"/"}>
+              회원가입
+            </Link>
           </section>
-          :
         </form>
       ) : (
         <OauthLogin isAuth={true} />

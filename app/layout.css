@@ -90,20 +90,42 @@
   background-color: #d1d1d1;
 }
 
-.btn-basic {
+.button {
   display: inline-block;
   padding: 5px 10px;
   background-color: white;
-  border: 1px solid #d1d1d1;
+  border: none;
   border-radius: 5px;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, .2);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   transition: background-color, color .3s, .3s;
   cursor: pointer;
 }
 
-.btn-basic:hover {
+.btn-normal {
+  color: black;
+}
+
+
+.btn-normal:hover {
   background-color: black;
+  color: white;
+}
+
+.btn-delete {
+  color: #d24444;
+}
+
+.btn-delete:hover {
+  background-color: #d24444;
+  color: white;
+}
+
+.btn-login {
+  color: #2656c4;
+}
+
+.btn-login:hover {
+  background-color: #2656c4;
   color: white;
 }

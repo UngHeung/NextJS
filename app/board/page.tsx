@@ -39,8 +39,8 @@ const postList = async () => {
           })}
         </ul>
 
-        <Link className="board-write btn-basic" href={"board/write/"}>
-          글쓰기
+        <Link className="button btn-normal board-write" href={"board/write/"}>
+          작성하기
         </Link>
       </section>
     </>

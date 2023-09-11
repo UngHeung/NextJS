@@ -38,7 +38,7 @@ export const Form = () => {
           <input id="book_writer_input" name="writer" type="text" placeholder="이름" onChange={(e) => setWriter(e.target.value)} value={writer} />
         </div>
         <input id="book_date_input" name="date" type="text" defaultValue={getDate()} />
-        <button type="submit" className="btn-basic">
+        <button type="submit" className="button btn-normal">
           등록
         </button>
       </header>

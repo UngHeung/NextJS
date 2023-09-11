@@ -81,11 +81,27 @@
   position: fixed;
   bottom: 130px;
   right: 50%;
-  text-align: right;
-  transform: translateX(165px)
+  border: 1px solid #d1d1d1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  transform: translateX(165px);
+  animation: updown .7s alternate ease-in-out infinite;
+}
+
+.board-write:hover {
+  box-shadow: none;
 }
 
 /* 글쓰기, 글수정 */
 .board-write-main {
   padding: 30px 20px
+}
+
+@keyframes updown {
+  0% {
+    transform: translate(165px, 3px);
+  }
+
+  100% {
+    transform: translate(165px, -3px);
+  }
 }

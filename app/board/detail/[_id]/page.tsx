@@ -31,10 +31,10 @@ const postDetail = async ({ ...props }: { params: PostProps }) => {
           </label>
         </section>
         <section className="board-detail-link-wrap">
-          <Link className="btn-basic" href={"/board"}>
+          <Link className="button btn-normal" href={"/board"}>
             목록
           </Link>
-          <Link className="btn-basic" href={`/board/update/${detail?._id}`}>
+          <Link className="button btn-normal" href={`/board/update/${detail?._id}`}>
             수정
           </Link>
 
