@@ -1,0 +1,9 @@
+#board_delete_button {
+  color: #d24444;
+  cursor: pointer;
+}
+
+#board_delete_button:hover {
+  background-color: #d24444;
+  color: white;
+}
