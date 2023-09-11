@@ -5,7 +5,6 @@
 import React from "react";
 import { connectDB } from "@/utils/database";
 import "./page.css";
-import Link from "next/link";
 import { visitorsBookProps } from "@/utils/interface/visitorsbookInterface";
 
 const visitorsBook = async () => {
