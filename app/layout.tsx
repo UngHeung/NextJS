@@ -18,7 +18,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <header className="main-header">
           <div className="main-header-wrap">
             <h2>
-              <Link href={"/"}>NEXT.JS</Link>
+              <Link href={"/"}>DEV.</Link>
             </h2>
             <nav className="main-nav">
               <ul className="main-menu">
