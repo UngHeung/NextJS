@@ -6,6 +6,7 @@ import React from "react";
 import { connectDB } from "@/utils/database";
 import "./page.css";
 import { visitorsBookProps } from "@/utils/interface/visitorsbookInterface";
+import { Form } from "./write/Form";
 
 const visitorsBook = async () => {
   const client = await connectDB;
@@ -33,7 +34,9 @@ const visitorsBook = async () => {
           })}
         </ul>
       </section>
-      <section>{/* <Link href={"visitorsBook/write"}>방명록 쓰기</Link> */}</section>
+      <section className="book-write-content">
+        <Form />
+      </section>
     </>
   );
 };

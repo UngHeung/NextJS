@@ -47,3 +47,7 @@
   text-align: right;
   white-space: pre-line;
 }
+
+.book-write-content {
+  position: relative;
+}
