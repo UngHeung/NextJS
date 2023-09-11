@@ -1,0 +1,58 @@
+.signup-input-wrap {
+  margin: 30px 20px;
+}
+
+
+.user-input-wrap {
+  padding-top: 30px;
+}
+
+.user-input-wrap>div {
+  position: relative;
+}
+
+.user-input-wrap input {
+  width: 100%;
+  height: 35px;
+  margin-bottom: 40px;
+  padding: 0 10px;
+  background-color: #f1f1f1;
+  border: none;
+  border-bottom: 1px solid #d1d1d1;
+  border-radius: 4px;
+}
+
+.user-input-wrap label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 14px;
+  color: #999999;
+  transition: top, left, font-size, color .3s, .3s, .3s, .3s;
+}
+
+.user-input-wrap input:focus+label,
+.user-input-wrap input:not(:placeholder-shown)+label {
+  top: -20px;
+  left: 0;
+  color: black;
+  font-size: 12px;
+}
+
+#signup_email {
+  width: calc(100% - 70px);
+}
+
+.user-input-wrap .button {
+  position: absolute;
+  top: 5px;
+  right: 0;
+}
+
+.signup-button-wrap {
+  text-align: right;
+}
+
+.signup-button-wrap button {
+  margin-right: 5px;
+}
