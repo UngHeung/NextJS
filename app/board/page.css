@@ -12,7 +12,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 30px 0 50px;
+  margin-bottom: 50px;
 }
 
 .board-list>li {
@@ -27,7 +27,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   padding: 10px 0;
   border-bottom: 1px solid #f1f1f1;
 }

@@ -12,7 +12,7 @@
   margin-bottom: 30px;
   padding: 30px 10px 10px;
   border-bottom: 1px solid #d1d1d1;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 300;
 }
 
@@ -24,7 +24,7 @@
 
 .board-detail-title {
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .board-detail-writer {
