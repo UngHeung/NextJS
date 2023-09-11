@@ -4,12 +4,12 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import "./Button.css";
 
-const Button = (props: { _id: string }) => {
+const Button = (props: { _id: string; req: string }) => {
   const router = useRouter();
 
   const handleRemove = async () => {
     try {
-      await fetch("/api/board/delete", { method: "DELETE", body: props._id })
+      await fetch(`/api/${props.req}/delete`, { method: "DELETE", body: props._id })
         .then((res) => {
           if (res.status === 200) {
             return res.json();
@@ -20,7 +20,7 @@ const Button = (props: { _id: string }) => {
         })
         .then((res) => {
           console.log(res);
-          router.push("/board");
+          router.push(`/${props.req}`);
           router.refresh();
         })
         .catch((e) => {

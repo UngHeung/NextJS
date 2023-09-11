@@ -38,7 +38,7 @@ const postDetail = async ({ ...props }: { params: PostProps }) => {
             수정
           </Link>
 
-          <Button _id={detail?._id} />
+          <Button _id={detail?._id} req="board" />
         </section>
       </main>
     </>
