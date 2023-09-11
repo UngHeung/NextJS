@@ -8,6 +8,8 @@ import "./page.css";
 import { connectDB } from "@/utils/database";
 import { PostProps } from "@/utils/interface/boardInterface";
 
+export const dynamic = "force-dynamic";
+
 const postList = async () => {
   const client = await connectDB;
   const db = client.db("simplepage");

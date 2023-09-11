@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import ADMIN from "./config";
+import ADMIN from "./authConfig";
 
 const url = `mongodb+srv://admin:${ADMIN.PW}@test-project.mmw6miq.mongodb.net/?retryWrites=true&w=majority`;
 

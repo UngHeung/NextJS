@@ -9,6 +9,8 @@ import { visitorsBookProps } from "@/utils/interface/visitorsbookInterface";
 import { Form } from "./write/Form";
 import Button from "../board/delete/Button";
 
+export const dynamic = "force-dynamic";
+
 const visitorsBook = async () => {
   const client = await connectDB;
   const db = client.db("simplepage");
