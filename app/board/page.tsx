@@ -29,7 +29,7 @@ const postList = async () => {
                   </section>
                   <section className="board-main">
                     <p className="board-content">{item?.content}</p>
-                    <span className="board-like">👍{item?.like.length}</span>
+                    <span className="board-like">{item?.like.length}</span>
                   </section>
                 </Link>
               </li>

@@ -1,3 +1,7 @@
+/**
+ * 게시판 폼 컴포넌트
+ */
+
 "use client";
 
 import React, { useState } from "react";

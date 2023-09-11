@@ -1,3 +1,7 @@
+/**
+ * 수정하기 페이지
+ */
+
 import { connectDB } from "@/utils/database";
 import React from "react";
 import Form from "../../common/Form";
