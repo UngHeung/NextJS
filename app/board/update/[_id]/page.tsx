@@ -7,6 +7,7 @@ import React from "react";
 import Form from "../../common/Form";
 import { ObjectId } from "mongodb";
 import { PostProps } from "@/utils/interface/boardInterface";
+import "../../page.css";
 
 const postUpdate = async ({ ...props }: { params: PostProps }) => {
   const writer = "관리자";

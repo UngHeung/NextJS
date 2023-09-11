@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import React from "react";
+import "./Button.css";
 
 const Button = (props: { _id: string }) => {
   const router = useRouter();
@@ -29,7 +30,11 @@ const Button = (props: { _id: string }) => {
       console.error(e);
     }
   };
-  return <button onClick={handleRemove}>삭제</button>;
+  return (
+    <button id="board_delete_button" className="btn-basic" onClick={handleRemove}>
+      삭제
+    </button>
+  );
 };
 
 export default Button;

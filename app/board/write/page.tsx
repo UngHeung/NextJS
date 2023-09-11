@@ -5,6 +5,7 @@
 import { connectDB } from "@/utils/database";
 import React from "react";
 import Form from "../common/Form";
+import "../page.css";
 
 const postWrite = () => {
   const writer = "관리자";

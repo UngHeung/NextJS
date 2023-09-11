@@ -29,6 +29,7 @@
 }
 
 .post-add-button-wrap {
+  width: 100%;
   text-align: right;
 }
 
@@ -37,10 +38,4 @@
   margin-right: 10px;
   font-size: 12px;
   font-weight: 400;
-}
-
-.post-add-submit {
-  background-color: inherit;
-  border: none;
-  cursor: pointer;
 }

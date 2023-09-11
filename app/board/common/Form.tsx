@@ -32,11 +32,11 @@ const Form = ({ ...props }: BoardFormOption) => {
         <textarea name="content" id="post_content" onChange={(e) => setContent(e.target.value)} value={content} placeholder="내용"></textarea>
       </section>
       <section className="post-add-button-wrap">
-        <button type="submit" className="post-add-submit">
-          ✔️저장
+        <button type="submit" className="post-add-submit btn-basic">
+          저장
         </button>
-        <Link className="post-add-cancel" href={"/board"}>
-          ❌취소
+        <Link className="post-add-cancel btn-basic" href={type === "write" ? "/board" : `/board/detail/${id}`}>
+          취소
         </Link>
       </section>
     </form>

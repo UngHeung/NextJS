@@ -22,7 +22,7 @@ const visitorsBook = async () => {
           {visitorsBookList.reverse().map((item) => {
             return (
               <li key={item?.id}>
-                <strong className="book-writer">✏️ {item?.writer}</strong>
+                <strong className="book-writer">{item?.writer}</strong>
                 <span className="book-date">
                   {`${item?.date.split(" ")[0]}
                   ${item?.date.split(" ")[1]}`}

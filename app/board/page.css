@@ -2,6 +2,9 @@
 
 .board-wrap {
   position: relative;
+  max-height: calc(100vh - 150px);
+  padding: 30px 20px 0;
+  overflow-y: auto;
 }
 
 .board-list {
@@ -9,7 +12,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 50px;
+  margin: 30px 0 50px;
 }
 
 .board-list>li {
@@ -75,12 +78,14 @@
 }
 
 .board-write {
-  position: absolute;
-  bottom: 0px;
-  right: 10px;
-  display: block;
-  font-size: 12px;
-  font-weight: 600;
-  text-align: center;
-  line-height: 30px;
+  position: fixed;
+  bottom: 130px;
+  right: 50%;
+  text-align: right;
+  transform: translateX(165px)
+}
+
+/* 글쓰기, 글수정 */
+.board-write-main {
+  padding: 30px 20px
 }

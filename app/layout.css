@@ -67,7 +67,7 @@
   max-width: 390px;
   height: calc(100vh - 150px);
   margin: 50px auto 0;
-  padding: 20px 20px;
+  padding: 0 5px;
   background-color: white;
   overflow-y: auto;
 }
@@ -86,4 +86,22 @@
   width: 4px;
   border-radius: 1px;
   background-color: #d1d1d1;
+}
+
+.btn-basic {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: white;
+  border: 1px solid #d1d1d1;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, .2);
+  font-size: 12px;
+  font-weight: 600;
+  transition: background-color, color .3s, .3s;
+  cursor: pointer;
+}
+
+.btn-basic:hover {
+  background-color: black;
+  color: white;
 }
