@@ -7,6 +7,7 @@ import { connectDB } from "@/utils/database";
 import "./page.css";
 import { visitorsBookProps } from "@/utils/interface/visitorsbookInterface";
 import { Form } from "./write/Form";
+import Button from "../board/delete/Button";
 
 const visitorsBook = async () => {
   const client = await connectDB;
@@ -20,8 +21,9 @@ const visitorsBook = async () => {
         <h3 className="title">방명록</h3>
         <ul className="book-list">
           {visitorsBookList.reverse().map((item) => {
+            item._id = item._id.toString();
             return (
-              <li key={item?.id}>
+              <li key={item?._id}>
                 <strong className="book-writer">{item?.writer}</strong>
                 <span className="book-date">
                   {`${item?.date.split(" ")[0]}
@@ -29,6 +31,7 @@ const visitorsBook = async () => {
                 </span>
                 <hr className="book-line" />
                 <span className="book-content">{`${item?.content}`}</span>
+                <Button _id={item?._id} req="visitorsBook" />
               </li>
             );
           })}
