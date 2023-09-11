@@ -58,7 +58,7 @@
 #user_pw:focus+label,
 #user_id:not(:placeholder-shown)+label,
 #user_pw:not(:placeholder-shown)+label {
-  top: -15px;
+  top: -20px;
   left: 0;
   font-size: 12px;
   color: black;
