@@ -43,6 +43,21 @@
   width: calc(100% - 70px);
 }
 
+.check-message {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  font-size: 12px;
+}
+
+.check-message.right {
+  color: green;
+}
+
+.check-message.wrong {
+  color: red
+}
+
 .user-input-wrap .button {
   position: absolute;
   top: 5px;
