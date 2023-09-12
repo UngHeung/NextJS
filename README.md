@@ -1,7 +1,7 @@
 # 🔥 Next.js
 
 > 만들어보면서 공부하자!  
-> `React` & `Next.js` & `JavaScript` & `TypeScript` & `MongoDB`
+> `Next.js` `JavaScript` `TypeScript` `MongoDB`
 
 <br>
 
