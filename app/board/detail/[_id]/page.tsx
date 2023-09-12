@@ -3,7 +3,7 @@
  */
 
 import { connectDB } from "@/utils/database";
-import React, { useState } from "react";
+import React from "react";
 import { ObjectId } from "mongodb";
 import "./page.css";
 import Link from "next/link";
