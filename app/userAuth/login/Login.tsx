@@ -14,7 +14,7 @@ const Login = async () => {
   return (
     <>
       {!user ? (
-        <form>
+        <form action={"/api/auth/get"} method="GET">
           <section className="sns-login-wrap">
             <OauthLogin isAuth={false} />
           </section>

@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 const Signup = () => {
   const router = useRouter();
 
-  const [accountName, setAccountName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
@@ -48,7 +48,7 @@ const Signup = () => {
       <form action={"/api/auth/post"} method="POST">
         <section className="user-input-wrap">
           <div>
-            <input type="text" name="accountname" id="signup_name" placeholder=" " onChange={(e) => setAccountName(e.target.value)} value={accountName} />
+            <input type="text" name="name" id="signup_name" placeholder=" " onChange={(e) => setName(e.target.value)} value={name} />
             <label htmlFor="signup_name">이름</label>
           </div>
           <div>
