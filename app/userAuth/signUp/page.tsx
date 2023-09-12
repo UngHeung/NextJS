@@ -7,17 +7,45 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import "./page.css";
+import { useRouter } from "next/navigation";
 
 const Signup = () => {
+  const router = useRouter();
+
   const [accountName, setAccountName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
 
+  const [emailCheck, setEmailCheck] = useState(false);
+  const [showEmailCheckMessage, setShowEmailCheckMessage] = useState("");
+
+  const checkEmail = async () => {
+    try {
+      await fetch("/api/auth/check", { method: "POST", body: email })
+        .then((res) => {
+          if (res.status === 200) {
+            setEmailCheck(true);
+            setShowEmailCheckMessage("확인되었습니다.");
+            return res.json();
+          } else {
+            setEmailCheck(false);
+            setShowEmailCheckMessage("중복되거나 잘못된 형식의 이메일입니다.");
+            return res.json();
+          }
+        })
+        .then((res) => {
+          console.log(res);
+        });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <section className="signup-input-wrap">
       <h3 className="title">회원가입</h3>
-      <form>
+      <form action={"/api/auth/post"} method="POST">
         <section className="user-input-wrap">
           <div>
             <input type="text" name="accountname" id="signup_name" placeholder=" " onChange={(e) => setAccountName(e.target.value)} value={accountName} />
@@ -26,7 +54,10 @@ const Signup = () => {
           <div>
             <input type="email" name="email" id="signup_email" placeholder=" " onChange={(e) => setEmail(e.target.value)} value={email} />
             <label htmlFor="signup_email">이메일</label>
-            <button className="button btn-normal">중복확인</button>
+            {showEmailCheckMessage ? <span className={`check-message ${emailCheck ? "right" : "wrong"}`}>{showEmailCheckMessage}</span> : null}
+            <button type="button" className="button btn-normal" onClick={checkEmail}>
+              중복확인
+            </button>
           </div>
           <div>
             <input type="password" name="password" id="signup_pw" placeholder=" " onChange={(e) => setPassword(e.target.value)} value={password} />
