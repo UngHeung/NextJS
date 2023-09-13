@@ -10,4 +10,5 @@ export interface PostProps {
   content: string;
   date: string;
   like: string[];
+  writerid: string;
 }
