@@ -25,18 +25,24 @@
   font-weight: 300;
 }
 
-#book_writer_input {
-  width: 100px;
+#book_writer_input,
+#book_password_input {
   height: 20px;
+  margin-right: 10px;
   padding: 15px 5px;
   box-sizing: border-box;
   border: none;
   border-bottom: 1px solid #d1d1d1;
+  text-align: center;
   overflow: hidden;
 }
 
-#book_writer_input:focus {
-  outline: none;
+#book_writer_input {
+  width: 60px;
+}
+
+#book_password_input {
+  width: 80px;
 }
 
 #book_date_input {
