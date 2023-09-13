@@ -20,7 +20,7 @@ const visitorsBook = async () => {
   const session = await getServerSession(authOptions);
   const user: userProps = session?.user as userProps;
 
-  const visitorsBookList: visitorsBookProps[] = await db.collection("visitorsbook").find().toArray();
+  const visitorsBookList: visitorsBookProps[] = await db.collection("visitorsbook").find().sort({ date: -1 }).toArray();
 
   return (
     <>
