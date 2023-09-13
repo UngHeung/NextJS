@@ -1,0 +1,11 @@
+#book_delete_input {
+  position: absolute;
+  right: 50px;
+  bottom: 23px;
+  width: 50px;
+  height: 25px;
+  background-color: #f1f1f1;
+  border: none;
+  border-bottom: 1px solid #d1d1d1;
+  text-align: center;
+}
