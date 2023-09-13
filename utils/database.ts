@@ -1,7 +1,6 @@
 import { MongoClient } from "mongodb";
-import { ADMIN } from "./authConfig";
 
-const url = `mongodb+srv://admin:${ADMIN.PW}@test-project.mmw6miq.mongodb.net/?retryWrites=true&w=majority`;
+const url = process.env.NEXT_PUBLIC_API_URL!;
 
 let connectDB: any;
 
