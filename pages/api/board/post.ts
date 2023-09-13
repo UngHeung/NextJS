@@ -12,12 +12,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   } else if (!req.body.content) {
     return res.status(500).json("내용이 없습니다.");
   }
+  console.log(req.body);
 
   try {
     const client = await connectDB;
     const db = client.db("simplepage");
 
-    req.body.writer = "관리자";
     req.body.like = [];
 
     const result = await db.collection("board").insertOne(req.body);
