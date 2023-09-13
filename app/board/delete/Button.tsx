@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { userProps } from "../common/Form";
 import "./Button.css";
 
-const Button = (props: { _id: string; userdata: userProps; req: string; authtype: boolean }) => {
+const Button = (props: { _id: string; userdata?: userProps; req: string; authtype?: boolean }) => {
   const router = useRouter();
   const [bookPassword, setBookPassword] = useState("");
 
