@@ -4,11 +4,9 @@
 
 export interface PostProps {
   _id: string;
-  no: number;
+  writerid: string;
   writer: string;
   title: string;
   content: string;
-  date: string;
   like: string[];
-  writerid: string;
 }
