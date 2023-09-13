@@ -6,6 +6,7 @@ import "./layout.css";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import NextAuthProvider from "./providers/NextAuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +22,9 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
     <html lang="ko-KR">
       <body className={inter.className}>
         <Header user={session?.user} />
-        <main className="main">{children}</main>
+        <NextAuthProvider>
+          <main className="main">{children}</main>
+        </NextAuthProvider>
         <Footer />
       </body>
     </html>
