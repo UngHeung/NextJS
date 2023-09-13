@@ -20,7 +20,7 @@ const Header = ({ ...props }) => {
             <li>
               <Link href={"/visitorsBook"}>방명록</Link>
             </li>
-            <li>{!user ? <Link href={"/userAuth"}>로그인</Link> : <span>{user.name}</span>}</li>
+            <li>{!user ? <Link href={"/userAuth"}>로그인</Link> : <Link href={"/userAuth/userInfo/"}>{user.name}</Link>}</li>
           </ul>
         </nav>
       </div>
