@@ -1,0 +1,24 @@
+.user-info-wrap {
+  padding: 30px 20px;
+}
+
+.info-title {
+  display: inline-block;
+  margin: 0 10px 20px 0;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.info-value {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.user-info-button-wrap {
+  padding: 0 20px;
+  text-align: right;
+}
+
+.user-info-button-wrap>button {
+  margin-left: 5px;
+}
