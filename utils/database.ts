@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 
-const url = process.env.NEXT_PUBLIC_API_URL!;
+const url = process.env.MONGODB_CONNECT_URL!;
 
 let connectDB: any;
 
