@@ -31,7 +31,7 @@ export const Form = ({ userdata }: visitorsBookProps) => {
   };
 
   return (
-    <form id="book_write_form" action={"/api/visitorsBook/post"} method="POST">
+    <form id="book_write_form" action={"/api/visitorsBook/post"} method="GET">
       <header className="book-write-head">
         <div>
           {userdata && (
