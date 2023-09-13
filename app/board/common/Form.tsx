@@ -18,7 +18,8 @@ interface BoardFormOption {
 const Form = ({ ...props }: BoardFormOption) => {
   const type = props.type;
   const data = props.data;
-  const id = data?._id;
+  const _id = data?._id;
+  const writerid = data?.writerid;
 
   const [title, setTitle] = useState(type === "write" ? "" : data?.title);
   const [content, setContent] = useState(type === "write" ? "" : data?.content);
@@ -27,7 +28,7 @@ const Form = ({ ...props }: BoardFormOption) => {
   return (
     <form action={type === "write" ? "/api/board/post" : "/api/board/update"} method="POST">
       <section className="post-input-wrap">
-        {type === "update" && <input name="_id" type="text" defaultValue={id} style={{ display: "none" }} />}
+        {type === "update" && <input name="_id" type="text" defaultValue={_id} style={{ display: "none" }} />}
         <input name="title" id="post_title" onChange={(e) => setTitle(e.target.value)} value={title} placeholder="제목"></input>
         <textarea name="content" id="post_content" onChange={(e) => setContent(e.target.value)} value={content} placeholder="내용"></textarea>
       </section>
@@ -35,7 +36,7 @@ const Form = ({ ...props }: BoardFormOption) => {
         <button type="submit" className="button btn-normal">
           저장
         </button>
-        <Link className="button btn-normal" href={type === "write" ? "/board" : `/board/detail/${id}`}>
+        <Link className="button btn-normal" href={type === "write" ? "/board" : `/board/detail/${_id}`}>
           취소
         </Link>
       </section>

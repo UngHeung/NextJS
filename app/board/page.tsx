@@ -7,6 +7,8 @@ import React from "react";
 import "./page.css";
 import { connectDB } from "@/utils/database";
 import { PostProps } from "@/utils/interface/boardInterface";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 export const dynamic = "force-dynamic";
 
@@ -14,6 +16,8 @@ const postList = async () => {
   const client = await connectDB;
   const db = client.db("simplepage");
   const boardList: PostProps[] = await db.collection("board").find().toArray();
+
+  const session = await getServerSession(authOptions);
 
   return (
     <>
