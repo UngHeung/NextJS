@@ -6,7 +6,7 @@
 
 import Link from "next/link";
 import React, { FormEvent, useState } from "react";
-import OauthLogin from "../oauth/OauthLogin";
+// import OauthLogin from "../oauth/OauthLogin";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -31,10 +31,10 @@ const Login = () => {
 
   return (
     <form onSubmit={(e) => handleSubmit(e, email, password)} method="GET">
-      <section className="sns-login-wrap">
+      {/* <section className="sns-login-wrap">
         <OauthLogin isAuth={false} />
-      </section>
-      <hr className="login-quarter-line" />
+      </section> */}
+      {/* <hr className="login-quarter-line" /> */}
       <section className="id-login-wrap">
         <div>
           <input name="email" type="email" id="user_id" placeholder=" " onChange={(e) => setEmail(e.target.value)} value={email} />
