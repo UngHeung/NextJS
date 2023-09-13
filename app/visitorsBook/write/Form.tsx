@@ -49,7 +49,7 @@ export const Form = ({ userdata }: visitorsBookProps) => {
               <label className="book-password-input" htmlFor="book_password_input">
                 비밀번호
               </label>
-              <input id="book_password_input" name="password" type="password" placeholder="비밀번호" onChange={(e) => setBookPassword(e.target.value)} />
+              <input id="book_password_input" name="bookpassword" type="password" placeholder="비밀번호" onChange={(e) => setBookPassword(e.target.value)} />
             </>
           )}
         </div>
