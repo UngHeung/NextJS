@@ -6,15 +6,11 @@
 
 import "./Form.css";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 export const Form = () => {
   const [writer, setWriter] = useState("");
   const [content, setContent] = useState("");
-
-  useEffect(() => {
-    console.log(writer, content);
-  }, [writer, content]);
 
   const getDate = () => {
     const date = new Date();
