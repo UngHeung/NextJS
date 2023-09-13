@@ -7,8 +7,6 @@ import React from "react";
 import "./page.css";
 import { connectDB } from "@/utils/database";
 import { PostProps } from "@/utils/interface/boardInterface";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 export const dynamic = "force-dynamic";
 
@@ -17,19 +15,17 @@ const postList = async () => {
   const db = client.db("simplepage");
   const boardList: PostProps[] = await db.collection("board").find().toArray();
 
-  const session = await getServerSession(authOptions);
-
   return (
     <>
       <section className="board-wrap">
         <h3 className="title">게시판</h3>
         <ul className="board-list">
-          {boardList.reverse().map((item) => {
+          {boardList.map((item) => {
             return (
               <li key={item?._id}>
                 <Link href={`/board/detail/${item?._id}`}>
                   <section className="board-head">
-                    <span className="board-no">{item?.no}</span>
+                    {/* <span className="board-no">{item?.no}</span> */}
                     <strong className="board-title">{item?.title}</strong>
                     <span className="board-writer">{item?.writer}</span>
                   </section>
