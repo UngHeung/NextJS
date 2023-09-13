@@ -12,7 +12,7 @@ import { PostProps } from "@/utils/interface/boardInterface";
 type PostReqType = "write" | "update";
 interface BoardFormProps {
   type: PostReqType;
-  userdata: userProps;
+  userdata?: userProps;
   data?: PostProps;
 }
 export interface userProps {
