@@ -1,4 +1,3 @@
-import { OAUTH } from "@/utils/authConfig";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { connectDB } from "@/utils/database";
@@ -62,7 +61,7 @@ export const authOptions: NextAuthOptions = {
     signIn: "/userAuth",
   },
 
-  secret: OAUTH.SECRET,
+  secret: process.env.OAUTH_SECRET,
 };
 
 export default NextAuth(authOptions);

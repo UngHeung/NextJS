@@ -8,7 +8,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const body = JSON.parse(req.body);
-  console.log(body);
   try {
     const client = await connectDB;
     const db = client.db("simplepage");

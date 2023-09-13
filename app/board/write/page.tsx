@@ -17,7 +17,6 @@ const postWrite = async () => {
     redirect("/userAuth");
   }
 
-  console.log(session?.user);
   const writer = "관리자";
   let no: number;
   const handleSubmit = async () => {

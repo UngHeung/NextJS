@@ -12,7 +12,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   } else if (!req.body.content) {
     return res.status(500).json("내용이 없습니다.");
   }
-  console.log(req.body);
 
   try {
     const client = await connectDB;
