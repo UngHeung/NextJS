@@ -8,12 +8,17 @@ import "./page.css";
 import { visitorsBookProps } from "@/utils/interface/visitorsbookInterface";
 import { Form } from "./write/Form";
 import Button from "../board/delete/Button";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { getServerSession } from "next-auth";
+import { userProps } from "../board/common/Form";
 
 export const dynamic = "force-dynamic";
 
 const visitorsBook = async () => {
   const client = await connectDB;
   const db = client.db("simplepage");
+  const session = await getServerSession(authOptions);
+  const user: userProps = session?.user as userProps;
 
   const visitorsBookList: visitorsBookProps[] = await db.collection("visitorsbook").find().toArray();
 
@@ -22,7 +27,7 @@ const visitorsBook = async () => {
       <section className="book-wrap">
         <h3 className="title">방명록</h3>
         <ul className="book-list">
-          {visitorsBookList.reverse().map((item) => {
+          {visitorsBookList.map((item) => {
             item._id = item._id.toString();
             return (
               <li key={item?._id}>
@@ -33,14 +38,14 @@ const visitorsBook = async () => {
                 </span>
                 <hr className="book-line" />
                 <span className="book-content">{`${item?.content}`}</span>
-                <Button _id={item?._id} req="visitorsBook" />
+                {user?._id === item?.writerid || !item?.authtype ? <Button _id={item?._id} userdata={user} req="visitorsBook" authtype={item?.authtype} /> : null}
               </li>
             );
           })}
         </ul>
       </section>
       <section className="book-write-content">
-        <Form />
+        <Form userdata={user} />
       </section>
     </>
   );
