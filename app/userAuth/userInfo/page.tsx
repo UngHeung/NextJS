@@ -3,10 +3,14 @@ import LogoutButton from "../login/LogoutButton";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import "./page.css";
+import { redirect } from "next/navigation";
 
 const pages = async () => {
   const session = await getServerSession(authOptions);
   const user = session?.user;
+  if (!user) {
+    redirect("/");
+  }
 
   return (
     <>
