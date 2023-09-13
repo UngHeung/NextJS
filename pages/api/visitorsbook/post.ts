@@ -12,6 +12,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(500).json("내용이 없습니다.");
   }
 
+  if (!req.body.authtype) {
+    req.body.authtype = false;
+  }
+
   try {
     const client = await connectDB;
     const db = client.db("simplepage");
