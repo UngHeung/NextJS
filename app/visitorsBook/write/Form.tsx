@@ -4,7 +4,7 @@
 
 "use client";
 
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import getDate from "@/utils/func/getDate";
 import { useRouter } from "next/navigation";
 import { UserDataProps } from "@/utils/interface/user/userInterfaces";
@@ -15,14 +15,19 @@ export const Form = ({ ...props }: UserDataProps) => {
   const [writer, setWriter] = useState(props?._id ? props?.name : "");
   const [content, setContent] = useState("");
   const [bookPassword, setBookPassword] = useState("");
+
   const date = getDate();
   const router = useRouter();
+  const writerid = props._id;
+  const authtype = writerid ? true : false;
 
   const data: VisitorsBookRequestProps = {
     writer: writer,
+    writerid: writerid,
     content: content,
     bookpassword: bookPassword,
     date: date,
+    authtype: authtype,
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>, data: VisitorsBookRequestProps) => {
@@ -55,7 +60,7 @@ export const Form = ({ ...props }: UserDataProps) => {
       id="book_write_form"
       onSubmit={(e) => {
         handleSubmit(e, data);
-        !props._id ? setWriter("") : null;
+        !writerid ? setWriter("") : null;
         setBookPassword("");
         setContent("");
       }}
@@ -63,10 +68,10 @@ export const Form = ({ ...props }: UserDataProps) => {
     >
       <header className="book-write-head">
         <div>
-          {props._id && (
+          {authtype && (
             <>
-              <input type="text" id="" name="writerid" defaultValue={props._id} style={{ display: "none" }} />
-              <input type="text" name="authtype" defaultValue={"true"} style={{ display: "none" }} />
+              <div>ff</div>
+              <input type="text" name="writerid" defaultValue={writerid} style={{ display: "none" }} />
             </>
           )}
           <label className="book-writer-input" htmlFor="book_writer_input">
@@ -79,9 +84,9 @@ export const Form = ({ ...props }: UserDataProps) => {
             placeholder="이름"
             onChange={(e) => setWriter(e.target.value)}
             value={writer}
-            readOnly={props._id ? true : false}
+            readOnly={writerid ? true : false}
           />
-          {!props._id && (
+          {!writerid && (
             <>
               <label className="book-password-input" htmlFor="book_password_input">
                 비밀번호

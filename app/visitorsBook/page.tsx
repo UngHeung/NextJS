@@ -5,12 +5,12 @@
 import React from "react";
 import Button from "../board/delete/Button";
 import { connectDB } from "@/utils/database";
-import { visitorsBookProps } from "@/utils/interface/visitorsBook/visitorsbookInterfaces";
 import { Form } from "./write/Form";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
 import { UserDataProps, UserSessionProps } from "@/utils/interface/user/userInterfaces";
 import "./page.css";
+import { VisitorsBookProps } from "@/utils/interface/visitorsBook/visitorsbookInterfaces";
 
 export const dynamic = "force-dynamic";
 
@@ -20,7 +20,7 @@ const visitorsBook = async () => {
   const session = await getServerSession(authOptions);
   const user: UserDataProps = session?.user as UserSessionProps;
 
-  const visitorsBookList: visitorsBookProps[] = await db.collection("visitorsbook").find().sort({ _id: -1 }).toArray();
+  const visitorsBookList: VisitorsBookProps[] = await db.collection("visitorsbook").find().sort({ _id: -1 }).toArray();
 
   return (
     <>

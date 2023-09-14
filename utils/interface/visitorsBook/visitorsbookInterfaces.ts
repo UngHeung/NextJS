@@ -13,7 +13,9 @@ export interface VisitorsBookProps {
 
 export interface VisitorsBookRequestProps {
   writer: string;
+  writerid?: string;
   content: string;
   bookpassword?: string;
   date: string;
+  authtype: boolean;
 }
