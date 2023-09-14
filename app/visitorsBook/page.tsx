@@ -8,7 +8,7 @@ import { connectDB } from "@/utils/database";
 import { Form } from "./write/Form";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
-import { UserDataProps, UserSessionProps } from "@/utils/interface/user/userInterfaces";
+import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
 import "./page.css";
 import { VisitorsBookProps } from "@/utils/interface/visitorsBook/visitorsbookInterfaces";
 
