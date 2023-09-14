@@ -1,29 +1,48 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { userProps } from "../common/Form";
+import React, { FormEvent, useState } from "react";
 import "./Button.css";
+import { UserDataProps } from "@/utils/interface/user/userInterfaces";
+import { CommonDeleteRequestProps, DeleteRequestType } from "@/utils/interface/visitorsBook/visitorsbookInterfaces";
 
-const Button = (props: { _id: string; userdata?: userProps; req: string; authtype?: boolean }) => {
-  const router = useRouter();
+const Button = (props: { _id: string; userdata: UserDataProps; req: string; authtype?: boolean }) => {
   const [bookPassword, setBookPassword] = useState("");
+  const router = useRouter();
 
-  const handleRemove = async () => {
+  const id = props?._id.toString();
+  const userId = props?.userdata?._id.toString();
+  const deleteType: DeleteRequestType = props.req as DeleteRequestType;
+
+  const data: CommonDeleteRequestProps = {
+    _id: id,
+    userid: userId!,
+    deletetype: deleteType,
+    authtype: props?.authtype,
+    bookpassword: bookPassword,
+  };
+
+  const handleRemove = async (e: React.MouseEvent<HTMLButtonElement>, data: CommonDeleteRequestProps) => {
+    e.preventDefault();
+
     try {
-      await fetch(`/api/${props.req}/delete`, { method: "DELETE", body: JSON.stringify({ _id: props._id, bookpassword: bookPassword, userdata: props.userdata }) })
+      await fetch(`/api/${deleteType}/delete`, {
+        method: "DELETE",
+        body: JSON.stringify({ ...data }),
+      })
         .then((res) => {
           if (res.status === 200) {
-            return res.json();
+            console.log("삭제 성공");
           } else {
-            console.log(res.status);
-            return;
+            console.log("삭제 실패");
           }
+          return res;
         })
         .then((res) => {
-          console.log(res);
-          router.push(`/${props.req}`);
-          router.refresh();
+          if (res.status === 200) {
+            router.refresh();
+            deleteType === "board" && router.push("board");
+          }
         })
         .catch((e) => {
           console.error(e);
@@ -34,8 +53,17 @@ const Button = (props: { _id: string; userdata?: userProps; req: string; authtyp
   };
   return (
     <>
-      {!props.authtype && <input id="book_delete_input" type="password" name="bookpassword" onChange={(e) => setBookPassword(e.target.value)} value={bookPassword} placeholder="비밀번호" />}
-      <button id="book_delete_button" className="button btn-delete" onClick={handleRemove}>
+      {!props.authtype && (
+        <input
+          id="book_delete_input"
+          type="password"
+          name="bookpassword"
+          onChange={(e) => setBookPassword(e.target.value)}
+          value={bookPassword}
+          placeholder="비밀번호"
+        />
+      )}
+      <button id="book_delete_button" className="button btn-delete" onClick={(e) => handleRemove(e, data)}>
         삭제
       </button>
     </>

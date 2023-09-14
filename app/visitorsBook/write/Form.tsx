@@ -44,7 +44,6 @@ export const Form = ({ ...props }: UserDataProps) => {
           return res;
         })
         .then((res) => {
-          console.log(res.status);
           if (res.status === 200) {
             router.refresh();
             console.log(res.status);
@@ -68,12 +67,7 @@ export const Form = ({ ...props }: UserDataProps) => {
     >
       <header className="book-write-head">
         <div>
-          {authtype && (
-            <>
-              <div>ff</div>
-              <input type="text" name="writerid" defaultValue={writerid} style={{ display: "none" }} />
-            </>
-          )}
+          {authtype && <input type="text" name="writerid" defaultValue={writerid} style={{ display: "none" }} />}
           <label className="book-writer-input" htmlFor="book_writer_input">
             작성자명
           </label>
