@@ -2,13 +2,13 @@
  * 수정하기 페이지
  */
 
-import { connectDB } from "@/utils/database";
 import React from "react";
 import Form from "../../common/Form";
+import { connectDB } from "@/utils/database";
 import { ObjectId } from "mongodb";
 import { PostProps } from "@/utils/interface/board/boardInterfaces";
-import "../../page.css";
 import { redirect } from "next/navigation";
+import "../../page.css";
 
 const postUpdate = async ({ ...props }: { params: PostProps }) => {
   let data = {} as PostProps;
@@ -28,7 +28,7 @@ const postUpdate = async ({ ...props }: { params: PostProps }) => {
       <main className="board-write-main">
         <h3 className="title">수정하기</h3>
         <header className="board-write-head">
-          <Form type="update" {...data} />
+          <Form type="update" postData={data} />
         </header>
       </main>
     </>
