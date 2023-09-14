@@ -1,10 +1,10 @@
 "use client";
 
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import React, { FormEvent, useState } from "react";
-import "./Button.css";
 import { UserDataProps } from "@/utils/interface/user/userInterfaces";
 import { CommonDeleteRequestProps, DeleteRequestType } from "@/utils/interface/visitorsBook/visitorsbookInterfaces";
+import "./Button.css";
 
 const Button = (props: { _id: string; userdata: UserDataProps; req: string; authtype?: boolean }) => {
   const [bookPassword, setBookPassword] = useState("");
@@ -32,9 +32,9 @@ const Button = (props: { _id: string; userdata: UserDataProps; req: string; auth
       })
         .then((res) => {
           if (res.status === 200) {
-            console.log("삭제 성공");
+            console.log("방명록 삭제 성공");
           } else {
-            console.log("삭제 실패");
+            console.log("방명록 삭제 실패");
           }
           return res;
         })
@@ -45,7 +45,7 @@ const Button = (props: { _id: string; userdata: UserDataProps; req: string; auth
           }
         })
         .catch((e) => {
-          console.error(e);
+          console.error(e + "서버에 문제 발생");
         });
     } catch (e) {
       console.error(e);
