@@ -2,18 +2,21 @@ import { connectDB } from "@/utils/database";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method === "POST") {
-    if (!req.body) {
-      return res.status(500).json("이메일 미입력");
-    }
+  if (!req.body) {
+    res.redirect(500, "/userAuth/signUp");
+  }
 
+  try {
     const client = await connectDB;
     const db = client.db("simplepage");
     if (await db.collection("userauth").findOne({ email: req.body })) {
-      return res.status(500).json("이미 가입된 이메일");
+      res.redirect(500, "/userAuth/signUp");
+      return;
     }
 
-    return res.status(200).json("가입 가능한 이메일");
+    res.redirect(302, "/userAuth/signUp");
+  } catch (e) {
+    console.log(e + "서버요청 오류 발생");
   }
 };
 
