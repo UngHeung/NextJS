@@ -34,7 +34,7 @@ export const Form = ({ ...props }: UserDataProps) => {
     e.preventDefault();
 
     try {
-      fetch("/api/visitorsBook/post", { method: "POST", body: JSON.stringify(data) })
+      await fetch("/api/visitorsBook/post", { method: "POST", body: JSON.stringify(data) })
         .then((res) => {
           if (res.status === 200) {
             console.log("방명록 등록 성공");
