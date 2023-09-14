@@ -18,18 +18,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       if (item.writerid === body.userid) {
         await db.collection("visitorsbook").deleteOne({ _id: new ObjectId(body._id) });
       } else {
-        res.status(500).json({ message: "내가 쓴 방명록이 아닙니다." });
         return res.redirect(500, "/visitorsBook");
       }
     } else {
       if (item.bookpassword === body.bookpassword) {
         await db.collection("visitorsbook").deleteOne({ _id: new ObjectId(body._id) });
       } else {
-        res.status(500).json({ message: "비밀번호가 다릅니다." });
         return res.redirect(500, "/visitorsBook");
       }
-      res.redirect(302, "/visitorsBook");
     }
+    res.redirect(302, "/visitorsBook");
   } catch (e) {
     console.error(e + "서버요청 오류 발생");
   }
