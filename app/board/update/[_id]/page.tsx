@@ -10,8 +10,6 @@ import { PostProps } from "@/utils/interface/board/boardInterfaces";
 import "../../page.css";
 
 const postUpdate = async ({ ...props }: { params: PostProps }) => {
-  const writer = "관리자";
-
   const client = await connectDB;
   const db = client.db("simplepage");
   const data = await db.collection("board").findOne({ _id: new ObjectId(props.params._id) });
@@ -22,7 +20,7 @@ const postUpdate = async ({ ...props }: { params: PostProps }) => {
       <main className="board-write-main">
         <h3 className="title">수정하기</h3>
         <header className="board-write-head">
-          <Form type="update" data={data} />
+          <Form type="update" {...data} />
         </header>
       </main>
     </>

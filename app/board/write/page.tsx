@@ -4,15 +4,16 @@
 
 import { connectDB } from "@/utils/database";
 import React from "react";
-import Form, { userProps } from "../common/Form";
-import "../page.css";
+import Form from "../common/Form";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { redirect } from "next/navigation";
+import { UserDataProps, UserSessionProps } from "@/utils/interface/user/userInterfaces";
+import "../page.css";
 
 const postWrite = async () => {
   const session = await getServerSession(authOptions);
-  const user = session?.user as userProps;
+  const user: UserDataProps = session?.user as UserSessionProps;
   if (!user) {
     redirect("/userAuth");
   }
