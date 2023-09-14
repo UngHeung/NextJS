@@ -11,14 +11,14 @@ import { PostProps } from "@/utils/interface/board/boardInterfaces";
 import Button from "../../delete/Button";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import { userProps } from "../../common/Form";
+import { UserDataProps, UserSessionProps } from "@/utils/interface/user/userInterfaces";
 
 const postDetail = async ({ ...props }: { params: PostProps }) => {
   const client = await connectDB;
   const db = client.db("simplepage");
   const detail: PostProps = await db.collection("board").findOne({ _id: new ObjectId(props.params._id) });
   const session = await getServerSession(authOptions);
-  const user = session?.user as userProps;
+  const user: UserDataProps = session?.user as UserSessionProps;
 
   return (
     <>
