@@ -7,7 +7,7 @@ import React from "react";
 import { ObjectId } from "mongodb";
 import "./page.css";
 import Link from "next/link";
-import { PostProps } from "@/utils/interface/board/boardInterface";
+import { PostProps } from "@/utils/interface/board/boardInterfaces";
 import Button from "../../delete/Button";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";

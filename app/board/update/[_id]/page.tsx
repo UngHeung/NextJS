@@ -6,7 +6,7 @@ import { connectDB } from "@/utils/database";
 import React from "react";
 import Form from "../../common/Form";
 import { ObjectId } from "mongodb";
-import { PostProps } from "@/utils/interface/board/boardInterface";
+import { PostProps } from "@/utils/interface/board/boardInterfaces";
 import "../../page.css";
 
 const postUpdate = async ({ ...props }: { params: PostProps }) => {

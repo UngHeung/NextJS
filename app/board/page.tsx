@@ -4,9 +4,9 @@
 
 import Link from "next/link";
 import React from "react";
-import "./page.css";
 import { connectDB } from "@/utils/database";
-import { PostProps } from "@/utils/interface/board/boardInterface";
+import { PostProps } from "@/utils/interface/board/boardInterfaces";
+import "./page.css";
 
 export const dynamic = "force-dynamic";
 

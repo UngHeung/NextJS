@@ -3,14 +3,14 @@
  */
 
 import React from "react";
-import { connectDB } from "@/utils/database";
-import "./page.css";
-import { visitorsBookProps } from "@/utils/interface/visitorsBook/visitorsbookInterface";
-import { Form } from "./write/Form";
 import Button from "../board/delete/Button";
+import { connectDB } from "@/utils/database";
+import { visitorsBookProps } from "@/utils/interface/visitorsBook/visitorsbookInterfaces";
+import { Form } from "./write/Form";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
-import { userProps } from "../board/common/Form";
+import { UserDataProps, UserSessionProps } from "@/utils/interface/user/userInterfaces";
+import "./page.css";
 
 export const dynamic = "force-dynamic";
 
@@ -18,7 +18,7 @@ const visitorsBook = async () => {
   const client = await connectDB;
   const db = client.db("simplepage");
   const session = await getServerSession(authOptions);
-  const user: userProps = session?.user as userProps;
+  const user: UserDataProps = session?.user as UserSessionProps;
 
   const visitorsBookList: visitorsBookProps[] = await db.collection("visitorsbook").find().sort({ _id: -1 }).toArray();
 

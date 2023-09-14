@@ -16,7 +16,7 @@ const Button = (props: { _id: string; userdata?: userProps; req: string; authtyp
           if (res.status === 200) {
             return res.json();
           } else {
-            console.log("서버에 문제 발생!");
+            console.log(res.status);
             return;
           }
         })

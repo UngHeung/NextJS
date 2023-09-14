@@ -7,30 +7,17 @@
 import React, { useState } from "react";
 import "./Form.css";
 import Link from "next/link";
-import { PostProps } from "@/utils/interface/board/boardInterface";
-
-type PostReqType = "write" | "update";
-interface BoardFormProps {
-  type: PostReqType;
-  userdata?: userProps;
-  data?: PostProps;
-}
-export interface userProps {
-  _id: string;
-  name: string;
-  email: string;
-}
+import { BoardFormProps } from "@/utils/interface/board/boardInterfaces";
 
 const Form = ({ ...props }: BoardFormProps) => {
   const type = props.type;
-  const data = props.data;
-  const _id = data?._id;
+  const postData = props.postdata;
+  const _id = postData?._id;
   const writerid = props?.userdata?._id;
   const writer = props?.userdata?.name;
 
-  const [title, setTitle] = useState(type === "write" ? "" : data?.title);
-  const [content, setContent] = useState(type === "write" ? "" : data?.content);
-  const [like, setLike] = useState(type === "write" ? [] : data?.like);
+  const [title, setTitle] = useState(type === "write" ? "" : postData?.title);
+  const [content, setContent] = useState(type === "write" ? "" : postData?.content);
 
   return (
     <form action={type === "write" ? "/api/board/post" : "/api/board/update"} method="POST">

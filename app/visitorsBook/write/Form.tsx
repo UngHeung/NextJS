@@ -4,34 +4,28 @@
 
 "use client";
 
-import { userProps } from "@/app/board/common/Form";
 import React, { FormEvent, useState } from "react";
 import getDate from "@/utils/func/getDate";
-import "./Form.css";
 import { useRouter } from "next/navigation";
+import { UserDataProps } from "@/utils/interface/user/userInterfaces";
+import { VisitorsBookRequestProps } from "@/utils/interface/visitorsBook/visitorsbookInterfaces";
+import "./Form.css";
 
-interface visitorsBookProps {
-  writer: string;
-  content: string;
-  bookpassword?: string;
-  date: string;
-}
-
-export const Form = ({ ...props }: userProps) => {
+export const Form = ({ ...props }: UserDataProps) => {
   const [writer, setWriter] = useState(props?._id ? props?.name : "");
   const [content, setContent] = useState("");
   const [bookPassword, setBookPassword] = useState("");
   const date = getDate();
   const router = useRouter();
 
-  const data: visitorsBookProps = {
+  const data: VisitorsBookRequestProps = {
     writer: writer,
     content: content,
     bookpassword: bookPassword,
     date: date,
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>, data: visitorsBookProps) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>, data: VisitorsBookRequestProps) => {
     e.preventDefault();
 
     try {
