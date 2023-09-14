@@ -8,8 +8,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const body: VisitorsBookProps = JSON.parse(req.body);
-  console.log(body);
-  console.log(body.writerid);
 
   if (!body.writer) {
     return res.status(500).json("작성자명이 없습니다.");
@@ -24,7 +22,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.redirect(302, "/visitorsBook");
   } catch (e) {
-    console.error(e + " 서버 에러");
+    console.error(e + " 서버요청 오류 발생");
   }
 };
 

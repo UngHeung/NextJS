@@ -15,20 +15,23 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const item = await db.collection("visitorsbook").findOne({ _id: new ObjectId(body._id) });
 
     if (item.authtype) {
-      if (item.writerid === body.userdata._id) {
+      if (item.writerid === body.userid) {
         await db.collection("visitorsbook").deleteOne({ _id: new ObjectId(body._id) });
-        return res.status(200).json("성공");
+      } else {
+        res.status(500).json({ message: "내가 쓴 방명록이 아닙니다." });
+        return res.redirect(500, "/visitorsBook");
       }
     } else {
       if (item.bookpassword === body.bookpassword) {
         await db.collection("visitorsbook").deleteOne({ _id: new ObjectId(body._id) });
-        return res.status(200).json("성공");
+      } else {
+        res.status(500).json({ message: "비밀번호가 다릅니다." });
+        return res.redirect(500, "/visitorsBook");
       }
+      res.redirect(302, "/visitorsBook");
     }
-
-    return res.status(500).json("실패");
   } catch (e) {
-    console.error(e);
+    console.error(e + "서버요청 오류 발생");
   }
 };
 
