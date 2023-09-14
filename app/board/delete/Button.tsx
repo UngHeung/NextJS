@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { UserDataProps } from "@/utils/interface/user/userInterfaces";
-import { CommonDeleteRequestProps, DeleteRequestType } from "@/utils/interface/visitorsBook/visitorsbookInterfaces";
+import { CommonDeleteRequestProps, DeleteRequestType } from "@/utils/interface/common/commonInterfaces";
 import "./Button.css";
 
 const Button = (props: { _id: string; userdata: UserDataProps; req: string; authtype?: boolean }) => {
