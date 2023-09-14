@@ -5,51 +5,101 @@
 "use client";
 
 import { userProps } from "@/app/board/common/Form";
+import React, { FormEvent, useState } from "react";
+import getDate from "@/utils/func/getDate";
 import "./Form.css";
-
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface visitorsBookProps {
-  userdata: userProps;
+  writer: string;
+  content: string;
+  bookpassword?: string;
+  date: string;
 }
 
-export const Form = ({ userdata }: visitorsBookProps) => {
-  const [writer, setWriter] = useState(userdata?.name);
+export const Form = ({ ...props }: userProps) => {
+  const [writer, setWriter] = useState(props?._id ? props?.name : "");
   const [content, setContent] = useState("");
   const [bookPassword, setBookPassword] = useState("");
+  const date = getDate();
+  const router = useRouter();
 
-  const getDate = () => {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    const hour = date.getHours();
-    const minute = date.getMinutes();
+  const data: visitorsBookProps = {
+    writer: writer,
+    content: content,
+    bookpassword: bookPassword,
+    date: date,
+  };
 
-    let result = `${year}-${month}-${day} ${hour}:${minute}`;
-    return result;
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>, data: visitorsBookProps) => {
+    e.preventDefault();
+
+    try {
+      fetch("/api/visitorsBook/post", { method: "POST", body: JSON.stringify(data) })
+        .then((res) => {
+          if (res.status === 200) {
+            console.log("방명록 등록 성공");
+          } else {
+            console.log("방명록 등록 실패");
+          }
+          return res;
+        })
+        .then((res) => {
+          console.log(res.status);
+          if (res.status === 200) {
+            router.refresh();
+            console.log(res.status);
+          }
+        });
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
-    <form id="book_write_form" action={"/api/visitorsBook/post"} method="POST">
+    <form
+      id="book_write_form"
+      onSubmit={(e) => {
+        handleSubmit(e, data);
+        !props._id ? setWriter("") : null;
+        setBookPassword("");
+        setContent("");
+      }}
+      method="POST"
+    >
       <header className="book-write-head">
         <div>
-          {userdata && (
+          {props._id && (
             <>
-              <input type="text" id="" name="writerid" defaultValue={userdata._id} style={{ display: "none" }} />
+              <input type="text" id="" name="writerid" defaultValue={props._id} style={{ display: "none" }} />
               <input type="text" name="authtype" defaultValue={"true"} style={{ display: "none" }} />
             </>
           )}
           <label className="book-writer-input" htmlFor="book_writer_input">
             작성자명
           </label>
-          <input id="book_writer_input" name="writer" type="text" placeholder="이름" onChange={(e) => setWriter(e.target.value)} defaultValue={writer} readOnly={userdata ? true : false} />
-          {!userdata && (
+          <input
+            id="book_writer_input"
+            name="writer"
+            type="text"
+            placeholder="이름"
+            onChange={(e) => setWriter(e.target.value)}
+            value={writer}
+            readOnly={props._id ? true : false}
+          />
+          {!props._id && (
             <>
               <label className="book-password-input" htmlFor="book_password_input">
                 비밀번호
               </label>
-              <input id="book_password_input" name="bookpassword" type="password" placeholder="비밀번호" onChange={(e) => setBookPassword(e.target.value)} value={bookPassword} />
+              <input
+                id="book_password_input"
+                name="bookpassword"
+                type="password"
+                placeholder="비밀번호"
+                onChange={(e) => setBookPassword(e.target.value)}
+                value={bookPassword}
+              />
             </>
           )}
         </div>
@@ -59,7 +109,13 @@ export const Form = ({ userdata }: visitorsBookProps) => {
         </button>
       </header>
       <section>
-        <textarea name="content" className="book-content-area" placeholder="방명록을 작성해주세요" onChange={(e) => setContent(e.target.value)} value={content}></textarea>
+        <textarea
+          name="content"
+          className="book-content-area"
+          placeholder="방명록을 작성해주세요"
+          onChange={(e) => setContent(e.target.value)}
+          value={content}
+        ></textarea>
       </section>
     </form>
   );
