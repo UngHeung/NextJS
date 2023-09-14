@@ -10,7 +10,7 @@ import { ObjectId } from "mongodb";
 import { PostProps } from "@/utils/interface/board/boardInterfaces";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import { UserDataProps, UserSessionProps } from "@/utils/interface/user/userInterfaces";
+import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
 import { redirect } from "next/navigation";
 import "./page.css";
 

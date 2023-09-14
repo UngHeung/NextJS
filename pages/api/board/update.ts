@@ -3,15 +3,17 @@
  */
 
 import { connectDB } from "@/utils/database";
+import { PostProps } from "@/utils/interface/board/boardInterfaces";
 import { ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (!req.body.title) {
-    console.log("제목이 없음");
+  const body: PostProps = req.body;
+  const postId = body._id;
+
+  if (!body.title) {
     return res.status(500).json("제목이 없습니다.");
-  } else if (!req.body.content) {
-    console.log("내용이 없음");
+  } else if (!body.content) {
     return res.status(500).json("내용이 없습니다.");
   }
 
@@ -19,18 +21,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const client = await connectDB;
     const db = client.db("simplepage");
     await db.collection("board").updateOne(
-      { _id: new ObjectId(req.body._id) },
+      { _id: new ObjectId(postId) },
       {
         $set: {
-          title: req.body.title,
-          content: req.body.content,
+          title: body.title,
+          content: body.content,
         },
       }
     );
 
-    res.redirect(302, `/board/detail/${req.body._id}`);
+    res.redirect(302, `/board/detail/${postId}`);
   } catch (e) {
-    console.error(e);
+    console.error(e + "서버 에러");
   }
 };
 

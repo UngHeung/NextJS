@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const client = await connectDB;
     const db = client.db("simplepage");
-    const result = await db.collection("board").insertOne(req.body);
+    await db.collection("board").insertOne(req.body);
 
     res.redirect(302, "/board");
   } catch (e) {

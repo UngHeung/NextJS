@@ -12,7 +12,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const client = await connectDB;
     const db = client.db("simplepage");
     await db.collection("board").deleteOne({ _id: new ObjectId(body._id) });
-    return res.status(200).json("성공");
+
+    res.redirect(302, "/board");
   } catch (e) {
     console.error(e);
   }
