@@ -39,6 +39,7 @@ const Button = (props: { _id: string; userdata: UserDataProps; req: string; auth
           return res;
         })
         .then((res) => {
+          console.log(res.status);
           if (res.status === 200) {
             router.refresh();
             deleteType === "board" && router.push("board");
