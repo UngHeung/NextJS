@@ -5,7 +5,7 @@
 import React from "react";
 import { connectDB } from "@/utils/database";
 import "./page.css";
-import { visitorsBookProps } from "@/utils/interface/visitorsbookInterface";
+import { visitorsBookProps } from "@/utils/interface/visitorsBook/visitorsbookInterface";
 import { Form } from "./write/Form";
 import Button from "../board/delete/Button";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
