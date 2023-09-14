@@ -21,9 +21,10 @@ const postList = async () => {
         <h3 className="title">게시판</h3>
         <ul className="board-list">
           {boardList.map((item) => {
+            const postid = JSON.stringify(item?._id);
             return (
-              <li key={item?._id}>
-                <Link href={`/board/detail/${item?._id}`}>
+              <li key={postid}>
+                <Link href={`/board/detail/${postid}`}>
                   <section className="board-head">
                     {/* <span className="board-no">{item?.no}</span> */}
                     <strong className="board-title">{item?.title}</strong>
