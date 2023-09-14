@@ -20,7 +20,7 @@ const visitorsBook = async () => {
   const session = await getServerSession(authOptions);
   const user: userProps = session?.user as userProps;
 
-  const visitorsBookList: visitorsBookProps[] = await db.collection("visitorsbook").find().sort({ date: -1 }).toArray();
+  const visitorsBookList: visitorsBookProps[] = await db.collection("visitorsbook").find().sort({ _id: -1 }).toArray();
 
   return (
     <>
@@ -28,24 +28,27 @@ const visitorsBook = async () => {
         <h3 className="title">방명록</h3>
         <ul className="book-list">
           {visitorsBookList.map((item) => {
-            item._id = item._id.toString();
+            const id = item._id.toString();
+            const [date, time] = item?.date?.split(" ");
             return (
-              <li key={item?._id}>
+              <li key={id}>
                 <strong className="book-writer">{item?.writer}</strong>
                 <span className="book-date">
-                  {`${item?.date.split(" ")[0]}
-                  ${item?.date.split(" ")[1]}`}
+                  {`${date}
+                  ${time}`}
                 </span>
                 <hr className="book-line" />
                 <span className="book-content">{`${item?.content}`}</span>
-                {user?._id === item?.writerid || !item?.authtype ? <Button _id={item?._id} userdata={user} req="visitorsBook" authtype={item?.authtype} /> : null}
+                {user?._id === item?.writerid || !item?.authtype ? (
+                  <Button _id={id} userdata={user} req="visitorsBook" authtype={item?.authtype} />
+                ) : null}
               </li>
             );
           })}
         </ul>
       </section>
       <section className="book-write-content">
-        <Form userdata={user} />
+        <Form {...user} />
       </section>
     </>
   );
