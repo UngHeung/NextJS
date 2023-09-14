@@ -7,7 +7,7 @@
 import React, { useState } from "react";
 import "./Form.css";
 import Link from "next/link";
-import { PostProps } from "@/utils/interface/boardInterface";
+import { PostProps } from "@/utils/interface/board/boardInterface";
 
 type PostReqType = "write" | "update";
 interface BoardFormProps {
@@ -42,8 +42,20 @@ const Form = ({ ...props }: BoardFormProps) => {
             <input name="writer" type="text" defaultValue={writer} style={{ display: "none" }} />
           </>
         )}
-        <input name="title" id="post_title" onChange={(e) => setTitle(e.target.value)} value={title} placeholder="제목"></input>
-        <textarea name="content" id="post_content" onChange={(e) => setContent(e.target.value)} value={content} placeholder="내용"></textarea>
+        <input
+          name="title"
+          id="post_title"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+          placeholder="제목"
+        ></input>
+        <textarea
+          name="content"
+          id="post_content"
+          onChange={(e) => setContent(e.target.value)}
+          value={content}
+          placeholder="내용"
+        ></textarea>
       </section>
       <section className="post-add-button-wrap">
         <button type="submit" className="button btn-normal">

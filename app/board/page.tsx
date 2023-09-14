@@ -6,7 +6,7 @@ import Link from "next/link";
 import React from "react";
 import "./page.css";
 import { connectDB } from "@/utils/database";
-import { PostProps } from "@/utils/interface/boardInterface";
+import { PostProps } from "@/utils/interface/board/boardInterface";
 
 export const dynamic = "force-dynamic";
 
