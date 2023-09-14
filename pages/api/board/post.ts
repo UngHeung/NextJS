@@ -7,7 +7,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!req.body.title) {
-    console.log("제모깅 없슴");
     return res.status(500).json("제목이 없습니다.");
   } else if (!req.body.content) {
     return res.status(500).json("내용이 없습니다.");
@@ -16,10 +15,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const client = await connectDB;
     const db = client.db("simplepage");
-
-    req.body.like = [];
-
     const result = await db.collection("board").insertOne(req.body);
+
     res.redirect(302, "/board");
   } catch (e) {
     console.error(e);

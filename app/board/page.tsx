@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic";
 const postList = async () => {
   const client = await connectDB;
   const db = client.db("simplepage");
-  const boardList: PostProps[] = await db.collection("board").find({}).sort({ _id: -1 }).toArray();
+  const boardList: PostProps[] = await db.collection("board").find().sort({ _id: -1 }).toArray();
 
   return (
     <>
