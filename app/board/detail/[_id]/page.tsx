@@ -2,23 +2,33 @@
  * 게시물 상세 페이지
  */
 
-import { connectDB } from "@/utils/database";
 import React from "react";
-import { ObjectId } from "mongodb";
-import "./page.css";
 import Link from "next/link";
-import { PostProps } from "@/utils/interface/board/boardInterfaces";
 import Button from "../../delete/Button";
+import { connectDB } from "@/utils/database";
+import { ObjectId } from "mongodb";
+import { PostProps } from "@/utils/interface/board/boardInterfaces";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { UserDataProps, UserSessionProps } from "@/utils/interface/user/userInterfaces";
+import { redirect } from "next/navigation";
+import "./page.css";
 
 const postDetail = async ({ ...props }: { params: PostProps }) => {
-  const client = await connectDB;
-  const db = client.db("simplepage");
-  const detail: PostProps = await db.collection("board").findOne({ _id: new ObjectId(props.params._id) });
-  const session = await getServerSession(authOptions);
-  const user: UserDataProps = session?.user as UserSessionProps;
+  let detail = {} as PostProps;
+  let session;
+  let user = {} as UserSessionProps;
+
+  try {
+    const client = await connectDB;
+    const db = client.db("simplepage");
+    detail = await db.collection("board").findOne({ _id: new ObjectId(props.params._id) });
+    session = await getServerSession(authOptions);
+    user = session?.user as UserSessionProps;
+  } catch (e) {
+    console.error(e + "서버에 문제 발생");
+    redirect("/board");
+  }
 
   return (
     <>
@@ -31,9 +41,9 @@ const postDetail = async ({ ...props }: { params: PostProps }) => {
         <section className="board-detail-content-wrap">
           <p className="board-detail-content">{detail?.content}</p>
           <input type="checkbox" name="board-like" id="board_detail_like" />
-          <label className="board-detail-like" htmlFor="board_detail_like">
+          {/* <label className="board-detail-like" htmlFor="board_detail_like">
             <span>{`👍 ${detail?.like.length}`}</span>
-          </label>
+          </label> */}
         </section>
         <section className="board-detail-link-wrap">
           <Link className="button btn-normal" href={"/board"}>
@@ -44,7 +54,7 @@ const postDetail = async ({ ...props }: { params: PostProps }) => {
               <Link className="button btn-normal" href={`/board/update/${detail?._id}`}>
                 수정
               </Link>
-              <Button _id={detail?._id} req="board" />
+              <Button _id={detail?._id} req="board" userdata={user} />
             </>
           ) : null}
         </section>

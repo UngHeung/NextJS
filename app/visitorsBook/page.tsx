@@ -15,12 +15,19 @@ import { VisitorsBookProps } from "@/utils/interface/visitorsBook/visitorsbookIn
 export const dynamic = "force-dynamic";
 
 const visitorsBook = async () => {
-  const client = await connectDB;
-  const db = client.db("simplepage");
-  const session = await getServerSession(authOptions);
-  const user: UserDataProps = session?.user as UserSessionProps;
+  let session;
+  let user = {} as UserSessionProps;
+  let visitorsBookList = [] as VisitorsBookProps[];
 
-  const visitorsBookList: VisitorsBookProps[] = await db.collection("visitorsbook").find().sort({ _id: -1 }).toArray();
+  try {
+    const client = await connectDB;
+    const db = client.db("simplepage");
+    session = await getServerSession(authOptions);
+    user = session?.user as UserSessionProps;
+    visitorsBookList = await db.collection("visitorsbook").find().sort({ _id: -1 }).toArray();
+  } catch (e) {
+    console.log(e + "서버에 문제 발생");
+  }
 
   return (
     <>

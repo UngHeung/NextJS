@@ -7,13 +7,21 @@ import React from "react";
 import { connectDB } from "@/utils/database";
 import { PostProps } from "@/utils/interface/board/boardInterfaces";
 import "./page.css";
+import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
 const postList = async () => {
-  const client = await connectDB;
-  const db = client.db("simplepage");
-  const boardList: PostProps[] = await db.collection("board").find().sort({ _id: -1 }).toArray();
+  let boardList: PostProps[];
+
+  try {
+    const client = await connectDB;
+    const db = client.db("simplepage");
+    boardList = await db.collection("board").find().sort({ _id: -1 }).toArray();
+  } catch (e) {
+    console.error(e + "서버에 문제 발생");
+    redirect("/board");
+  }
 
   return (
     <>
@@ -21,18 +29,17 @@ const postList = async () => {
         <h3 className="title">게시판</h3>
         <ul className="board-list">
           {boardList.map((item) => {
-            const postid = JSON.stringify(item?._id);
+            const postid = item?._id.toString();
             return (
               <li key={postid}>
                 <Link href={`/board/detail/${postid}`}>
                   <section className="board-head">
-                    {/* <span className="board-no">{item?.no}</span> */}
                     <strong className="board-title">{item?.title}</strong>
                     <span className="board-writer">{item?.writer}</span>
                   </section>
                   <section className="board-main">
                     <p className="board-content">{item?.content}</p>
-                    <span className="board-like">{item?.like.length}</span>
+                    {/* <span className="board-like">{item?.like.length}</span> */}
                   </section>
                 </Link>
               </li>

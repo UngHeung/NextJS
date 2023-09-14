@@ -8,12 +8,20 @@ import Form from "../../common/Form";
 import { ObjectId } from "mongodb";
 import { PostProps } from "@/utils/interface/board/boardInterfaces";
 import "../../page.css";
+import { redirect } from "next/navigation";
 
 const postUpdate = async ({ ...props }: { params: PostProps }) => {
-  const client = await connectDB;
-  const db = client.db("simplepage");
-  const data = await db.collection("board").findOne({ _id: new ObjectId(props.params._id) });
-  data._id = data._id.toString();
+  let data = {} as PostProps;
+
+  try {
+    const client = await connectDB;
+    const db = client.db("simplepage");
+    data = await db.collection("board").findOne({ _id: new ObjectId(props.params._id) });
+    data._id = data._id.toString();
+  } catch (e) {
+    console.error("서버에 문제 발생");
+    redirect(`/board/${props.params._id}}`);
+  }
 
   return (
     <>
