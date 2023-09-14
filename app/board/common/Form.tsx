@@ -7,23 +7,32 @@
 import React, { useState } from "react";
 import "./Form.css";
 import Link from "next/link";
-import { BoardFormProps } from "@/utils/interface/board/boardInterfaces";
+import { PostProps, PostRequestType } from "@/utils/interface/board/boardInterfaces";
+import { UserDataProps } from "@/utils/interface/user/userInterfaces";
 
-const Form = ({ ...props }: BoardFormProps) => {
-  const type = props.type;
-  const postData = props.postdata;
-  const _id = postData?._id;
-  const writerid = props?.userdata?._id;
-  const writer = props?.userdata?.name;
+const Form = ({
+  type,
+  postData,
+  userData,
+}: {
+  type: PostRequestType;
+  postData?: PostProps;
+  userData?: UserDataProps;
+}) => {
+  const reqType = type;
+  const postId = postData?._id;
+  const writerid = reqType === "write" ? userData?._id : postData?.writerid;
+  const writer = reqType === "write" ? userData?.name : postData?.writer;
 
-  const [title, setTitle] = useState(type === "write" ? "" : postData?.title);
-  const [content, setContent] = useState(type === "write" ? "" : postData?.content);
+  const [title, setTitle] = useState(reqType === "write" ? "" : postData?.title);
+  const [content, setContent] = useState(reqType === "write" ? "" : postData?.content);
 
   return (
-    <form action={type === "write" ? "/api/board/post" : "/api/board/update"} method="POST">
+    <form action={reqType === "write" ? "/api/board/post" : "/api/board/update"} method="POST">
       <section className="post-input-wrap">
-        {type === "update" && <input name="_id" type="text" defaultValue={_id} style={{ display: "none" }} />}
-        {type === "write" && (
+        {reqType === "update" ? (
+          <input name="_id" type="text" defaultValue={postId} style={{ display: "none" }} />
+        ) : (
           <>
             <input name="writerid" type="text" defaultValue={writerid} style={{ display: "none" }} />
             <input name="writer" type="text" defaultValue={writer} style={{ display: "none" }} />
@@ -48,7 +57,7 @@ const Form = ({ ...props }: BoardFormProps) => {
         <button type="submit" className="button btn-normal">
           저장
         </button>
-        <Link className="button btn-normal" href={type === "write" ? "/board" : `/board/detail/${_id}`}>
+        <Link className="button btn-normal" href={reqType === "write" ? "/board" : `/board/detail/${postId}`}>
           취소
         </Link>
       </section>
