@@ -3,19 +3,22 @@
  */
 
 import { connectDB } from "@/utils/database";
+import { PostProps } from "@/utils/interface/board/boardInterfaces";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (!req.body.title) {
+  const body: PostProps = JSON.parse(req.body);
+
+  if (!body.title) {
     return res.status(500).json("제목이 없습니다.");
-  } else if (!req.body.content) {
+  } else if (!body.content) {
     return res.status(500).json("내용이 없습니다.");
   }
 
   try {
     const client = await connectDB;
     const db = client.db("simplepage");
-    await db.collection("board").insertOne(req.body);
+    await db.collection("board").insertOne(body);
 
     res.redirect(302, "/board");
   } catch (e) {

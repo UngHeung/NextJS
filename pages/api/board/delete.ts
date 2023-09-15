@@ -3,14 +3,15 @@
  */
 
 import { connectDB } from "@/utils/database";
+import { PostProps } from "@/utils/interface/board/boardInterfaces";
 import { ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const body = JSON.parse(req.body);
   try {
     const client = await connectDB;
     const db = client.db("simplepage");
+    const body: PostProps = JSON.parse(req.body);
     await db.collection("board").deleteOne({ _id: new ObjectId(body._id) });
 
     res.redirect(302, "/board");
