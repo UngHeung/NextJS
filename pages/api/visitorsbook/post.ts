@@ -6,7 +6,7 @@ import { connectDB } from "@/utils/database";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const body = JSON.parse(req.body);
+  const body = req.body;
 
   if (!body.writer) {
     return res.status(500).json("작성자명이 없습니다.");

@@ -10,7 +10,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const client = await connectDB;
     const db = client.db("simplepage");
-    const body = JSON.parse(req.body);
+    const body = req.body;
 
     const item = await db.collection("visitorsbook").findOne({ _id: new ObjectId(body._id) });
 
