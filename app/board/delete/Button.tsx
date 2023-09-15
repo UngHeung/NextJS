@@ -28,7 +28,7 @@ const Button = (props: { _id: string; userdata: UserDataProps; req: string; auth
     try {
       await fetch(`/api/${deleteType}/delete`, {
         method: "DELETE",
-        body: JSON.stringify({ ...data }),
+        body: JSON.stringify(data),
       })
         .then((res) => {
           if (res.status === 200) {
