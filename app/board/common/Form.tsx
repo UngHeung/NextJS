@@ -5,10 +5,10 @@
 "use client";
 
 import React, { useState } from "react";
-import "./Form.css";
 import Link from "next/link";
 import { PostProps, PostRequestType } from "@/utils/interface/board/boardInterfaces";
 import { UserDataProps } from "@/utils/interface/user/userInterfaces";
+import "./Form.css";
 
 const Form = ({
   type,

@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 import { UserDataProps } from "@/utils/interface/user/userInterfaces";
 import { VisitorsBookRequestProps } from "@/utils/interface/visitorsBook/visitorsbookInterfaces";
 import "./Form.css";
-import { BASE_URL } from "@/utils/constants/config";
 
 export const Form = ({ ...props }: UserDataProps) => {
   const [writer, setWriter] = useState(props?._id ? props?.name : "");
@@ -35,7 +34,7 @@ export const Form = ({ ...props }: UserDataProps) => {
     e.preventDefault();
 
     try {
-      await fetch(BASE_URL + "/api/visitorsBook/post", {
+      await fetch("/api/visitorsBook/post", {
         method: "POST",
         body: JSON.stringify(data),
       })
