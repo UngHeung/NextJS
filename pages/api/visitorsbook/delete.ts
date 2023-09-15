@@ -3,8 +3,6 @@
  */
 
 import { connectDB } from "@/utils/database";
-import { UserDataProps } from "@/utils/interface/user/userInterfaces";
-import { VisitorsBookProps, VisitorsBookRequestProps } from "@/utils/interface/visitorsBook/visitorsbookInterfaces";
 import { ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 

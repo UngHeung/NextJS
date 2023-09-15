@@ -2,14 +2,16 @@ import { connectDB } from "@/utils/database";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (!req.body) {
+  const body = JSON.parse(req.body);
+
+  if (!body) {
     res.redirect(500, "/userAuth/signUp");
   }
 
   try {
     const client = await connectDB;
     const db = client.db("simplepage");
-    if (await db.collection("userauth").findOne({ email: req.body })) {
+    if (await db.collection("userauth").findOne({ email: body })) {
       res.redirect(500, "/userAuth/signUp");
       return;
     }

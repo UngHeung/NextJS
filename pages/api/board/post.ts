@@ -3,11 +3,10 @@
  */
 
 import { connectDB } from "@/utils/database";
-import { PostProps } from "@/utils/interface/board/boardInterfaces";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const body: PostProps = JSON.parse(req.body);
+  const body = req.body;
 
   if (!body.title) {
     return res.status(500).json("제목이 없습니다.");

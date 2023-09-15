@@ -3,12 +3,11 @@
  */
 
 import { connectDB } from "@/utils/database";
-import { PostProps } from "@/utils/interface/board/boardInterfaces";
 import { ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const body: PostProps = req.body;
+  const body = req.body;
   const postId = body._id;
 
   if (!body.title) {

@@ -3,11 +3,10 @@
  */
 
 import { connectDB } from "@/utils/database";
-import { VisitorsBookProps } from "@/utils/interface/visitorsBook/visitorsbookInterfaces";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const body: VisitorsBookProps = JSON.parse(req.body);
+  const body = JSON.parse(req.body);
 
   if (!body.writer) {
     return res.status(500).json("작성자명이 없습니다.");
