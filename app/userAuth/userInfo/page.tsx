@@ -2,13 +2,14 @@ import React from "react";
 import LogoutButton from "../login/LogoutButton";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import "./page.css";
 import { redirect } from "next/navigation";
 import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
+import "./page.css";
 
 const pages = async () => {
   const session = await getServerSession(authOptions);
   const user = session?.user as UserSessionProps;
+
   if (!user) {
     redirect("/");
   }
