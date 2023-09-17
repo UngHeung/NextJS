@@ -3,12 +3,17 @@
  */
 
 // 유저 데이터 속성
-export interface UserDataProps {
-  _id: string;
-  name: string;
+export interface UserSignUpProps {
+  userid: string;
+  accountname: string;
   email: string;
   password?: string;
 }
 
+export interface UserLoginProps {
+  email: string;
+  password: string;
+}
+
 // 유저 세션 속성
-export type UserSessionProps = Omit<UserDataProps, "password">;
+export interface UserSessionProps extends Omit<UserSignUpProps, "password"> {}
