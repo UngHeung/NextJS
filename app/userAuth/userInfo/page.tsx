@@ -4,10 +4,11 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import "./page.css";
 import { redirect } from "next/navigation";
+import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
 
 const pages = async () => {
   const session = await getServerSession(authOptions);
-  const user = session?.user;
+  const user = session?.user as UserSessionProps;
   if (!user) {
     redirect("/");
   }
@@ -18,7 +19,7 @@ const pages = async () => {
         <h3 className="title">회원정보</h3>
         <div>
           <h4 className="info-title">계정이름</h4>
-          <span className="info-value">{user?.name}</span>
+          <span className="info-value">{user?.accountname}</span>
         </div>
         <div>
           <h4 className="info-title">이메일</h4>

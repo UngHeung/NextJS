@@ -4,8 +4,10 @@
 
 "use client";
 
-import Link from "next/link";
 import React, { useState } from "react";
+import Link from "next/link";
+import handleSignUp from "../signUp/handleSignUp";
+import { useRouter } from "next/navigation";
 import "./page.css";
 
 const Signup = () => {
@@ -13,25 +15,35 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
-
   const [emailCheck, setEmailCheck] = useState(false);
   const [showEmailCheckMessage, setShowEmailCheckMessage] = useState("");
 
-  const handleCheckEmail = async () => {
+  const redirect = useRouter();
+
+  const checkEmail = async (email: string) => {
+    if (!email) {
+      console.log("이메일 미입력");
+      setEmailCheck(false);
+      setShowEmailCheckMessage("이메일을 입력해주세요.");
+      return;
+    }
+
     try {
       await fetch("/api/auth/check", { method: "POST", body: email })
         .then((res) => {
-          if (res.status === 200) {
+          if (res.ok) {
+            console.log("중복확인 성공");
             setEmailCheck(true);
             setShowEmailCheckMessage("확인되었습니다.");
           } else {
+            console.log("중복확인 실패");
             setEmailCheck(false);
             setShowEmailCheckMessage("중복되거나 잘못된 형식의 이메일입니다.");
           }
-          return res;
+          return res.json();
         })
-        .then((res) => {
-          //
+        .then(() => {
+          redirect.push("/userAuth");
         });
     } catch (e) {
       console.error(e);
@@ -41,12 +53,12 @@ const Signup = () => {
   return (
     <section className="signup-input-wrap">
       <h3 className="title">회원가입</h3>
-      <form action={"/api/auth/post"} method="POST">
+      <form onSubmit={(e) => handleSignUp(e, redirect)}>
         <section className="user-input-wrap">
           <div>
             <input
               type="text"
-              name="name"
+              name="accountname"
               id="signup_name"
               placeholder=" "
               onChange={(e) => setName(e.target.value)}
@@ -67,7 +79,7 @@ const Signup = () => {
             {showEmailCheckMessage ? (
               <span className={`check-message ${emailCheck ? "right" : "wrong"}`}>{showEmailCheckMessage}</span>
             ) : null}
-            <button type="button" className="button btn-normal" onClick={handleCheckEmail}>
+            <button type="button" className="button btn-normal" onClick={() => checkEmail(email)}>
               중복확인
             </button>
           </div>

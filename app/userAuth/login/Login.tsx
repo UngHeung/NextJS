@@ -4,10 +4,9 @@
 
 "use client";
 
+import React, { useState } from "react";
 import Link from "next/link";
-import React, { FormEvent, useState } from "react";
-// import OauthLogin from "../oauth/OauthLogin";
-import { signIn } from "next-auth/react";
+import handleLogin from "./handleLogin";
 import { useRouter } from "next/navigation";
 
 const Login = () => {
@@ -15,33 +14,29 @@ const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>, email: string, password: string) => {
-    e.preventDefault();
-    await signIn("credentials", {
-      email: email,
-      password: password,
-      redirect: false,
-    }).then((res) => {
-      if (res?.ok) {
-        router.refresh();
-        router.push("/");
-      }
-    });
-  };
-
   return (
-    <form onSubmit={(e) => handleSubmit(e, email, password)} method="GET">
-      {/* <section className="sns-login-wrap">
-        <OauthLogin isAuth={false} />
-      </section> */}
-      {/* <hr className="login-quarter-line" /> */}
+    <form onSubmit={(e) => handleLogin(e, router)} method="GET">
       <section className="id-login-wrap">
         <div>
-          <input name="email" type="email" id="user_id" placeholder=" " onChange={(e) => setEmail(e.target.value)} value={email} />
+          <input
+            name="email"
+            type="email"
+            id="user_id"
+            placeholder=" "
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+          />
           <label htmlFor="user_id">이메일</label>
         </div>
         <div>
-          <input name="password" type="password" id="user_pw" placeholder=" " onChange={(e) => setPassword(e.target.value)} value={password} />
+          <input
+            name="password"
+            type="password"
+            id="user_pw"
+            placeholder=" "
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
           <label htmlFor="user_pw">비밀번호</label>
         </div>
       </section>
