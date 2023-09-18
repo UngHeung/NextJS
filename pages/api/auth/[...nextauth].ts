@@ -2,6 +2,7 @@ import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import getDB from "../getDatabase";
 import { NextAuthOptions } from "next-auth";
+import getDbCollection from "../getDatabase";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -12,7 +13,7 @@ export const authOptions: NextAuthOptions = {
         password: { label: "password", type: "password" },
       },
       authorize: async (credentials) => {
-        const user = await (await getDB()).collection("userauth").findOne({ email: credentials?.email });
+        const user = await (await getDbCollection("userauth")).findOne({ email: credentials?.email });
 
         if (!user) {
           console.log("가입되지 않은 이메일");
