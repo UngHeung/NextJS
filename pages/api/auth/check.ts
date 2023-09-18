@@ -1,10 +1,9 @@
-import { connectDB } from "@/utils/database";
+import getDbCollection from "../getDatabase";
 import { NextApiRequest, NextApiResponse } from "next";
-import getDB from "../getDatabase";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    if ((await (await getDB()).collection("userauth").findOne({ email: req.body })) || null) {
+    if ((await (await getDbCollection("userauth")).findOne({ email: req.body })) || null) {
       res.redirect(500, "/userAuth/signUp");
     } else {
       res.redirect(302, "/userAuth/signUp");
