@@ -13,6 +13,11 @@ const handleVisitorsBook = async (e: FormEvent, authtype: boolean, router: AppRo
   const content = formData.get("content");
   const bookpassword = formData.get("bookpassword");
 
+  if (!content) {
+    console.log("내용이 없습니다.");
+    return;
+  }
+
   const data: VisitorsBookRequestProps = {
     writer: writer as string,
     writerid: writerid as string,

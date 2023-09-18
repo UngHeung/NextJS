@@ -12,6 +12,14 @@ const handlePost = async (e: FormEvent, router: AppRouterInstance, { ...props })
   const writerid = formData.get("writerid");
   const writer = formData.get("writer");
 
+  if (!title) {
+    console.log("제목이 없습니다.");
+    return;
+  } else if (!content) {
+    console.log("내용이 없습니다.");
+    return;
+  }
+
   const data = {
     _id: postid,
     writerid: writerid,
