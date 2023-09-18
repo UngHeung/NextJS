@@ -8,12 +8,14 @@ import React from "react";
 import Link from "next/link";
 import Button from "../../delete/Button";
 import getDbCollection from "@/pages/api/getDatabase";
+import CommentList from "@/app/components/comment/CommentBox";
 import { ObjectId } from "mongodb";
 import { PostProps } from "@/utils/interface/board/boardInterfaces";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
 import "./page.css";
+import { CommentFormProps } from "@/app/components/comment/Form";
 
 const postDetail = async ({ ...props }: { params: PostProps }) => {
   const session = await getServerSession(authOptions);
@@ -28,6 +30,12 @@ const postDetail = async ({ ...props }: { params: PostProps }) => {
     console.error("board_detail_id_서버에 문제 발생\n" + e);
     // redirect("/board");
   }
+
+  const CommentOptions: CommentFormProps = {
+    postid: props.params._id,
+    writer: user.accountname,
+    writerid: user.userid,
+  };
 
   return (
     <>
@@ -56,6 +64,9 @@ const postDetail = async ({ ...props }: { params: PostProps }) => {
               <Button postid={detail?._id} req="board" userdata={user} />
             </>
           ) : null}
+        </section>
+        <section>
+          <CommentList {...CommentOptions} />
         </section>
       </main>
     </>
