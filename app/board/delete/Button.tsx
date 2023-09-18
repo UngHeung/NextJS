@@ -30,9 +30,7 @@ const Button = (props: { postid: string; userdata: UserInfoProps; req: string; a
     try {
       await fetchApi("DELETE", `/api/${deleteType}/delete`, data).then((response) => {
         if (response.ok) {
-          router.refresh();
           router.push(response.url);
-          // deleteType === "board" && router.push("board");
         } else {
           console.log(response.status);
         }
