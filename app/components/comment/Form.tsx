@@ -44,16 +44,21 @@ const Form = ({ ...props }: CommentFormProps) => {
       await fetchApi("POST", "/api/comment/post", data).then((response) => {
         if (response.ok) {
           router.refresh();
+          router.push(response.url);
         }
       });
     } catch (e) {
       console.log("comment_form_서버에 오류 발생\n" + e);
     }
-    console.log(data);
   };
 
   return (
-    <form onSubmit={handleComment}>
+    <form
+      onSubmit={(e) => {
+        handleComment(e);
+        setComment("");
+      }}
+    >
       <input type="text" name="postid" defaultValue={props.postid} style={{ display: "none" }} />
       <input type="text" name="writerid" defaultValue={props.writerid} style={{ display: "none" }} />
       <div>
