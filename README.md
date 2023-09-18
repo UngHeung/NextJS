@@ -78,3 +78,10 @@ npm install mongodb@4 # 낮은 버전이 필요할 수 있다.
 
 > - [ ] 브라우저 로딩
 > - [ ] 서버 통신
+
+### 이슈
+
+> - [ ] bcrypt 사용 불가 현상
+> - [ ] 배포 페이지 방명록 사용 불가 현상
+> - [x] DB/Session 사용 중복 코드
+> - [x] fetch redirect 사용 안됨
