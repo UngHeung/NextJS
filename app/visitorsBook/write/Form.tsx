@@ -23,7 +23,6 @@ export const Form = ({ ...props }: UserInfoProps) => {
     <form
       id="book_write_form"
       onSubmit={(e) => {
-        e.preventDefault();
         handleVisitorsBook(e, authtype, router);
         !writerid ? setWriter("") : null;
         setBookPassword("");
