@@ -5,45 +5,20 @@
 "use client";
 
 import React, { useState } from "react";
-import { CommentProps, CommentUpdateProps } from "./Form";
-import { FormEvent } from "@/utils/interface/eventType";
+import handleCommentUpdate from "./handleCommentUpdate";
+import { CommentProps } from "./Form";
 import { useRouter } from "next/navigation";
-import getDate from "@/utils/func/getDate";
-import fetchApi from "@/pages/api/apiConfig";
 
 const Item = ({ ...props }: CommentProps) => {
   const [itemState, setItemState] = useState(false);
   const [comment, setCommnet] = useState(props.comment);
   const router = useRouter();
 
-  const handleCommentUpdate = async (e: FormEvent) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-    const data: CommentUpdateProps = {
-      _id: formData.get("commentid") as string,
-      comment: formData.get("comment") as string,
-      postid: formData.get("postid") as string,
-      date: getDate(),
-    };
-
-    try {
-      await fetchApi("POST", "/api/comment/update", data).then((response) => {
-        if (response.ok) {
-          router.refresh();
-          router.push(response.url);
-        }
-      });
-    } catch (e) {
-      console.error("comment_update_서버에 오류 발생\n" + e);
-    }
-  };
-
   return (
     <li>
       <form
         onSubmit={(e) => {
-          handleCommentUpdate(e);
+          handleCommentUpdate(e, router);
           setItemState(false);
         }}
       >

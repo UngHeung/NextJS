@@ -3,10 +3,10 @@
  */
 
 import React from "react";
-import Form, { CommentFormProps, CommentProps } from "./Form";
-import { redirect } from "next/navigation";
 import getDbCollection from "@/pages/api/getDatabase";
 import Item from "./Item";
+import Form, { CommentFormProps, CommentProps } from "./Form";
+import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 

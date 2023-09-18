@@ -5,10 +5,8 @@
 "use client";
 
 import React, { useState } from "react";
-import fetchApi from "@/pages/api/apiConfig";
-import { FormEvent } from "@/utils/interface/eventType";
+import handleCommentWrite from "./handleCommentWrite";
 import { useRouter } from "next/navigation";
-import getDate from "@/utils/func/getDate";
 
 export interface CommentProps {
   _id?: string; // commentid
@@ -32,34 +30,10 @@ const Form = ({ ...props }: CommentFormProps) => {
   const [comment, setComment] = useState("");
   const router = useRouter();
 
-  const handleCommentWrite = async (e: FormEvent) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-    const data: CommentProps = {
-      postid: formData.get("postid") as string,
-      writerid: formData.get("writerid") as string,
-      writer: formData.get("writer") as string,
-      comment: formData.get("comment") as string,
-      date: getDate(),
-    };
-
-    try {
-      await fetchApi("POST", "/api/comment/post", data).then((response) => {
-        if (response.ok) {
-          router.refresh();
-          router.push(response.url);
-        }
-      });
-    } catch (e) {
-      console.log("comment_form_서버에 오류 발생\n" + e);
-    }
-  };
-
   return (
     <form
       onSubmit={(e) => {
-        handleCommentWrite(e);
+        handleCommentWrite(e, router);
         setComment("");
       }}
     >
