@@ -26,10 +26,10 @@ const Button = (props: { postid: string; userdata: UserInfoProps; req: string; a
 
   const handleRemove = async (e: ButtonEvent, data: CommonDeleteRequestProps) => {
     e.preventDefault();
-    console.log(data);
     try {
       await fetchApi("DELETE", `/api/${deleteType}/delete`, data).then((response) => {
         if (response.ok) {
+          router.refresh();
           router.push(response.url);
         } else {
           console.log(response.status);
