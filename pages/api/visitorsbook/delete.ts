@@ -21,7 +21,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.redirect(302, "/visitorsBook");
   } catch (e) {
-    console.error("visitorsbook_delete 서버요청 오류 발생\n" + e);
+    console.error("visitorsbook_delete_서버요청 오류 발생\n" + e);
   }
 };
 
