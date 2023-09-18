@@ -9,7 +9,6 @@ export interface PostProps {
   writer: string;
   title: string;
   content: string;
-  // like: string[];
 }
 
 export type PostRequestType = "write" | "update";
