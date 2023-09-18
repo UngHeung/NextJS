@@ -2,25 +2,19 @@
  * 게시물 업데이트 서버 요청
  */
 
-import { connectDB } from "@/utils/database";
+import getDbCollection from "../getDatabase";
+import { PostProps } from "@/utils/interface/board/boardInterfaces";
 import { ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const body = req.body;
-  const postId = body._id;
-
-  if (!body.title) {
-    return res.status(500).json("제목이 없습니다.");
-  } else if (!body.content) {
-    return res.status(500).json("내용이 없습니다.");
-  }
+  const body = req.body as PostProps;
 
   try {
-    const client = await connectDB;
-    const db = client.db("simplepage");
-    await db.collection("board").updateOne(
-      { _id: new ObjectId(postId) },
+    await (
+      await getDbCollection("board")
+    ).updateOne(
+      { _id: new ObjectId(body._id) },
       {
         $set: {
           title: body.title,
@@ -29,9 +23,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       }
     );
 
-    res.redirect(302, `/board/detail/${postId}`);
+    res.redirect(302, `/board/detail/${body._id}`);
   } catch (e) {
-    console.error(e + "서버 에러");
+    console.error("board_update_서버요청 오류 발생\n" + e);
   }
 };
 
