@@ -13,7 +13,6 @@ import { PostProps } from "@/utils/interface/board/boardInterfaces";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
-import { redirect } from "next/navigation";
 import "./page.css";
 
 const postDetail = async ({ ...props }: { params: PostProps }) => {
