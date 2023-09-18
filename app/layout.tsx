@@ -1,14 +1,9 @@
-import "./globals.css";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { getServerSession } from "next-auth";
-import "./layout.css";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import NextAuthProvider from "./providers/NextAuthProvider";
-
-const inter = Inter({ subsets: ["latin"] });
+import type { Metadata } from "next";
+import "./globals.css";
+import "./layout.css";
 
 export const metadata: Metadata = {
   title: "NextJS",
@@ -16,16 +11,14 @@ export const metadata: Metadata = {
 };
 
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
-  let session = await getServerSession(authOptions);
-
   return (
-    <html lang="ko-KR">
-      <body className={inter.className}>
-        <Header user={session?.user} />
+    <html>
+      <body>
         <NextAuthProvider>
+          <Header />
           <main className="main">{children}</main>
+          <Footer />
         </NextAuthProvider>
-        <Footer />
       </body>
     </html>
   );

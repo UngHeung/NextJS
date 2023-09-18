@@ -1,10 +1,12 @@
-"use client";
-
 import Link from "next/link";
 import React from "react";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
+import { getServerSession } from "next-auth/next";
 
-const Header = ({ ...props }) => {
-  const user = props?.user;
+const Header = async () => {
+  const session = await getServerSession(authOptions);
+  const user = session?.user as UserSessionProps;
 
   return (
     <header className="main-header">
@@ -20,7 +22,13 @@ const Header = ({ ...props }) => {
             <li>
               <Link href={"/visitorsBook"}>방명록</Link>
             </li>
-            <li>{!user ? <Link href={"/userAuth"}>로그인</Link> : <Link href={"/userAuth/userInfo/"}>{user.name}</Link>}</li>
+            <li>
+              {!user ? (
+                <Link href={"/userAuth"}>로그인</Link>
+              ) : (
+                <Link href={"/userAuth/userInfo/"}>{user.accountname}</Link>
+              )}
+            </li>
           </ul>
         </nav>
       </div>
