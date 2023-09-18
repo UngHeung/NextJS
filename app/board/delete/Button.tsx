@@ -1,55 +1,44 @@
 "use client";
 
 import React, { useState } from "react";
+import fetchApi from "@/pages/api/apiConfig";
 import { useRouter } from "next/navigation";
-import { UserDataProps } from "@/utils/interface/user/userInterfaces";
+import { UserInfoProps } from "@/utils/interface/user/userInterfaces";
 import { CommonDeleteRequestProps, DeleteRequestType } from "@/utils/interface/common/commonInterfaces";
+import { ButtonEvent } from "@/utils/interface/eventType";
 import "./Button.css";
 
-const Button = (props: { _id: string; userdata: UserDataProps; req: string; authtype?: boolean }) => {
+const Button = (props: { postid: string; userdata: UserInfoProps; req: string; authtype?: boolean }) => {
+  const postid = props?.postid;
+  const userId = props?.userdata?.userid;
+  const deleteType: DeleteRequestType = props.req as DeleteRequestType;
+
   const [bookPassword, setBookPassword] = useState("");
   const router = useRouter();
 
-  const id = props?._id.toString();
-  const userId = props?.userdata?._id.toString();
-  const deleteType: DeleteRequestType = props.req as DeleteRequestType;
-
   const data: CommonDeleteRequestProps = {
-    _id: id,
+    _id: postid,
     userid: userId!,
     deletetype: deleteType,
     authtype: props?.authtype,
     bookpassword: bookPassword,
   };
 
-  const handleRemove = async (e: React.MouseEvent<HTMLButtonElement>, data: CommonDeleteRequestProps) => {
+  const handleRemove = async (e: ButtonEvent, data: CommonDeleteRequestProps) => {
     e.preventDefault();
-
+    console.log(data);
     try {
-      await fetch(`/api/${deleteType}/delete`, {
-        method: "DELETE",
-        body: JSON.stringify(data),
-      })
-        .then((res) => {
-          if (res.status === 200) {
-            console.log("방명록 삭제 성공");
-          } else {
-            console.log("방명록 삭제 실패");
-          }
-          return res;
-        })
-        .then((res) => {
-          console.log(res.status);
-          if (res.status === 200) {
-            router.refresh();
-            deleteType === "board" && router.push("board");
-          }
-        })
-        .catch((e) => {
-          console.error(e + "서버에 문제 발생");
-        });
+      await fetchApi("DELETE", `/api/${deleteType}/delete`, data).then((response) => {
+        if (response.ok) {
+          router.refresh();
+          router.push(response.url);
+          // deleteType === "board" && router.push("board");
+        } else {
+          console.log(response.status);
+        }
+      });
     } catch (e) {
-      console.error(e);
+      console.error("common_delete_button_서버에 문제 발생\n" + e);
     }
   };
   return (

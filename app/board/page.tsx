@@ -4,10 +4,10 @@
 
 import Link from "next/link";
 import React from "react";
-import { connectDB } from "@/utils/database";
+import getDbCollection from "@/pages/api/getDatabase";
 import { PostProps } from "@/utils/interface/board/boardInterfaces";
-import "./page.css";
 import { redirect } from "next/navigation";
+import "./page.css";
 
 export const dynamic = "force-dynamic";
 
@@ -15,11 +15,9 @@ const postList = async () => {
   let boardList: PostProps[];
 
   try {
-    const client = await connectDB;
-    const db = client.db("simplepage");
-    boardList = await db.collection("board").find().sort({ _id: -1 }).toArray();
+    boardList = await (await getDbCollection("board")).find().sort({ _id: -1 }).toArray();
   } catch (e) {
-    console.error(e + "서버에 문제 발생");
+    console.error("board_서버에 문제 발생\n" + e);
     redirect("/board");
   }
 
@@ -29,10 +27,10 @@ const postList = async () => {
         <h3 className="title">게시판</h3>
         <ul className="board-list">
           {boardList.map((item) => {
-            const postid = item?._id.toString();
+            item._id = item._id.toString();
             return (
-              <li key={postid}>
-                <Link href={`/board/detail/${postid}`}>
+              <li key={item?._id}>
+                <Link href={`/board/detail/${item?._id}`}>
                   <section className="board-head">
                     <strong className="board-title">{item?.title}</strong>
                     <span className="board-writer">{item?.writer}</span>

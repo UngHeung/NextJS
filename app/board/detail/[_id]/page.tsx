@@ -2,10 +2,12 @@
  * 게시물 상세 페이지
  */
 
+export const dynamic = "force-dynamic";
+
 import React from "react";
 import Link from "next/link";
 import Button from "../../delete/Button";
-import { connectDB } from "@/utils/database";
+import getDbCollection from "@/pages/api/getDatabase";
 import { ObjectId } from "mongodb";
 import { PostProps } from "@/utils/interface/board/boardInterfaces";
 import { getServerSession } from "next-auth";
@@ -15,19 +17,17 @@ import { redirect } from "next/navigation";
 import "./page.css";
 
 const postDetail = async ({ ...props }: { params: PostProps }) => {
+  const session = await getServerSession(authOptions);
+  const user = session?.user as UserSessionProps;
+
   let detail = {} as PostProps;
-  let session;
-  let user = {} as UserSessionProps;
 
   try {
-    const client = await connectDB;
-    const db = client.db("simplepage");
-    detail = await db.collection("board").findOne({ _id: new ObjectId(props.params._id) });
-    session = await getServerSession(authOptions);
-    user = session?.user as UserSessionProps;
+    detail = await (await getDbCollection("board")).findOne({ _id: new ObjectId(props.params._id) });
+    detail._id = detail._id.toString();
   } catch (e) {
-    console.error(e + "서버에 문제 발생");
-    redirect("/board");
+    console.error("board_detail_id_서버에 문제 발생\n" + e);
+    // redirect("/board");
   }
 
   return (
@@ -49,12 +49,12 @@ const postDetail = async ({ ...props }: { params: PostProps }) => {
           <Link className="button btn-normal" href={"/board"}>
             목록
           </Link>
-          {user?._id === detail?.writerid ? (
+          {user?.userid === detail?.writerid ? (
             <>
               <Link className="button btn-normal" href={`/board/update/${detail?._id}`}>
                 수정
               </Link>
-              <Button _id={detail?._id} req="board" userdata={user} />
+              <Button postid={detail?._id} req="board" userdata={user} />
             </>
           ) : null}
         </section>

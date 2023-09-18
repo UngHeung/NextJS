@@ -6,32 +6,26 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { PostProps, PostRequestType } from "@/utils/interface/board/boardInterfaces";
-import { UserDataProps } from "@/utils/interface/user/userInterfaces";
+import handlePost from "./handlePost";
+import { PostRequestType } from "@/utils/interface/board/boardInterfaces";
+import { useRouter } from "next/navigation";
 import "./Form.css";
 
-const Form = ({
-  type,
-  postData,
-  userData,
-}: {
-  type: PostRequestType;
-  postData?: PostProps;
-  userData?: UserDataProps;
-}) => {
+const Form = ({ type, data }: { type: PostRequestType; data: any }) => {
   const reqType = type;
-  const postId = postData?._id;
-  const writerid = reqType === "write" ? userData?._id : postData?.writerid;
-  const writer = reqType === "write" ? userData?.name : postData?.writer;
+  const postId = data?._id;
+  const writerid = reqType === "write" ? data?.userid : data?.writerid;
+  const writer = reqType === "write" ? data?.accountname : data?.writer;
 
-  const [title, setTitle] = useState(reqType === "write" ? "" : postData?.title);
-  const [content, setContent] = useState(reqType === "write" ? "" : postData?.content);
+  const [title, setTitle] = useState(reqType === "write" ? "" : data?.title);
+  const [content, setContent] = useState(reqType === "write" ? "" : data?.content);
+  const router = useRouter();
 
   return (
-    <form action={reqType === "write" ? "/api/board/post" : "/api/board/update"} method="POST">
+    <form onSubmit={(e) => handlePost(e, router, { reqType, title, content })}>
       <section className="post-input-wrap">
         {reqType === "update" ? (
-          <input name="_id" type="text" defaultValue={postId} style={{ display: "none" }} />
+          <input name="postid" type="text" defaultValue={postId} style={{ display: "none" }} />
         ) : (
           <>
             <input name="writerid" type="text" defaultValue={writerid} style={{ display: "none" }} />
