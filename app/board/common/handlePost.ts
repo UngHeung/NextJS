@@ -31,7 +31,6 @@ const handlePost = async (e: FormEvent, router: AppRouterInstance, { ...props })
 
   try {
     await fetchApi("POST", apiUrl, data).then((response) => {
-      console.log(response);
       if (response.ok) {
         router.refresh();
         router.push(response.url);
