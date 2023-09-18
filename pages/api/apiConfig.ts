@@ -11,6 +11,7 @@ const fetchApi = async (method: MethodType, apiUrl: string, data: any) => {
   const result = await fetch(apiUrl, {
     method: method,
     headers: {
+      "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
