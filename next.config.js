@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // basePath: process.env.NEXT_PUBLIC_API_URL,
+  basePath: "https://ungheung.github.io/",
 };
 
 module.exports = nextConfig;
