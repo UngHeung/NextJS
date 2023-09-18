@@ -1,3 +1,7 @@
+/**
+ * 댓글 입력 요청 폼
+ */
+
 "use client";
 
 import React, { useState } from "react";
@@ -7,7 +11,7 @@ import { useRouter } from "next/navigation";
 import getDate from "@/utils/func/getDate";
 
 export interface CommentProps {
-  commentid: string;
+  _id?: string; // commentid
   postid: string;
   writer: string;
   writerid: string;
@@ -15,30 +19,30 @@ export interface CommentProps {
   date: string;
 }
 
-export interface CommentFormProps extends Omit<CommentProps, "commentid" | "date" | "comment"> {}
-
-export interface CommentReqProps {
-  postid: string;
-  writerid: string;
-  writer: string;
+export interface CommentUpdateProps {
+  _id: string;
   comment: string;
+  date: string;
+  postid: string;
 }
+
+export interface CommentFormProps extends Omit<CommentProps, "commentid" | "date" | "comment"> {}
 
 const Form = ({ ...props }: CommentFormProps) => {
   const [comment, setComment] = useState("");
   const router = useRouter();
 
-  const handleComment = async (e: FormEvent) => {
+  const handleCommentWrite = async (e: FormEvent) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const data = {
-      postid: formData.get("postid"),
-      writerid: formData.get("writerid"),
-      writer: formData.get("writer"),
-      comment: formData.get("comment"),
+    const data: CommentProps = {
+      postid: formData.get("postid") as string,
+      writerid: formData.get("writerid") as string,
+      writer: formData.get("writer") as string,
+      comment: formData.get("comment") as string,
       date: getDate(),
-    } as CommentReqProps;
+    };
 
     try {
       await fetchApi("POST", "/api/comment/post", data).then((response) => {
@@ -55,7 +59,7 @@ const Form = ({ ...props }: CommentFormProps) => {
   return (
     <form
       onSubmit={(e) => {
-        handleComment(e);
+        handleCommentWrite(e);
         setComment("");
       }}
     >

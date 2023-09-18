@@ -1,3 +1,7 @@
+/**
+ * 댓글 박스 컴포넌트
+ */
+
 import React from "react";
 import Form, { CommentFormProps, CommentProps } from "./Form";
 import { redirect } from "next/navigation";
@@ -16,13 +20,12 @@ const CommentBox = async ({ ...props }: CommentFormProps) => {
     redirect(`/board/detail${props.postid}`);
   }
 
-  console.log(commentList);
-
   return (
     <>
       <section>
         <ul>
           {commentList.map((item: CommentProps, idx) => {
+            item._id = item?._id!.toString();
             return <Item key={idx} {...item} />;
           })}
         </ul>
