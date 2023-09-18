@@ -4,69 +4,30 @@
 
 "use client";
 
-import React, { FormEvent, useEffect, useState } from "react";
-import getDate from "@/utils/func/getDate";
+import React, { useState } from "react";
+import handleVisitorsBook from "./handleVisitorsBook";
 import { useRouter } from "next/navigation";
-import { UserDataProps } from "@/utils/interface/user/userInterfaces";
-import { VisitorsBookRequestProps } from "@/utils/interface/visitorsBook/visitorsbookInterfaces";
+import { UserInfoProps } from "@/utils/interface/user/userInterfaces";
 import "./Form.css";
 
-export const Form = ({ ...props }: UserDataProps) => {
-  const [writer, setWriter] = useState(props?._id ? props?.name : "");
+export const Form = ({ ...props }: UserInfoProps) => {
+  const [writer, setWriter] = useState(props?.userid ? props?.accountname : "");
   const [content, setContent] = useState("");
   const [bookPassword, setBookPassword] = useState("");
 
-  const date = getDate();
   const router = useRouter();
-  const writerid = props._id;
+  const writerid = props.userid;
   const authtype = writerid ? true : false;
-
-  const data: VisitorsBookRequestProps = {
-    writer: writer,
-    writerid: writerid,
-    content: content,
-    bookpassword: bookPassword,
-    date: date,
-    authtype: authtype,
-  };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>, data: VisitorsBookRequestProps) => {
-    e.preventDefault();
-
-    try {
-      await fetch("/api/visitorsBook/post", {
-        method: "POST",
-        body: JSON.stringify(data),
-      })
-        .then((res) => {
-          if (res.status === 200) {
-            console.log("방명록 등록 성공");
-          } else {
-            console.log("방명록 등록 실패");
-          }
-          return res;
-        })
-        .then((res) => {
-          if (res.status === 200) {
-            router.refresh();
-            console.log(res.status);
-          }
-        });
-    } catch (e) {
-      console.error(e);
-    }
-  };
 
   return (
     <form
       id="book_write_form"
       onSubmit={(e) => {
-        handleSubmit(e, data);
+        handleVisitorsBook(e, authtype, router);
         !writerid ? setWriter("") : null;
         setBookPassword("");
         setContent("");
       }}
-      method="POST"
     >
       <header className="book-write-head">
         <div>
@@ -99,7 +60,6 @@ export const Form = ({ ...props }: UserDataProps) => {
             </>
           )}
         </div>
-        <input id="book_date_input" name="date" type="text" defaultValue={getDate()} />
         <button type="submit" className="button btn-normal">
           등록
         </button>

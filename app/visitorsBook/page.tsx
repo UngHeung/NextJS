@@ -4,27 +4,23 @@
 
 import React from "react";
 import Button from "../board/delete/Button";
-import { connectDB } from "@/utils/database";
 import { Form } from "./write/Form";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
 import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
 import "./page.css";
 import { VisitorsBookProps } from "@/utils/interface/visitorsBook/visitorsbookInterfaces";
+import getDbCollection from "@/pages/api/getDatabase";
 
 export const dynamic = "force-dynamic";
 
 const visitorsBook = async () => {
-  let session;
-  let user = {} as UserSessionProps;
+  const session = await getServerSession(authOptions);
+  const user = session?.user as UserSessionProps;
   let visitorsBookList = [] as VisitorsBookProps[];
 
   try {
-    const client = await connectDB;
-    const db = client.db("simplepage");
-    session = await getServerSession(authOptions);
-    user = session?.user as UserSessionProps;
-    visitorsBookList = await db.collection("visitorsbook").find().sort({ _id: -1 }).toArray();
+    visitorsBookList = await (await getDbCollection("visitorsbook")).find().sort({ _id: -1 }).toArray();
   } catch (e) {
     console.log(e + "서버에 문제 발생");
   }
@@ -46,8 +42,8 @@ const visitorsBook = async () => {
                 </span>
                 <hr className="book-line" />
                 <span className="book-content">{`${item?.content}`}</span>
-                {user?._id === item?.writerid || !item?.authtype ? (
-                  <Button _id={id} userdata={user} req="visitorsBook" authtype={item?.authtype} />
+                {user?.userid === item?.writerid || !item?.authtype ? (
+                  <Button postid={id} userdata={user} req="visitorsBook" authtype={item?.authtype} />
                 ) : null}
               </li>
             );
