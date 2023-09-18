@@ -1,3 +1,8 @@
+/**
+ * 회원가입 핸들러
+ */
+
+import fetchApi from "@/pages/api/apiConfig";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 import { FormEvent } from "react";
 
@@ -19,24 +24,9 @@ const handleSignUp = async (e: FormEvent<HTMLFormElement>, redirect: AppRouterIn
   }
 
   try {
-    await fetch("/api/auth/post", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => {
-        if (res.ok) {
-          console.log("가입 성공");
-        } else {
-          console.log("가입 실패");
-          return;
-        }
-      })
-      .then(() => {
-        redirect.push("/userAuth");
-      });
+    await fetchApi("POST", "/api/auth/post", data).then((response) => {
+      redirect.push(response.url);
+    });
   } catch (e) {
     throw new Error(e + "서버에 문제 발생");
   }

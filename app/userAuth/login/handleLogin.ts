@@ -25,19 +25,18 @@ const handleLogin = async (e: FormEvent<HTMLFormElement>, router: AppRouterInsta
 
   try {
     await signIn("credentials", data)
-      .then((res) => {
-        console.log(res?.ok);
-        if (res?.ok) {
+      .then((response) => {
+        console.log(response?.ok);
+        if (response?.ok) {
           console.log("로그인 성공");
         } else {
           console.log("로그인 실패");
           return;
         }
-
-        return res;
+        return response;
       })
-      .then((res) => {
-        if (res?.ok) {
+      .then((response) => {
+        if (response?.ok) {
           router.refresh();
           router.push("/");
         }
