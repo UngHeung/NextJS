@@ -4,21 +4,31 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import handleSignUp from "../signUp/handleSignUp";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import "./page.css";
 
 const Signup = () => {
+  const session = useSession();
+  const user = session.data?.user;
+  const redirect = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      console.log("회원입니다.");
+      redirect.push("/");
+    }
+  }, [redirect, user]);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
   const [emailCheck, setEmailCheck] = useState(false);
   const [showEmailCheckMessage, setShowEmailCheckMessage] = useState("");
-
-  const redirect = useRouter();
 
   const checkEmail = async (email: string) => {
     if (!email) {
