@@ -24,7 +24,7 @@ const Item = ({ user, item }: { user?: UserSessionProps; item: CommentProps }) =
         className="comment-form-container"
         onSubmit={(e) => {
           handleCommentUpdate(e, router);
-          setPrevComment(comment);
+          setPrevComment("");
           setItemState(false);
         }}
       >
@@ -51,7 +51,6 @@ const Item = ({ user, item }: { user?: UserSessionProps; item: CommentProps }) =
                   className="button btn-normal"
                   onClick={() => {
                     setItemState(false);
-                    console.log(prevComment);
                     setCommnet(prevComment);
                   }}
                 >

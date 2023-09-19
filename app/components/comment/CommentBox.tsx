@@ -12,8 +12,6 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
 import "./CommentBox.css";
 
-export const dynamic = "force-dynamic";
-
 const CommentBox = async ({ ...props }: CommentFormProps) => {
   const session = await getServerSession(authOptions);
   const user = session?.user as UserSessionProps;
