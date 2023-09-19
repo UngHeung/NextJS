@@ -8,10 +8,20 @@ const handleCommentUpdate = async (e: FormEvent, router: AppRouterInstance) => {
   e.preventDefault();
 
   const formData = new FormData(e.currentTarget);
+
+  const commentid = formData.get("commentid");
+  const comment = formData.get("comment");
+  const postid = formData.get("postid");
+
+  if (!comment) {
+    console.log("내용이 없습니다.");
+    return;
+  }
+
   const data: CommentUpdateProps = {
-    _id: formData.get("commentid") as string,
-    comment: formData.get("comment") as string,
-    postid: formData.get("postid") as string,
+    _id: commentid as string,
+    comment: comment as string,
+    postid: postid as string,
     date: getDate(),
   };
 

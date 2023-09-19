@@ -8,11 +8,22 @@ const handleCommentWrite = async (e: FormEvent, router: AppRouterInstance) => {
   e.preventDefault();
 
   const formData = new FormData(e.currentTarget);
+
+  const postid = formData.get("postid");
+  const writerid = formData.get("writerid");
+  const writer = formData.get("writer");
+  const comment = formData.get("commnet");
+
+  if (!comment) {
+    console.log("내용이 없습니다.");
+    return;
+  }
+
   const data: CommentProps = {
-    postid: formData.get("postid") as string,
-    writerid: formData.get("writerid") as string,
-    writer: formData.get("writer") as string,
-    comment: formData.get("comment") as string,
+    postid: postid as string,
+    writerid: writerid as string,
+    writer: writer as string,
+    comment: comment as string,
     date: getDate(),
   };
 
