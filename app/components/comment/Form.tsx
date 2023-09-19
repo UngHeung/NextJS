@@ -32,6 +32,7 @@ const Form = ({ ...props }: CommentFormProps) => {
 
   return (
     <form
+      className="comment-input-form-container"
       onSubmit={(e) => {
         handleCommentWrite(e, router);
         setComment("");
@@ -40,14 +41,19 @@ const Form = ({ ...props }: CommentFormProps) => {
       <input type="text" name="postid" defaultValue={props.postid} style={{ display: "none" }} />
       <input type="text" name="writerid" defaultValue={props.writerid} style={{ display: "none" }} />
       <div>
-        <label htmlFor="writer">작성자</label>
-        <input type="text" name="writer" id="writer" defaultValue={props.writer} readOnly />
+        <label htmlFor="comment_writer">작성자</label>
+        <input type="text" name="writer" id="comment_writer" defaultValue={props.writer} readOnly />
       </div>
       <div>
-        <label htmlFor="comment_content">내용</label>
-        <textarea name="comment" id="comment" onChange={(e) => setComment(e.target.value)} value={comment}></textarea>
+        <textarea
+          name="comment"
+          id="comment_content"
+          placeholder="댓글을 입력하세요."
+          onChange={(e) => setComment(e.target.value)}
+          value={comment}
+        ></textarea>
       </div>
-      <button>저장</button>
+      <button className="comment-input-button button btn-normal">저장</button>
     </form>
   );
 };
