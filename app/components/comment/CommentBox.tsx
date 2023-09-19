@@ -4,8 +4,9 @@
 
 import React from "react";
 import getDbCollection from "@/pages/api/getDatabase";
+import Form from "./Form";
 import Item from "./Item";
-import Form, { CommentFormProps, CommentProps } from "./Form";
+import { CommentFormProps, CommentProps } from "@/utils/interface/comment/commentInterface";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";

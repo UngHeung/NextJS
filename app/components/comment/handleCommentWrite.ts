@@ -1,7 +1,7 @@
 import fetchApi from "@/pages/api/apiConfig";
 import getDate from "@/utils/func/getDate";
+import { CommentProps } from "@/utils/interface/comment/commentInterface";
 import { FormEvent } from "@/utils/interface/eventType";
-import { CommentProps } from "./Form";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 
 const handleCommentWrite = async (e: FormEvent, router: AppRouterInstance) => {

@@ -1,8 +1,8 @@
 import getDate from "@/utils/func/getDate";
 import fetchApi from "@/pages/api/apiConfig";
-import { CommentUpdateProps } from "./Form";
 import { FormEvent } from "@/utils/interface/eventType";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
+import { CommentUpdateProps } from "@/utils/interface/comment/commentInterface";
 
 const handleCommentUpdate = async (e: FormEvent, router: AppRouterInstance) => {
   e.preventDefault();
