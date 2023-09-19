@@ -67,7 +67,7 @@ export const Form = ({ ...props }: UserInfoProps) => {
       <section>
         <textarea
           name="content"
-          className="book-content-area"
+          className="book-content-wrap"
           placeholder="방명록을 작성해주세요"
           onChange={(e) => setContent(e.target.value)}
           value={content}

@@ -48,3 +48,8 @@ input:focus,
 a:focus {
   outline: none;
 }
+
+textarea,
+code {
+  font-family: 'pretendard', monospace;
+}
