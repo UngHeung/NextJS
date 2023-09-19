@@ -1,0 +1,75 @@
+/* CommentBox */
+
+.comment-list-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 20px 10px;
+}
+
+.comment-input-wrap {
+  width: 100%;
+}
+
+/* Item */
+
+.comment-form-container {
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #d1d1d1;
+}
+
+.comment-writer-name,
+.comment-date {
+  display: inline-block;
+}
+
+.comment-writer-name {
+  width: 60%;
+  font-size: 14px;
+  text-align: left;
+}
+
+.comment-date {
+  width: 40%;
+  font-size: 10px;
+  text-align: right;
+  border: none;
+  cursor: default;
+}
+
+.comment-content {
+  width: 100%;
+  max-height: 80px;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-bottom: 1px solid white;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  white-space: pre-line;
+  resize: none;
+}
+
+.comment-content:not(:read-only) {
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #d1d1d1;
+}
+
+.comment-button-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.comment-button-wrap>button {
+  margin-right: 5px;
+}
+
+.comment-update-button {
+  position: absolute;
+  left: 93px;
+}

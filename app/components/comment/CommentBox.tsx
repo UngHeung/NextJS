@@ -10,6 +10,7 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
+import "./CommentBox.css";
 
 export const dynamic = "force-dynamic";
 
@@ -28,7 +29,7 @@ const CommentBox = async ({ ...props }: CommentFormProps) => {
   return (
     <>
       <section>
-        <ul>
+        <ul className="comment-list-wrap">
           {commentList.map((item: CommentProps, idx) => {
             item._id = item?._id!.toString();
             return <Item key={idx} user={user} item={item} />;
@@ -36,7 +37,7 @@ const CommentBox = async ({ ...props }: CommentFormProps) => {
         </ul>
       </section>
       {user && (
-        <section>
+        <section className="comment-input-wrap">
           <Form {...props} />
         </section>
       )}

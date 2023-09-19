@@ -21,44 +21,58 @@ const Item = ({ user, item }: { user?: UserSessionProps; item: CommentProps }) =
   return (
     <li>
       <form
+        className="comment-form-container"
         onSubmit={(e) => {
           handleCommentUpdate(e, router);
           setPrevComment(comment);
           setItemState(false);
         }}
       >
-        <strong>{item.writer}</strong>
+        <strong className="comment-writer-name">{item.writer}</strong>
         <div style={{ display: "none" }}>
           <input type="string" name="commentid" defaultValue={commentid} />
           <input type="string" name="postid" defaultValue={item.postid} />
         </div>
-        <input type="string" name="date" defaultValue={item.date} />
+        <input className="comment-date" type="string" name="date" defaultValue={item.date} readOnly />
         <textarea
+          className="comment-content"
           name="comment"
           onChange={(e) => setCommnet(e.target.value)}
           value={comment}
           readOnly={!itemState}
         ></textarea>
-        {itemState && <button>저장</button>}
+        <div className="comment-button-wrap">
+          {itemState && <button className="button btn-login comment-update-button">저장</button>}
+          {user?.userid === item.writerid ? (
+            <>
+              {itemState ? (
+                <button
+                  type="button"
+                  className="button btn-normal"
+                  onClick={() => {
+                    setItemState(false);
+                    console.log(prevComment);
+                    setCommnet(prevComment);
+                  }}
+                >
+                  취소
+                </button>
+              ) : (
+                <button type="button" className="button btn-normal" onClick={() => setItemState(true)}>
+                  수정
+                </button>
+              )}
+              <button
+                type="button"
+                className="button btn-delete"
+                onClick={() => handleRemoveItem(commentid!, item.postid, router)}
+              >
+                삭제
+              </button>
+            </>
+          ) : null}
+        </div>
       </form>
-      {user?.userid === item.writerid ? (
-        <>
-          {itemState ? (
-            <button
-              onClick={() => {
-                setItemState(false);
-                console.log(prevComment);
-                setCommnet(prevComment);
-              }}
-            >
-              취소
-            </button>
-          ) : (
-            <button onClick={() => setItemState(true)}>수정</button>
-          )}
-          <button onClick={() => handleRemoveItem(commentid!, item.postid, router)}>삭제</button>
-        </>
-      ) : null}
     </li>
   );
 };
