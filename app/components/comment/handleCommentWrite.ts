@@ -12,7 +12,7 @@ const handleCommentWrite = async (e: FormEvent, router: AppRouterInstance) => {
   const postid = formData.get("postid");
   const writerid = formData.get("writerid");
   const writer = formData.get("writer");
-  const comment = formData.get("commnet");
+  const comment = formData.get("comment");
 
   if (!comment) {
     console.log("내용이 없습니다.");
