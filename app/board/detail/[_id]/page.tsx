@@ -61,7 +61,7 @@ const postDetail = async ({ ...props }: { params: PostProps }) => {
               <Link className="button btn-normal" href={`/board/update/${detail?._id}`}>
                 수정
               </Link>
-              <Button postid={detail?._id} req="board" userdata={user} />
+              <Button postid={detail?._id} req="board" userdata={user} authtype={true} />
             </>
           ) : null}
         </section>
