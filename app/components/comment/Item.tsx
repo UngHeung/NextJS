@@ -7,9 +7,9 @@
 import React, { useState } from "react";
 import handleCommentUpdate from "./handleCommentUpdate";
 import handleRemoveItem from "./handleCommentDelete";
-import { CommentProps } from "./Form";
 import { useRouter } from "next/navigation";
 import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
+import { CommentProps } from "@/utils/interface/comment/commentInterface";
 
 const Item = ({ user, item }: { user?: UserSessionProps; item: CommentProps }) => {
   const commentid = item._id;

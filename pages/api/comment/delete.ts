@@ -3,7 +3,7 @@
  */
 
 import getDbCollection from "../getDatabase";
-import { CommentProps } from "@/app/components/comment/Form";
+import { CommentProps } from "@/utils/interface/comment/commentInterface";
 import { ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 
