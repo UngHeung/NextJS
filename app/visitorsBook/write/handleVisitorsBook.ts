@@ -28,7 +28,7 @@ const handleVisitorsBook = async (e: FormEvent, authtype: boolean, router: AppRo
   };
 
   try {
-    await fetchApi("POST", "/api/visitorsBook/post", data).then((response) => {
+    await fetchApi("POST", "/api/visitorsbook/post", data).then((response) => {
       if (response.status === 200) {
         router.refresh();
         router.push(response.url);

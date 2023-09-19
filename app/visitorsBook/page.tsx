@@ -43,7 +43,7 @@ const visitorsBook = async () => {
                 <hr className="book-line" />
                 <span className="book-content">{`${item?.content}`}</span>
                 {user?.userid === item?.writerid || !item?.authtype ? (
-                  <Button postid={id} userdata={user} req="visitorsBook" authtype={item?.authtype} />
+                  <Button postid={id} userdata={user} req="visitorsbook" authtype={item?.authtype} />
                 ) : null}
               </li>
             );
