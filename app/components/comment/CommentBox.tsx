@@ -7,10 +7,15 @@ import getDbCollection from "@/pages/api/getDatabase";
 import Item from "./Item";
 import Form, { CommentFormProps, CommentProps } from "./Form";
 import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
 
 export const dynamic = "force-dynamic";
 
 const CommentBox = async ({ ...props }: CommentFormProps) => {
+  const session = await getServerSession(authOptions);
+  const user = session?.user as UserSessionProps;
   let commentList: CommentProps[];
 
   try {
@@ -26,13 +31,15 @@ const CommentBox = async ({ ...props }: CommentFormProps) => {
         <ul>
           {commentList.map((item: CommentProps, idx) => {
             item._id = item?._id!.toString();
-            return <Item key={idx} {...item} />;
+            return <Item key={idx} user={user} item={item} />;
           })}
         </ul>
       </section>
-      <section>
-        <Form {...props} />
-      </section>
+      {user && (
+        <section>
+          <Form {...props} />
+        </section>
+      )}
     </>
   );
 };

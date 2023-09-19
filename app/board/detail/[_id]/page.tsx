@@ -33,8 +33,8 @@ const postDetail = async ({ ...props }: { params: PostProps }) => {
 
   const CommentOptions: CommentFormProps = {
     postid: props.params._id,
-    writer: user.accountname,
-    writerid: user.userid,
+    writer: user?.accountname,
+    writerid: user?.userid,
   };
 
   return (

@@ -6,14 +6,16 @@
 
 import React, { useState } from "react";
 import handleCommentUpdate from "./handleCommentUpdate";
+import handleRemoveItem from "./handleCommentDelete";
 import { CommentProps } from "./Form";
 import { useRouter } from "next/navigation";
-import handleRemoveItem from "./handleCommentDelete";
+import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
 
-const Item = ({ ...props }: CommentProps) => {
-  const commentid = props._id;
+const Item = ({ user, item }: { user?: UserSessionProps; item: CommentProps }) => {
+  const commentid = item._id;
   const [itemState, setItemState] = useState(false);
-  const [comment, setCommnet] = useState(props.comment);
+  const [comment, setCommnet] = useState(item.comment);
+  const [prevComment, setPrevComment] = useState(comment);
   const router = useRouter();
 
   return (
@@ -21,15 +23,16 @@ const Item = ({ ...props }: CommentProps) => {
       <form
         onSubmit={(e) => {
           handleCommentUpdate(e, router);
+          setPrevComment(comment);
           setItemState(false);
         }}
       >
-        <strong>{props.writer}</strong>
+        <strong>{item.writer}</strong>
         <div style={{ display: "none" }}>
           <input type="string" name="commentid" defaultValue={commentid} />
-          <input type="string" name="postid" defaultValue={props.postid} />
+          <input type="string" name="postid" defaultValue={item.postid} />
         </div>
-        <input type="string" name="date" defaultValue={props.date} />
+        <input type="string" name="date" defaultValue={item.date} />
         <textarea
           name="comment"
           onChange={(e) => setCommnet(e.target.value)}
@@ -38,13 +41,24 @@ const Item = ({ ...props }: CommentProps) => {
         ></textarea>
         {itemState && <button>저장</button>}
       </form>
-
-      {itemState ? (
-        <button onClick={() => setItemState(false)}>취소</button>
-      ) : (
-        <button onClick={() => setItemState(true)}>수정</button>
-      )}
-      <button onClick={() => handleRemoveItem(commentid!, props.postid, router)}>삭제</button>
+      {user?.userid === item.writerid ? (
+        <>
+          {itemState ? (
+            <button
+              onClick={() => {
+                setItemState(false);
+                console.log(prevComment);
+                setCommnet(prevComment);
+              }}
+            >
+              취소
+            </button>
+          ) : (
+            <button onClick={() => setItemState(true)}>수정</button>
+          )}
+          <button onClick={() => handleRemoveItem(commentid!, item.postid, router)}>삭제</button>
+        </>
+      ) : null}
     </li>
   );
 };
