@@ -4,6 +4,7 @@ import NextAuthProvider from "./providers/NextAuthProvider";
 import type { Metadata } from "next";
 import "./globals.css";
 import "./layout.css";
+import { RecoilRoot } from "recoil";
 
 export const metadata: Metadata = {
   title: "NextJS",
@@ -15,9 +16,11 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
     <html>
       <body>
         <NextAuthProvider>
-          <Header />
-          <main className="main">{children}</main>
-          <Footer />
+          <RecoilRoot>
+            <Header />
+            <main className="main">{children}</main>
+            <Footer />
+          </RecoilRoot>
         </NextAuthProvider>
       </body>
     </html>
