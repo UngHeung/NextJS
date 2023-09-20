@@ -1,8 +1,7 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
-import getDB from "../getDatabase";
-import { NextAuthOptions } from "next-auth";
 import getDbCollection from "../getDatabase";
+import { NextAuthOptions } from "next-auth";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -31,7 +30,7 @@ export const authOptions: NextAuthOptions = {
   ],
   session: {
     strategy: "jwt",
-    maxAge: 6 * 24 * 60 * 60,
+    maxAge: 1 * 24 * 60 * 60,
   },
 
   callbacks: {
