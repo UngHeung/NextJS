@@ -34,6 +34,15 @@ npm install mongodb@4 # 낮은 버전이 필요할 수 있다.
 
 <br>
 
+## 라이브러리 설치
+
+```bash
+npm install recoil # 리코일
+npm install react-notion # 노션 페이지
+```
+
+<br>
+
 ## 🎯 구현 목표
 
 ### 회원
