@@ -66,7 +66,7 @@
 
 .main {
   max-width: 390px;
-  height: calc(100vh - 150px);
+  height: calc(100dvh - 150px);
   margin: 50px auto 0;
   padding: 0 5px;
   background-color: white;
