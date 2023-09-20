@@ -5,7 +5,7 @@
 **사용 언어**<br>
 `JavaScript` `TypeScript`<br>
 **라이브러리**<br>
-`React` `NextAuth`<br>
+`React` `NextAuth` `NotionX`<br>
 **프레임워크**<br>
 `Next.js`<br>
 **DB**<br>
