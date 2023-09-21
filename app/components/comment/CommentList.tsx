@@ -16,7 +16,7 @@ const CommentList = ({ postInfo, commentList }: { postInfo: CommentFormProps; co
         {commentList.map((item: CommentProps, idx) => {
           item._id = item?._id!.toString();
           return (
-            <li key={idx}>
+            <li key={idx} className="comment-input-wrap">
               <strong className="comment-writer-name">{item.writer}</strong>
               <div style={{ display: "none" }}>
                 <input type="string" name="commentid" defaultValue={item._id} />

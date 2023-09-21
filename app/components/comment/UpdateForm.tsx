@@ -4,7 +4,7 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import handleCommentUpdate from "./handleCommentUpdate";
 import handleRemoveItem from "./handleCommentDelete";
 import { useRouter } from "next/navigation";
@@ -12,10 +12,15 @@ import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
 import { CommentProps } from "@/utils/interface/comment/commentInterface";
 
 const UpdateForm = ({ user, item }: { user?: UserSessionProps; item: CommentProps }) => {
-  const [itemState, setItemState] = useState(false);
+  const [updateState, setUpdateState] = useState(false);
   const [comment, setCommnet] = useState(item.comment);
   const [prevComment, setPrevComment] = useState(comment);
   const router = useRouter();
+
+  useEffect(() => {
+    setCommnet(item.comment);
+    setPrevComment(item.comment);
+  }, [item.comment]);
 
   return (
     <form
@@ -23,35 +28,35 @@ const UpdateForm = ({ user, item }: { user?: UserSessionProps; item: CommentProp
       onSubmit={(e) => {
         handleCommentUpdate(e, router);
         setPrevComment("");
-        setItemState(false);
+        setUpdateState(false);
       }}
     >
       <input type="text" name="postid" defaultValue={item.postid} style={{ display: "none" }} />
       <input type="text" name="commentid" defaultValue={item._id} style={{ display: "none" }} />
       <textarea
-        className="comment-content"
+        className="comment-update-content"
         name="comment"
         onChange={(e) => setCommnet(e.target.value)}
         value={comment}
-        style={{ display: `${!itemState ? "none" : "block"}` }}
+        style={{ display: `${!updateState ? "none" : "block"}` }}
       ></textarea>
       <div className="comment-button-wrap">
-        {itemState && <button className="button btn-login comment-update-button">저장</button>}
+        {updateState && <button className="button btn-login comment-update-button">저장</button>}
         {user?.userid === item.writerid ? (
           <>
-            {itemState ? (
+            {updateState ? (
               <button
                 type="button"
                 className="button btn-normal"
                 onClick={() => {
-                  setItemState(false);
+                  setUpdateState(false);
                   setCommnet(prevComment);
                 }}
               >
                 취소
               </button>
             ) : (
-              <button type="button" className="button btn-normal" onClick={() => setItemState(true)}>
+              <button type="button" className="button btn-normal" onClick={() => setUpdateState(true)}>
                 수정
               </button>
             )}
