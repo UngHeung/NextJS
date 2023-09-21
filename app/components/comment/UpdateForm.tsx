@@ -26,7 +26,8 @@ const UpdateForm = ({ user, item }: { user?: UserSessionProps; item: CommentProp
     <form
       className="comment-form-container"
       onSubmit={(e) => {
-        handleCommentUpdate(e, router);
+        const commentid = item._id!;
+        handleCommentUpdate(e, router, commentid);
         setPrevComment("");
         setUpdateState(false);
       }}

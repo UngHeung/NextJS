@@ -4,12 +4,12 @@ import { FormEvent } from "@/utils/interface/eventType";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 import { CommentUpdateProps } from "@/utils/interface/comment/commentInterface";
 
-const handleCommentUpdate = async (e: FormEvent, router: AppRouterInstance) => {
+const handleCommentUpdate = async (e: FormEvent, router: AppRouterInstance, _id: string) => {
   e.preventDefault();
 
   const formData = new FormData(e.currentTarget);
 
-  const commentid = formData.get("commentid");
+  const commentid = _id;
   const comment = formData.get("comment");
   const postid = formData.get("postid");
 

@@ -14,7 +14,7 @@ const CommentList = ({ postInfo, commentList }: { postInfo: CommentFormProps; co
     <>
       <ul className="comment-list-wrap">
         {commentList.map((item: CommentProps, idx) => {
-          item._id = item?._id!.toString();
+          item._id = item._id!.toString();
           return (
             <li key={idx} className="comment-input-wrap">
               <strong className="comment-writer-name">{item.writer}</strong>
