@@ -5,6 +5,7 @@ import Form from "./Form";
 import { CommentFormProps, CommentProps } from "@/utils/interface/comment/commentInterface";
 import { useSession } from "next-auth/react";
 import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
+import UpdateForm from "./UpdateForm";
 
 const CommentList = ({ postInfo, commentList }: { postInfo: CommentFormProps; commentList: CommentProps[] }) => {
   const user = useSession().data?.user as UserSessionProps;
@@ -22,13 +23,8 @@ const CommentList = ({ postInfo, commentList }: { postInfo: CommentFormProps; co
                 <input type="string" name="postid" defaultValue={item.postid} />
               </div>
               <input className="comment-date" type="string" name="date" defaultValue={item.date} readOnly />
-              <textarea
-                className="comment-content"
-                name="comment"
-                // onChange={}
-                value={item.comment}
-                readOnly
-              ></textarea>
+              <p className="comment-content">{commentList[idx].comment}</p>
+              <UpdateForm user={user} item={item} />
             </li>
           );
         })}
