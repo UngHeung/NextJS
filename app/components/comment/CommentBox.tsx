@@ -4,42 +4,29 @@
 
 import React from "react";
 import getDbCollection from "@/pages/api/getDatabase";
-import Form from "./Form";
-import Item from "./Item";
+import CommentList from "./CommentList";
 import { CommentFormProps, CommentProps } from "@/utils/interface/comment/commentInterface";
 import { redirect } from "next/navigation";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
 import "./CommentBox.css";
 
-const CommentBox = async ({ ...props }: CommentFormProps) => {
-  const session = await getServerSession(authOptions);
-  const user = session?.user as UserSessionProps;
+const CommentBox = async (postInfo: CommentFormProps) => {
   let commentList: CommentProps[];
 
   try {
-    commentList = await (await getDbCollection("comment")).find({ postid: props.postid }).sort({ _id: -1 }).toArray();
+    commentList = await (await getDbCollection("comment"))
+      .find({ postid: postInfo.postid })
+      .sort({ _id: -1 })
+      .toArray();
   } catch (e) {
     console.error("commentbox_서버에 문제 발생\n" + e);
-    redirect(`/board/detail${props.postid}`);
+    redirect(`/board/detail/${postInfo.postid}`);
   }
 
   return (
     <>
       <section>
-        <ul className="comment-list-wrap">
-          {commentList.map((item: CommentProps, idx) => {
-            item._id = item?._id!.toString();
-            return <Item key={idx} user={user} item={item} />;
-          })}
-        </ul>
+        <CommentList postInfo={postInfo} commentList={commentList} />
       </section>
-      {user && (
-        <section className="comment-input-wrap">
-          <Form {...props} />
-        </section>
-      )}
     </>
   );
 };
