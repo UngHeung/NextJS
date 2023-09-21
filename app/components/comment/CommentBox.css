@@ -17,6 +17,7 @@
 /* Item */
 
 .comment-form-container {
+  position: relative;
   margin-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid #d1d1d1;
@@ -41,24 +42,29 @@
   cursor: default;
 }
 
-.comment-content {
+.comment-content,
+.comment-update-content {
   width: 100%;
-  /* height: 70px; */
+  min-height: 50px;
   padding: 10px;
   margin: 10px 0;
-  border: none;
-  border-bottom: 1px solid white;
-  border-radius: 4px;
   box-sizing: border-box;
   font-size: 13px;
   font-weight: 300;
-  white-space: pre-line;
-  resize: none;
 }
 
-.comment-content:not(:read-only) {
+.comment-content {
+  white-space: pre-line;
+}
+
+.comment-update-content {
+  position: absolute;
+  top: -70px;
   background-color: #f1f1f1;
+  border: none;
   border-bottom: 1px solid #d1d1d1;
+  border-radius: 4px;
+  resize: none;
 }
 
 .comment-button-wrap {
@@ -79,10 +85,6 @@
 .comment-input-form-container {
   position: relative;
   width: 100%;
-}
-
-.comment-input-form-container>div {
-  position: relative;
 }
 
 .comment-input-form-container label {
