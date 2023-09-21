@@ -9,7 +9,7 @@ import handleCommentWrite from "./handleCommentWrite";
 import { useRouter } from "next/navigation";
 import { CommentFormProps } from "@/utils/interface/comment/commentInterface";
 
-const Form = ({ ...props }: CommentFormProps) => {
+const Form = ({ postInfo }: { postInfo: CommentFormProps }) => {
   const [comment, setComment] = useState("");
   const router = useRouter();
 
@@ -21,11 +21,11 @@ const Form = ({ ...props }: CommentFormProps) => {
         setComment("");
       }}
     >
-      <input type="text" name="postid" defaultValue={props.postid} style={{ display: "none" }} />
-      <input type="text" name="writerid" defaultValue={props.writerid} style={{ display: "none" }} />
+      <input type="text" name="postid" defaultValue={postInfo.postid} style={{ display: "none" }} />
+      <input type="text" name="writerid" defaultValue={postInfo.writerid} style={{ display: "none" }} />
       <div>
         <label htmlFor="comment_writer">작성자</label>
-        <input type="text" name="writer" id="comment_writer" defaultValue={props.writer} readOnly />
+        <input type="text" name="writer" id="comment_writer" defaultValue={postInfo.writer} readOnly />
       </div>
       <div>
         <textarea
