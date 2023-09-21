@@ -31,7 +31,7 @@ const postDetail = async ({ ...props }: { params: PostProps }) => {
     // redirect("/board");
   }
 
-  const CommentOptions: CommentFormProps = {
+  const postInfo: CommentFormProps = {
     postid: props.params._id,
     writer: user?.accountname,
     writerid: user?.userid,
@@ -41,16 +41,12 @@ const postDetail = async ({ ...props }: { params: PostProps }) => {
     <>
       <main className="board-detail-main">
         <header className="board-detail-head">
-          {/* <span className="board-detail-no">{detail?.no}</span> */}
           <h3 className="board-detail-title">{detail?.title}</h3>
           <span className="board-detail-writer">{detail?.writer}</span>
         </header>
         <section className="board-detail-content-wrap">
           <p className="board-detail-content">{detail?.content}</p>
           <input type="checkbox" name="board-like" id="board_detail_like" />
-          {/* <label className="board-detail-like" htmlFor="board_detail_like">
-            <span>{`👍 ${detail?.like.length}`}</span>
-          </label> */}
         </section>
         <section className="board-detail-link-wrap">
           <Link className="button btn-normal" href={"/board"}>
@@ -66,7 +62,7 @@ const postDetail = async ({ ...props }: { params: PostProps }) => {
           ) : null}
         </section>
         <section>
-          <CommentList {...CommentOptions} />
+          <CommentList {...postInfo} />
         </section>
       </main>
     </>
