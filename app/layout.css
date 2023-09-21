@@ -25,6 +25,10 @@
   cursor: default;
 }
 
+.main-header-wrap img {
+  vertical-align: middle;
+}
+
 /* nav */
 .main-nav {
   display: inline-block;
