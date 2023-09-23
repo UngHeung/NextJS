@@ -51,7 +51,7 @@ const Button = (props: { postid: string; userdata: UserInfoProps; req: string; a
           placeholder="비밀번호"
         />
       )}
-      <button id="book_delete_button" className="button btn-delete" onClick={(e) => handleRemove(e, data)}>
+      <button className="button btn-delete" onClick={(e) => handleRemove(e, data)}>
         삭제
       </button>
     </>

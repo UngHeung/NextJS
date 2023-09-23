@@ -28,11 +28,11 @@ const visitorsBook = async () => {
       <section className="book-wrap">
         <h3 className="title">방명록</h3>
         <ul className="book-list">
-          {visitorsBookList.map((item) => {
+          {visitorsBookList.map((item, idx) => {
             const id = item._id.toString();
             const [date, time] = item?.date?.split(" ");
             return (
-              <li key={id}>
+              <li key={idx}>
                 <strong className="book-writer">{item?.writer}</strong>
                 <span className="book-date">
                   {`${date}
