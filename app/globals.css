@@ -45,6 +45,7 @@ input:focus,
 textarea:focus,
 button:focus,
 input:focus,
+select:focus,
 a:focus {
   outline: none;
 }
