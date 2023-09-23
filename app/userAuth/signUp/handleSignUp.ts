@@ -16,6 +16,7 @@ const handleSignUp = async (e: FormEvent<HTMLFormElement>, redirect: AppRouterIn
     accountname: formData.get("accountname"),
     email: formData.get("email"),
     password: formData.get("password"),
+    admin: false,
   };
 
   if (!email || !password) {

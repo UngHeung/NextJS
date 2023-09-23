@@ -8,6 +8,7 @@ export interface UserInfoProps {
   accountname: string;
   email: string;
   password?: string;
+  admin: boolean;
 }
 
 export interface UserLoginProps {
@@ -16,5 +17,5 @@ export interface UserLoginProps {
 }
 
 // 유저 세션 속성
-export interface UserSignUpProps extends Omit<UserInfoProps, "userid"> {}
+export interface UserSignUpProps extends Omit<UserInfoProps, "userid" | "admin"> {}
 export interface UserSessionProps extends Omit<UserInfoProps, "password"> {}
