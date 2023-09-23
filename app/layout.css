@@ -3,6 +3,7 @@
   position: fixed;
   top: 0;
   width: 100vw;
+  min-width: 335px;
   height: 50px;
   border-bottom: 1px solid #d1d1d1;
   font-size: 14px;
@@ -76,6 +77,7 @@
 
 .main {
   max-width: 390px;
+  min-width: 335px;
   height: calc(100dvh - 150px);
   margin: 50px auto 0;
   padding: 0 5px;
