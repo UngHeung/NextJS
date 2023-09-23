@@ -48,6 +48,8 @@
   white-space: pre-line;
 }
 
+/* notice form */
+
 .notice-form {
   position: fixed;
   left: 50%;
@@ -70,8 +72,8 @@
 
 .notice-input-title {
   width: 70%;
-  height: 25px;
-  padding: 15px 10px;
+  height: 30px;
+  padding: 0 10px;
   background-color: #f1f1f1;
   border: none;
   border-bottom: 1px solid #d1d1d1;
@@ -82,12 +84,20 @@
 }
 
 .notice-input-important {
+  display: inline-block;
+  height: 30px;
+  padding: 0 3px;
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #d1d1d1;
+  vertical-align: bottom;
+  line-height: 30px;
   cursor: pointer;
 }
 
 #notice_input_importance {
   width: 0px;
   height: 30px;
+  background-color: #f1f1f1;
   border: none;
   border-bottom: 1px solid white;
   transition: width .3s;
@@ -103,8 +113,6 @@
   border-color: #d1d1d1;
 }
 
-
-
 .notice-input-content {
   width: 100%;
   height: 100px;
@@ -114,4 +122,13 @@
   border-top: 1px solid #d1d1d1;
   border-bottom: 1px solid #d1d1d1;
   resize: none;
+}
+
+.notice-important-wrap {
+  position: absolute;
+  left: 70%;
+}
+
+.notice-input-important {
+  cursor: pointer;
 }
