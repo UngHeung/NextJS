@@ -43,7 +43,7 @@ const Button = (props: { postid: string; userdata: UserInfoProps; req: string; a
     <>
       {!props.authtype && (
         <input
-          id="book_delete_input"
+          className="book-delete-input"
           type="password"
           name="bookpassword"
           onChange={(e) => setBookPassword(e.target.value)}
