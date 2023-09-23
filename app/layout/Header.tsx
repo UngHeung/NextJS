@@ -21,6 +21,9 @@ const Header = async () => {
         <nav className="main-nav">
           <ul className="main-menu">
             <li>
+              <Link href={"/readMe"}>리드미</Link>
+            </li>
+            <li>
               <Link href={"/board"}>게시판</Link>
             </li>
             <li>
@@ -30,7 +33,9 @@ const Header = async () => {
               {!user ? (
                 <Link href={"/userAuth"}>로그인</Link>
               ) : (
-                <Link href={"/userAuth/userInfo/"}>{user.accountname}</Link>
+                <Link href={"/userAuth/userInfo/"} className="user-login">
+                  {user.accountname}
+                </Link>
               )}
             </li>
           </ul>
