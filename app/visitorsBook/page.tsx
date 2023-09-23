@@ -12,8 +12,6 @@ import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
 import { VisitorsBookProps } from "@/utils/interface/visitorsBook/visitorsbookInterfaces";
 import "./page.css";
 
-export const dynamic = "force-dynamic";
-
 const visitorsBook = async () => {
   const session = await getServerSession(authOptions);
   const user = session?.user as UserSessionProps;
