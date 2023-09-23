@@ -5,13 +5,8 @@ import { getServerSession } from "next-auth";
 import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import "./page.css";
-
-interface NoticeProps {
-  important: boolean;
-  importantNo?: number;
-  title: string;
-  content: string;
-}
+import NoticeForm from "./notice/NoticeForm";
+import { NoticeProps } from "@/utils/interface/notice/noticeInterface";
 
 export const dynamic = "force-dynamic";
 
@@ -22,7 +17,7 @@ const home = async () => {
   let noticeList: NoticeProps[];
 
   try {
-    noticeList = await (await getDbCollection("notice")).find().sort({ importance: -1 }).toArray();
+    noticeList = await (await getDbCollection("notice")).find().sort({ importance: -1, _id: -1 }).toArray();
   } catch (e) {
     console.error("home_서버에 문제 발생\n" + e);
     redirect("/home");
@@ -47,29 +42,7 @@ const home = async () => {
           )}
         </ul>
       </section>
-      {!user?.admin ? null : (
-        <form className="notice-form">
-          <header className="notice-form-head">
-            <input type="text" name="title" id="notice_input_title" className="notice-input-title" placeholder="제목" />
-            <input type="checkbox" name="important" id="notice_input_important" />
-            <label className="notice-input-important" htmlFor="notice_input_important">
-              중요
-            </label>
-            <select name="notice-input-importance" id="notice_input_importance">
-              <option defaultChecked value="0">
-                --
-              </option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-            <button className="button btn-normal">등록</button>
-          </header>
-          <textarea name="content" className="notice-input-content" placeholder="내용"></textarea>
-        </form>
-      )}
+      {!user?.admin ? null : <NoticeForm />}
     </>
   );
 };
