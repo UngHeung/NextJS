@@ -10,7 +10,7 @@
 **사용 언어**<br>
 `JavaScript` `TypeScript`<br>
 **라이브러리**<br>
-`React` `NextAuth`<br>
+`React` `NextAuth` `bcryptjs`<br>
 **프레임워크**<br>
 `Next.js`<br>
 **DB**<br>
@@ -35,6 +35,14 @@ npx create-next-app@latest --typescript
 ```bash
 npm install mongodb
 npm install mongodb@4 # 낮은 버전이 필요할 수 있다.
+```
+
+## bcrypt
+
+```bash
+npm install @mapbox/node-pre-gyp
+npm install bcryptjs
+npm install @types/bcryptjs
 ```
 
 <br>

@@ -1,4 +1,5 @@
 import NextAuth from "next-auth/next";
+import bcrypt from "bcryptjs";
 import CredentialsProvider from "next-auth/providers/credentials";
 import getDbCollection from "../getDatabase";
 import { NextAuthOptions } from "next-auth";
@@ -19,7 +20,10 @@ export const authOptions: NextAuthOptions = {
           return;
         }
 
-        if (credentials?.password !== user.password) {
+        const comparePassword = user.password;
+        const inputPasswordHash = await bcrypt.hash(credentials?.password as string, 10);
+
+        if (await bcrypt.compare(inputPasswordHash!, comparePassword)) {
           console.log("잘못된 비밀번호");
           return;
         }
