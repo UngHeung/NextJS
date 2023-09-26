@@ -27,7 +27,7 @@ const InfoUpdate = () => {
   }
 
   return (
-    <section>
+    <section className="info-update-input-wrap">
       <h3 className="title">회원정보수정</h3>
       <form onSubmit={(e) => handleUpdateInfo(e, router)}>
         <input name="userid" type="text" style={{ display: "none" }} defaultValue={user.userid} readOnly />
@@ -98,8 +98,14 @@ const InfoUpdate = () => {
             </div>
           </>
         )}
-        <button type="submit">저장</button>
-        <button type="button">취소</button>
+        <section className="info-update-button-wrap">
+          <button type="submit" className="button btn-login">
+            저장
+          </button>
+          <button type="button" className="button btn-normal">
+            취소
+          </button>
+        </section>
       </form>
       <label htmlFor=""></label>
     </section>
