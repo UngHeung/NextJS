@@ -3,6 +3,7 @@
 :root {
   --color-gray100: #f1f1f1;
   --color-gray200: #d1d1d1;
+  --color-gray300: #999999;
   --color-main: #935db4;
   --color-red: #d24444;
   --color-blue: #2656c4;
@@ -16,7 +17,7 @@
 }
 
 *::placeholder {
-  color: #999999;
+  color: var(--color-gray300);
 }
 
 body {
