@@ -7,7 +7,6 @@ const handleUpdateInfo = async (e: FormEvent, router: AppRouterInstance) => {
   e.preventDefault();
 
   const formData = new FormData(e.currentTarget);
-
   const data: UserInfoUpdateProps = {
     _id: formData.get("userid") as string,
     accountname: formData.get("accountname") as string,

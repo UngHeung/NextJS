@@ -50,6 +50,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         }
       );
     }
+
     res.redirect(302, "/userAuth/userInfo");
   } catch (e) {
     console.error("auth_update_서버 문제 발생2\n" + e);
