@@ -38,7 +38,7 @@
 
 .important::before {
   content: "★ ";
-  color: #d24444;
+  color: var(--color-main);
   font-weight: 600;
 }
 
@@ -104,7 +104,7 @@
 }
 
 #notice_input_important:checked+label {
-  color: #d24444;
+  color: var(--color-main);
   font-weight: 600;
 }
 
