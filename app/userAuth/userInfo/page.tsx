@@ -5,6 +5,7 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { redirect } from "next/navigation";
 import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
 import "./page.css";
+import Link from "next/link";
 
 const pages = async () => {
   const session = await getServerSession(authOptions);
@@ -28,7 +29,9 @@ const pages = async () => {
         </div>
       </section>
       <section className="user-info-button-wrap">
-        <button className="button btn-normal">수정</button>
+        <Link href={"userInfo/infoUpdate"} className="button btn-normal">
+          수정
+        </Link>
         <LogoutButton />
       </section>
     </>
