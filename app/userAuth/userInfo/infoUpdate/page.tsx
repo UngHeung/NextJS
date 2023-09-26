@@ -102,7 +102,13 @@ const InfoUpdate = () => {
           <button type="submit" className="button btn-login">
             저장
           </button>
-          <button type="button" className="button btn-normal">
+          <button
+            type="button"
+            className="button btn-normal"
+            onClick={() => {
+              router.back();
+            }}
+          >
             취소
           </button>
         </section>
