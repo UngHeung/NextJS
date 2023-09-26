@@ -15,7 +15,6 @@ const handleUpdateInfo = async (e: FormEvent, router: AppRouterInstance) => {
     updatepassword: Boolean(formData.get("updatepassword")),
     newpassword: formData.get("newpassword") as string,
   };
-  console.log(data);
 
   try {
     await fetchApi("POST", "/api/auth/update", data).then((response) => {
