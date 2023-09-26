@@ -5,18 +5,10 @@
 "use client";
 
 import React, { useState } from "react";
+import handleUpdateInfo from "./handleUpdateInfo";
 import { useSession } from "next-auth/react";
 import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
 import { useRouter } from "next/navigation";
-import handleUpdateInfo from "./handleUpdateInfo";
-
-export interface UserInfoUpdateProps {
-  _id: string;
-  accountname: string;
-  password: string;
-  updatepassword: boolean;
-  newpassword?: string;
-}
 
 const InfoUpdate = () => {
   const user = useSession().data?.user as UserSessionProps;

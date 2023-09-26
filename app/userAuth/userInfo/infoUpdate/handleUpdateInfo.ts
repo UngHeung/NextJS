@@ -1,7 +1,7 @@
 import fetchApi from "@/pages/api/apiConfig";
 import { FormEvent } from "@/utils/interface/eventType";
+import { UserInfoUpdateProps } from "@/utils/interface/user/userInterfaces";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
-import { UserInfoUpdateProps } from "./page";
 
 const handleUpdateInfo = async (e: FormEvent, router: AppRouterInstance) => {
   e.preventDefault();
