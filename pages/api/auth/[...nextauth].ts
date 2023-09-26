@@ -20,10 +20,11 @@ export const authOptions: NextAuthOptions = {
           return;
         }
 
+        const inputPassword = credentials?.password as string;
         const comparePassword = user.password;
-        const inputPasswordHash = await bcrypt.hash(credentials?.password as string, 10);
+        const validateLogin = await bcrypt.compare(inputPassword, comparePassword);
 
-        if (await bcrypt.compare(inputPasswordHash!, comparePassword)) {
+        if (!validateLogin) {
           console.log("잘못된 비밀번호");
           return;
         }
