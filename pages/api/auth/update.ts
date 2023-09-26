@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import getDbCollection from "../getDatabase";
+import { UserInfoUpdateProps } from "@/utils/interface/user/userInterfaces";
 import { NextApiRequest, NextApiResponse } from "next";
-import { UserInfoUpdateProps } from "@/app/userAuth/userInfo/infoUpdate/page";
 import { ObjectId } from "mongodb";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
