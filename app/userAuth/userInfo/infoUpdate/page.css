@@ -1,0 +1,10 @@
+#update_password {
+  /* display: none; */
+  vertical-align: middle;
+  margin-left: 5px;
+  accent-color: var(--color-main);
+}
+
+.check-password-update>label {
+  font-size: 12px;
+}

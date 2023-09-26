@@ -18,7 +18,7 @@
   position: relative;
   width: 100%;
   padding: 30px 0 50px;
-  border-bottom: 1px solid #d1d1d1;
+  border-bottom: 1px solid var(--color-gray200);
   box-sizing: border-box;
 }
 
@@ -31,7 +31,7 @@
 .book-line {
   width: 100%;
   margin: 10px 0 20px;
-  border: 1px solid #f1f1f1;
+  border: 1px solid var(--color-gray100);
 }
 
 .book-content,

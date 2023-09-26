@@ -1,7 +1,8 @@
+/* 회원가입 */
+
 .signup-input-wrap {
   margin: 30px 20px;
 }
-
 
 .user-input-wrap {
   padding-top: 30px;
@@ -16,9 +17,9 @@
   height: 35px;
   margin-bottom: 40px;
   padding: 0 10px;
-  background-color: #f1f1f1;
+  background-color: var(--color-gray100);
   border: none;
-  border-bottom: 1px solid #d1d1d1;
+  border-bottom: 1px solid var(--color-gray200);
   border-radius: 4px;
 }
 
@@ -51,11 +52,11 @@
 }
 
 .check-message.right {
-  color: green;
+  color: var(--color-green);
 }
 
 .check-message.wrong {
-  color: red
+  color: var(--color-red)
 }
 
 .user-input-wrap .button {

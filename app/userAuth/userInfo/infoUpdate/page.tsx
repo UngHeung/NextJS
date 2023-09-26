@@ -9,6 +9,7 @@ import handleUpdateInfo from "./handleUpdateInfo";
 import { useSession } from "next-auth/react";
 import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
 import { useRouter } from "next/navigation";
+import "./page.css";
 
 const InfoUpdate = () => {
   const user = useSession().data?.user as UserSessionProps;
@@ -56,6 +57,7 @@ const InfoUpdate = () => {
         </div>
         <div className="check-password-update">
           {/* update password */}
+          <label htmlFor="update_password">비밀번호 변경</label>
           <input
             id="update_password"
             name="updatepassword"
@@ -70,7 +72,6 @@ const InfoUpdate = () => {
             }}
           />
         </div>
-        <label htmlFor="update_password">비밀번호 변경</label>
         {updatePassword && (
           <>
             <div>

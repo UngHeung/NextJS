@@ -1,11 +1,13 @@
+/* 삭제버튼 */
+
 .book-delete-input {
   position: absolute;
   right: 50px;
   bottom: 15px;
   width: 50px;
   height: 25px;
-  background-color: #f1f1f1;
+  background-color: var(--color-gray100);
   border: none;
-  border-bottom: 1px solid #d1d1d1;
+  border-bottom: 1px solid var(--color-gray200);
   text-align: center;
 }

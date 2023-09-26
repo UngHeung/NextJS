@@ -5,7 +5,7 @@
   width: 100vw;
   min-width: 335px;
   height: 50px;
-  border-bottom: 1px solid #d1d1d1;
+  border-bottom: 1px solid var(--color-gray200);
   font-size: 14px;
 }
 
@@ -58,7 +58,7 @@
   bottom: -100px;
   width: 100vw;
   box-sizing: border-box;
-  border-top: 1px solid #d1d1d1;
+  border-top: 1px solid var(--color-gray200);
   font-size: 12px;
 }
 
@@ -77,11 +77,11 @@
 }
 
 .main-footer-wrap>.line {
-  color: #d1d1d1;
+  color: var(--color-gray200);
 }
 
 .main-footer-wrap>a {
-  border-bottom: 1px solid #d1d1d1;
+  border-bottom: 1px solid var(--color-gray200);
 }
 
 
@@ -110,7 +110,7 @@
 ::-webkit-scrollbar-thumb {
   width: 4px;
   border-radius: 1px;
-  background-color: #d1d1d1;
+  background-color: var(--color-gray200);
 }
 
 .button {
@@ -136,19 +136,19 @@
 }
 
 .btn-delete {
-  color: #d24444;
+  color: var(--color-red);
 }
 
 .btn-delete:hover {
-  background-color: #d24444;
+  background-color: var(--color-red);
   color: white;
 }
 
 .btn-login {
-  color: #2656c4;
+  color: var(--color-blue);
 }
 
 .btn-login:hover {
-  background-color: #2656c4;
+  background-color: var(--color-blue);
   color: white;
 }

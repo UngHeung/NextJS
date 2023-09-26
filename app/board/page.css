@@ -19,7 +19,7 @@
   width: 100%;
   margin-bottom: 40px;
   padding: 30px 10px;
-  border-bottom: 1px solid #d1d1d1;
+  border-bottom: 1px solid var(--color-gray200);
 }
 
 .board-head {
@@ -29,7 +29,7 @@
   width: 100%;
   margin-bottom: 20px;
   padding: 10px 0;
-  border-bottom: 1px solid #f1f1f1;
+  border-bottom: 1px solid var(--color-gray100);
 }
 
 .board-writer {
@@ -70,7 +70,7 @@
   position: fixed;
   bottom: 130px;
   right: 50%;
-  border: 1px solid #d1d1d1;
+  border: 1px solid var(--color-gray200);
   box-shadow: 0 0 10px rgba(0, 0, 0, .2);
   transform: translateX(165px);
   animation: updown .7s alternate ease-in-out infinite;
