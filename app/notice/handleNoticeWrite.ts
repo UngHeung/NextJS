@@ -9,14 +9,18 @@ const handleNoticeWrite = async (e: FormEvent, router: AppRouterInstance) => {
   const formData = new FormData(e.currentTarget);
   const title = formData.get("title") as string;
   const content = formData.get("content") as string;
-  const important = formData.get("important");
-  const importance = formData.get("importance") as string;
+  let important = Boolean(formData.get("important"));
+  const importance = parseInt(formData.get("importance") as string);
+
+  if (!importance) {
+    important = false;
+  }
 
   const data: NoticeProps = {
     title: title,
     content: content,
-    important: Boolean(important),
-    importance: parseInt(importance),
+    important: important,
+    importance: importance,
   };
 
   fetchApi("POST", "/api/notice/post", data).then((response) => {
