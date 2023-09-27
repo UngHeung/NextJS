@@ -108,9 +108,10 @@
   font-weight: 600;
 }
 
-#notice_input_important:checked+label+select {
+#notice_input_important:checked~select {
   width: 30px;
   border-color: var(--color-gray200);
+  cursor: pointer;
 }
 
 .notice-input-content {
