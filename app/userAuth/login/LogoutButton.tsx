@@ -16,7 +16,7 @@ const LogoutButton = () => {
       onClick={() => {
         signOut();
         resetUser();
-        router.push("/");
+        // router.push("/");
       }}
     >
       로그아웃
