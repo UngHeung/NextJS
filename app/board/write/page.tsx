@@ -2,19 +2,19 @@
  * 글쓰기 페이지
  */
 
+"use client";
+
 import React from "react";
 import Form from "../common/Form";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { redirect } from "next/navigation";
-import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
+import { useRecoilValue } from "recoil";
+import { loginUser } from "@/recoil/atoms";
 import "../page.css";
 
-const postWrite = async () => {
-  const session = await getServerSession(authOptions);
-  const user = session?.user as UserSessionProps;
+const postWrite = () => {
+  const user = useRecoilValue(loginUser);
 
-  if (!user) {
+  if (!user.accountname) {
     console.log("로그인이 필요합니다.");
     redirect("/userAuth");
   }
