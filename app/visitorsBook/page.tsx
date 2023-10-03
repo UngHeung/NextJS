@@ -49,7 +49,7 @@ const visitorsBook = async () => {
         </ul>
       </section>
       <section className="book-write-content">
-        <Form {...user} />
+        <Form />
       </section>
     </>
   );

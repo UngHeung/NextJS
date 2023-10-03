@@ -7,17 +7,19 @@
 import React, { useState } from "react";
 import handleVisitorsBook from "./handleVisitorsBook";
 import { useRouter } from "next/navigation";
-import { UserInfoProps } from "@/utils/interface/user/userInterfaces";
+import { useRecoilValue } from "recoil";
+import { loginUser } from "@/recoil/atoms";
 import "./Form.css";
 
-export const Form = ({ ...props }: UserInfoProps) => {
-  const [writer, setWriter] = useState(props?.userid ? props?.accountname : "");
+export const Form = () => {
+  const user = useRecoilValue(loginUser);
+  const [writer, setWriter] = useState(user?.userid ? user?.accountname : "");
   const [content, setContent] = useState("");
   const [bookPassword, setBookPassword] = useState("");
   const [isFetching, setIsFetching] = useState(false);
 
   const router = useRouter();
-  const writerid = props.userid;
+  const writerid = user.userid;
   const authtype = writerid ? true : false;
 
   return (
