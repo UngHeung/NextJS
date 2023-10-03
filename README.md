@@ -51,7 +51,6 @@ npm install @types/bcryptjs
 
 ```bash
 npm install recoil # 리코일
-npm install react-notion # 노션 페이지
 ```
 
 <br>
@@ -124,6 +123,7 @@ npm install react-notion # 노션 페이지
 
 ### 성능 개선
 
+> - [x] 등록버튼 여러번 클릭 막기
 > - [ ] 브라우저 로딩
 > - [ ] 서버 통신
 > - [ ] 상태관리 라이브러리
