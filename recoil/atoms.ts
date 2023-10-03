@@ -2,6 +2,7 @@
  * Atoms
  */
 
+import { PostProps } from "@/utils/interface/board/boardInterfaces";
 import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
 import { atom } from "recoil";
 
@@ -14,3 +15,14 @@ export const loginUser = atom({
     admin: false,
   } as UserSessionProps,
 });
+
+// export const postData = atom({
+//   key: "postData",
+//   default: {
+//     _id: "",
+//     writerid: "",
+//     writer: "",
+//     title: "",
+//     content: "",
+//   } as PostProps,
+// });
