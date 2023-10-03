@@ -1,14 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
 import logo from "@/public/assets/logo-dark.svg";
 import Image from "next/image";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
-import { getServerSession } from "next-auth/next";
+import { useRecoilValue } from "recoil";
+import { loginUser } from "@/recoil/atoms";
 
-const Header = async () => {
-  const session = await getServerSession(authOptions);
-  const user = session?.user as UserSessionProps;
+const Header = () => {
+  const user = useRecoilValue(loginUser);
 
   return (
     <header className="main-header">
@@ -30,7 +30,7 @@ const Header = async () => {
               <Link href={"/visitorsBook"}>방명록</Link>
             </li>
             <li>
-              {!user ? (
+              {!user.userid ? (
                 <Link href={"/userAuth"}>로그인</Link>
               ) : (
                 <Link href={"/userAuth/userInfo/"} className="user-login">
