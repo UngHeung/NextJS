@@ -9,6 +9,7 @@ const NoticeForm = () => {
   const [content, setContent] = useState("");
   const [important, setImportant] = useState(false);
   const [importance, setImportance] = useState(0);
+  const [isFetching, setIsFetching] = useState(false);
   const router = useRouter();
 
   const handleNoticeDelete = async () => {
@@ -31,6 +32,7 @@ const NoticeForm = () => {
       <form
         className="notice-form"
         onSubmit={(e) => {
+          setIsFetching(true);
           handleNoticeWrite(e, router);
           formReset();
         }}
@@ -74,7 +76,9 @@ const NoticeForm = () => {
               <option value="5">5</option>
             </select>
           </div>
-          <button className="button btn-normal">등록</button>
+          <button className="button btn-normal" disabled={isFetching}>
+            등록
+          </button>
         </header>
         <textarea
           name="content"

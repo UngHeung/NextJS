@@ -14,6 +14,7 @@ export const Form = ({ ...props }: UserInfoProps) => {
   const [writer, setWriter] = useState(props?.userid ? props?.accountname : "");
   const [content, setContent] = useState("");
   const [bookPassword, setBookPassword] = useState("");
+  const [isFetching, setIsFetching] = useState(false);
 
   const router = useRouter();
   const writerid = props.userid;
@@ -23,6 +24,7 @@ export const Form = ({ ...props }: UserInfoProps) => {
     <form
       id="book_write_form"
       onSubmit={(e) => {
+        setIsFetching(true);
         handleVisitorsBook(e, authtype, router);
         !writerid ? setWriter("") : null;
         setBookPassword("");
@@ -60,7 +62,7 @@ export const Form = ({ ...props }: UserInfoProps) => {
             </>
           )}
         </div>
-        <button type="submit" className="button btn-normal">
+        <button type="submit" className="button btn-normal" disabled={isFetching}>
           등록
         </button>
       </header>

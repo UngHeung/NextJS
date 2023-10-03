@@ -15,6 +15,7 @@ const UpdateForm = ({ user, item }: { user?: UserSessionProps; item: CommentProp
   const [updateState, setUpdateState] = useState(false);
   const [comment, setCommnet] = useState(item.comment);
   const [prevComment, setPrevComment] = useState(comment);
+  const [isFetching, setIsFetching] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -27,6 +28,7 @@ const UpdateForm = ({ user, item }: { user?: UserSessionProps; item: CommentProp
       className="comment-form-container"
       onSubmit={(e) => {
         const commentid = item._id!;
+        setIsFetching(true);
         handleCommentUpdate(e, router, commentid);
         setPrevComment("");
         setUpdateState(false);
@@ -57,7 +59,12 @@ const UpdateForm = ({ user, item }: { user?: UserSessionProps; item: CommentProp
                 취소
               </button>
             ) : (
-              <button type="button" className="button btn-normal" onClick={() => setUpdateState(true)}>
+              <button
+                type="button"
+                className="button btn-normal"
+                onClick={() => setUpdateState(true)}
+                disabled={isFetching}
+              >
                 수정
               </button>
             )}

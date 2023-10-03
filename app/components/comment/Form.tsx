@@ -11,12 +11,14 @@ import { CommentFormProps } from "@/utils/interface/comment/commentInterface";
 
 const Form = ({ postInfo }: { postInfo: CommentFormProps }) => {
   const [comment, setComment] = useState("");
+  const [isFetching, setIsFetching] = useState(false);
   const router = useRouter();
 
   return (
     <form
       className="comment-input-form-container"
       onSubmit={(e) => {
+        setIsFetching(true);
         handleCommentWrite(e, router);
         setComment("");
       }}
@@ -36,7 +38,9 @@ const Form = ({ postInfo }: { postInfo: CommentFormProps }) => {
           value={comment}
         ></textarea>
       </div>
-      <button className="comment-input-button button btn-normal">저장</button>
+      <button className="comment-input-button button btn-normal" disabled={isFetching}>
+        저장
+      </button>
     </form>
   );
 };
