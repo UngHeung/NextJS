@@ -11,7 +11,7 @@ import { useRecoilValue } from "recoil";
 import { loginUser } from "@/recoil/atoms";
 import "../page.css";
 
-const postWrite = () => {
+const PostWrite = () => {
   const user = useRecoilValue(loginUser);
 
   if (!user.accountname) {
@@ -31,4 +31,4 @@ const postWrite = () => {
   );
 };
 
-export default postWrite;
+export default PostWrite;
