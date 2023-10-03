@@ -11,7 +11,7 @@ import "./page.css";
 const pages = () => {
   const user = useRecoilValue(loginUser);
 
-  if (!user) {
+  if (!user.accountname) {
     redirect("/");
   }
 
