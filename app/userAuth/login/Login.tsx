@@ -19,10 +19,6 @@ const Login = () => {
   const [password, setPassword] = useState<string>("");
   const [user, setUser] = useRecoilState(loginUser);
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
-
   return (
     <form
       onSubmit={async (e) => {
