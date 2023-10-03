@@ -1,15 +1,15 @@
+"use client";
+
 import React from "react";
 import LogoutButton from "../login/LogoutButton";
 import Link from "next/link";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { redirect } from "next/navigation";
-import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
+import { loginUser } from "@/recoil/atoms";
+import { useRecoilValue } from "recoil";
 import "./page.css";
 
-const pages = async () => {
-  const session = await getServerSession(authOptions);
-  const user = session?.user as UserSessionProps;
+const pages = () => {
+  const user = useRecoilValue(loginUser);
 
   if (!user) {
     redirect("/");

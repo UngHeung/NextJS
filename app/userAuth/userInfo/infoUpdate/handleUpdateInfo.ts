@@ -27,7 +27,7 @@ const handleUpdateInfo = async (e: FormEvent, router: AppRouterInstance) => {
       }
     });
   } catch (e) {
-    console.error("userAuth_userInfo_infoUpdate_서버 에러 발생\n" + e);
+    throw new Error("userAuth_userInfo_infoUpdate_서버 에러 발생\n" + e);
   }
 };
 

@@ -10,10 +10,12 @@ import { useSession } from "next-auth/react";
 import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
 import { useRouter } from "next/navigation";
 import "./page.css";
+import { useRecoilState } from "recoil";
+import { loginUser } from "@/recoil/atoms";
 
 const InfoUpdate = () => {
-  const user = useSession().data?.user as UserSessionProps;
   const router = useRouter();
+  const [user, setUser] = useRecoilState(loginUser);
   const [accountname, setAccountname] = useState(user?.accountname);
   const [password, setPassword] = useState("");
   const [updatePassword, setUpdatePassword] = useState(false);
@@ -29,7 +31,19 @@ const InfoUpdate = () => {
   return (
     <section className="info-update-input-wrap">
       <h3 className="title">회원정보수정</h3>
-      <form onSubmit={(e) => handleUpdateInfo(e, router)}>
+      <form
+        onSubmit={async (e) => {
+          try {
+            await handleUpdateInfo(e, router);
+            setUser({
+              ...user,
+              accountname: accountname,
+            });
+          } catch (e) {
+            console.error(e);
+          }
+        }}
+      >
         <input name="userid" type="text" style={{ display: "none" }} defaultValue={user.userid} readOnly />
         <div>
           {/* account name */}
