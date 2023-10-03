@@ -4,18 +4,38 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import handleLogin from "./handleLogin";
 import { useRouter } from "next/navigation";
+import { getSession } from "next-auth/react";
+import { useRecoilState } from "recoil";
+import { loginUser } from "@/recoil/atoms";
+import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
 
 const Login = () => {
   const router = useRouter();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [user, setUser] = useRecoilState(loginUser);
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   return (
-    <form onSubmit={(e) => handleLogin(e, router)} method="GET">
+    <form
+      onSubmit={async (e) => {
+        try {
+          await handleLogin(e, router);
+          const user = (await getSession())?.user as UserSessionProps;
+          setUser(user);
+        } catch (e) {
+          console.log("login_서버 에러 발생\n" + e);
+        }
+      }}
+      method="GET"
+    >
       <section className="id-login-wrap">
         <div>
           <input
