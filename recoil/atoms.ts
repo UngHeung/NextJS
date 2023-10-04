@@ -26,3 +26,14 @@ export const loginUser = atom({
 //     content: "",
 //   } as PostProps,
 // });
+
+export const modalData = atom({
+  key: "modalData",
+  default: {
+    type: "",
+    title: "",
+    message: "",
+    url: "",
+    isShow: false,
+  },
+});
