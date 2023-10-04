@@ -11,12 +11,14 @@ import React, { useEffect, useState } from "react";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 import { modalData } from "@/recoil/atoms";
 import "./Modal.css";
+import { useRouter } from "next/navigation";
 
 export type ModalType = "primary" | "secondary";
 
 const Modal = () => {
   const modal = useRecoilValue(modalData);
   const resetModal = useResetRecoilState(modalData);
+  const router = useRouter();
   const [isShow, setIsShow] = useState(modal.isShow);
 
   useEffect(() => {
@@ -32,7 +34,13 @@ const Modal = () => {
     switch (type) {
       case "primary":
         return (
-          <button className="button btn-normal" onClick={checkModal}>
+          <button
+            className="button btn-normal"
+            onClick={() => {
+              modal.url ? router.push(modal.url) : null;
+              checkModal();
+            }}
+          >
             확인
           </button>
         );
