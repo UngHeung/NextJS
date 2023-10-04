@@ -10,10 +10,10 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 import { modalData } from "@/recoil/atoms";
-import "./Modal.css";
 import { useRouter } from "next/navigation";
+import "./Modal.css";
 
-export type ModalType = "primary" | "secondary";
+export type ModalType = "primary" | "secondary" | "tertiary";
 
 const Modal = () => {
   const modal = useRecoilValue(modalData);
@@ -58,6 +58,15 @@ const Modal = () => {
             <button className="button btn-normal" onClick={checkModal}>
               취소
             </button>
+          </>
+        );
+
+      case "tertiary":
+        return (
+          <>
+            {setTimeout(() => {
+              resetModal();
+            }, 1000)}
           </>
         );
     }
