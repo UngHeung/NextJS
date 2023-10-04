@@ -38,7 +38,7 @@ const Login = () => {
 
           if (result.ok) {
             setUser(user);
-            router.refresh;
+            router.refresh();
             router.push("/");
           }
         } catch (e) {

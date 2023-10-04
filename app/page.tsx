@@ -1,19 +1,18 @@
 import React from "react";
+import NoticeForm from "./notice/NoticeForm";
 import getDbCollection from "@/pages/api/getDatabase";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import "./page.css";
-import NoticeForm from "./notice/NoticeForm";
 import { NoticeProps } from "@/utils/interface/notice/noticeInterface";
+import "./page.css";
 
 export const dynamic = "force-dynamic";
 
 const home = async () => {
   const session = await getServerSession(authOptions);
   const user = session?.user as UserSessionProps;
-
   let noticeList: NoticeProps[];
 
   try {
