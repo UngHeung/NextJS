@@ -2,9 +2,12 @@
  * Atoms
  */
 
+import { atom } from "recoil";
+import { recoilPersist } from "recoil-persist";
 import { PostProps } from "@/utils/interface/board/boardInterfaces";
 import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
-import { atom } from "recoil";
+
+const { persistAtom } = recoilPersist();
 
 export const loginUser = atom({
   key: "loginUser",
@@ -14,6 +17,7 @@ export const loginUser = atom({
     email: "",
     admin: false,
   } as UserSessionProps,
+  effects_UNSTABLE: [persistAtom],
 });
 
 // export const postData = atom({
@@ -36,4 +40,5 @@ export const modalData = atom({
     url: "",
     isShow: false,
   },
+  effects_UNSTABLE: [persistAtom],
 });
