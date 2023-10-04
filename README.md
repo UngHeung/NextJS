@@ -51,6 +51,7 @@ npm install @types/bcryptjs
 
 ```bash
 npm install recoil # 리코일
+npm install recoil-persist # 리코일 새로고침 후 값 유지
 ```
 
 <br>
