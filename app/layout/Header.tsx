@@ -30,11 +30,11 @@ const Header = () => {
               <Link href={"/visitorsBook"}>방명록</Link>
             </li>
             <li>
-              {!user.userid ? (
+              {!user?.userid ? (
                 <Link href={"/userAuth"}>로그인</Link>
               ) : (
                 <Link href={"/userAuth/userInfo/"} className="user-login">
-                  {user.accountname}
+                  {user?.accountname}
                 </Link>
               )}
             </li>

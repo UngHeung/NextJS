@@ -5,6 +5,7 @@ import Recoil from "./components/recoil/Recoil";
 import type { Metadata } from "next";
 import "./globals.css";
 import "./layout.css";
+import Modal from "./components/modal/Modal";
 
 export const metadata: Metadata = {
   title: "NextJS",
@@ -20,6 +21,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             <Header />
             <main className="main">{children}</main>
             <Footer />
+            <Modal />
           </Recoil>
         </NextAuthProvider>
       </body>
