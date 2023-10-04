@@ -12,12 +12,6 @@ const handleLogin = async (e: FormEvent<HTMLFormElement>, router: AppRouterInsta
   const email = formData.get("email");
   const password = formData.get("password");
 
-  const data = {
-    email: email,
-    password: password,
-    redirect: false,
-  };
-
   const result = {
     ok: false,
     message: "",
@@ -32,6 +26,12 @@ const handleLogin = async (e: FormEvent<HTMLFormElement>, router: AppRouterInsta
     result.message = "비밀번호를 입력해주세요.";
     return result;
   }
+
+  const data = {
+    email: email,
+    password: password,
+    redirect: false,
+  };
 
   try {
     await signIn("credentials", data).then((response) => {
