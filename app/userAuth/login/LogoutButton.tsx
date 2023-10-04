@@ -1,14 +1,13 @@
 "use client";
 
-import { loginUser } from "@/recoil/atoms";
-import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import React from "react";
-import { useResetRecoilState } from "recoil";
+import { loginUser, modalData } from "@/recoil/atoms";
+import { signOut } from "next-auth/react";
+import { useRecoilState, useResetRecoilState } from "recoil";
 
 const LogoutButton = () => {
-  const router = useRouter();
   const resetUser = useResetRecoilState(loginUser);
+  const [modal, setModal] = useRecoilState(modalData);
 
   return (
     <button
@@ -16,7 +15,13 @@ const LogoutButton = () => {
       onClick={() => {
         signOut();
         resetUser();
-        // router.push("/");
+        setModal({
+          type: "primary",
+          title: "로그아웃 성공",
+          message: "로그아웃 되었습니다.",
+          url: "",
+          isShow: true,
+        });
       }}
     >
       로그아웃
