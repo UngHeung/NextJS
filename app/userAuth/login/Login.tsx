@@ -20,10 +20,6 @@ const Login = () => {
   const [user, setUser] = useRecoilState(loginUser);
   const [modal, setModal] = useRecoilState(modalData);
 
-  useEffect(() => {
-    console.log(modal);
-  }, [modal]);
-
   return (
     <form
       onSubmit={async (e) => {
