@@ -18,31 +18,36 @@ const handleLogin = async (e: FormEvent<HTMLFormElement>, router: AppRouterInsta
     redirect: false,
   };
 
-  if (!email || !password) {
-    console.log("아이디 또는 비밀번호 미입력");
-    return;
+  const result = {
+    ok: false,
+    message: "",
+  };
+
+  if (!email) {
+    result.message = "이메일을 입력해주세요.";
+    return result;
+  }
+
+  if (!password) {
+    result.message = "비밀번호를 입력해주세요.";
+    return result;
   }
 
   try {
-    await signIn("credentials", data)
-      .then((response) => {
-        console.log(response?.ok);
-        if (response?.ok) {
-          console.log("로그인 성공");
-        } else {
-          console.log("로그인 실패");
-          return;
-        }
-        return response;
-      })
-      .then((response) => {
-        if (response?.ok) {
-          router.refresh();
-          router.push("/");
-        }
-      });
+    await signIn("credentials", data).then((response) => {
+      if (response?.ok) {
+        result.ok = true;
+        result.message = "로그인 되었습니다.";
+      } else {
+        result.message = "이메일 또는 비밀번호를 확인해주세요.";
+      }
+
+      return response;
+    });
   } catch (e) {
-    throw new Error(e + "서버에 문제 발생");
+    result.message = "이메일 또는 비밀번호를 확인해주세요.";
+  } finally {
+    return result;
   }
 };
 

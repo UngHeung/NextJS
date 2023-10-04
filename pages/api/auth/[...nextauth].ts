@@ -16,8 +16,7 @@ export const authOptions: NextAuthOptions = {
         const user = await (await getDbCollection("userauth")).findOne({ email: credentials?.email });
 
         if (!user) {
-          console.log("가입되지 않은 이메일");
-          return;
+          throw new Error("api_auth_[...nextauth] : 가입되지 않은 이메일");
         }
 
         const inputPassword = credentials?.password as string;
@@ -25,8 +24,7 @@ export const authOptions: NextAuthOptions = {
         const validateLogin = await bcrypt.compare(inputPassword, comparePassword);
 
         if (!validateLogin) {
-          console.log("잘못된 비밀번호");
-          return;
+          throw new Error("api_auth_[...nextauth] : 잘못된 비밀번호");
         }
 
         return user;

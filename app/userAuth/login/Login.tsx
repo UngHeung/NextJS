@@ -10,7 +10,7 @@ import handleLogin from "./handleLogin";
 import { useRouter } from "next/navigation";
 import { getSession } from "next-auth/react";
 import { useRecoilState } from "recoil";
-import { loginUser } from "@/recoil/atoms";
+import { loginUser, modalData } from "@/recoil/atoms";
 import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
 
 const Login = () => {
@@ -18,16 +18,35 @@ const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [user, setUser] = useRecoilState(loginUser);
+  const [modal, setModal] = useRecoilState(modalData);
+
+  useEffect(() => {
+    console.log(modal);
+  }, [modal]);
 
   return (
     <form
       onSubmit={async (e) => {
+        let result: { ok: boolean; message: string };
+        let user: UserSessionProps;
         try {
-          await handleLogin(e, router);
-          const user = (await getSession())?.user as UserSessionProps;
-          setUser(user);
+          result = await handleLogin(e, router);
+          user = (await getSession())?.user as UserSessionProps;
+          setModal({
+            type: "primary",
+            title: result?.ok ? "로그인 성공" : "로그인 실패",
+            message: result.message,
+            url: "",
+            isShow: true,
+          });
+
+          if (result.ok) {
+            setUser(user);
+            router.refresh;
+            router.push("/");
+          }
         } catch (e) {
-          console.log("login_서버 에러 발생\n" + e);
+          console.error(e);
         }
       }}
       method="GET"
