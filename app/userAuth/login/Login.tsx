@@ -32,14 +32,12 @@ const Login = () => {
             type: "primary",
             title: result?.ok ? "로그인 성공" : "로그인 실패",
             message: result.message,
-            url: "",
+            url: result.ok ? "/" : "",
             isShow: true,
           });
 
           if (result.ok) {
             setUser(user);
-            router.refresh();
-            router.push("/");
           }
         } catch (e) {
           console.error(e);

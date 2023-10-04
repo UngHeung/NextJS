@@ -37,7 +37,10 @@ const Modal = () => {
           <button
             className="button btn-normal"
             onClick={() => {
-              modal.url ? router.push(modal.url) : null;
+              if (modal.url) {
+                router.refresh();
+                router.push(modal.url);
+              }
               checkModal();
             }}
           >
