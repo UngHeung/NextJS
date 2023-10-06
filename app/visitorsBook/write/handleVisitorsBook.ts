@@ -1,3 +1,8 @@
+/**
+ * 방명록 작성 핸들러
+ */
+
+import { ModalOption } from "@/app/components/modal/Modal";
 import fetchApi from "@/pages/api/apiConfig";
 import getDate from "@/utils/func/getDate";
 import { FormEvent } from "@/utils/interface/eventType";
@@ -13,9 +18,16 @@ const handleVisitorsBook = async (e: FormEvent, authtype: boolean, router: AppRo
   const content = formData.get("content");
   const bookpassword = formData.get("bookpassword");
 
+  const result: ModalOption = {
+    ok: false,
+    title: "등록 실패",
+    message: "",
+    url: "",
+  };
+
   if (!content) {
-    console.log("내용이 없습니다.");
-    return;
+    result.message = "내용을 입력해주세요.";
+    return result;
   }
 
   const data: VisitorsBookRequestProps = {
@@ -29,13 +41,18 @@ const handleVisitorsBook = async (e: FormEvent, authtype: boolean, router: AppRo
 
   try {
     await fetchApi("POST", "/api/visitorsbook/post", data).then((response) => {
-      if (response.status === 200) {
-        router.refresh();
-        router.push(response.url);
+      if (response.ok) {
+        result.ok = true;
+        result.title = "등록 성공";
+        result.message = "등록되었습니다.";
+        result.url = response.url;
       }
     });
   } catch (e) {
-    console.error(e);
+    result.title = "서버 오류 발생";
+    result.message = "관리자에게 문의하세요";
+  } finally {
+    return result;
   }
 };
 

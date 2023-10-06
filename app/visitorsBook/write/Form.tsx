@@ -7,30 +7,49 @@
 import React, { useState } from "react";
 import handleVisitorsBook from "./handleVisitorsBook";
 import { useRouter } from "next/navigation";
-import { useRecoilValue } from "recoil";
-import { loginUser } from "@/recoil/atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { loginUser, modalData } from "@/recoil/atoms";
 import "./Form.css";
+import { ModalOption } from "@/app/components/modal/Modal";
 
 export const Form = () => {
   const user = useRecoilValue(loginUser);
+  const router = useRouter();
+  const writerid = user?.userid;
+  const authtype = writerid ? true : false;
   const [writer, setWriter] = useState(user?.userid ? user?.accountname : "");
   const [content, setContent] = useState("");
   const [bookPassword, setBookPassword] = useState("");
   const [isFetching, setIsFetching] = useState(false);
-
-  const router = useRouter();
-  const writerid = user.userid;
-  const authtype = writerid ? true : false;
+  const [modal, setModal] = useRecoilState(modalData);
 
   return (
     <form
       id="book_write_form"
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         setIsFetching(true);
-        handleVisitorsBook(e, authtype, router);
-        !writerid ? setWriter("") : null;
-        setBookPassword("");
-        setContent("");
+
+        let result: ModalOption;
+
+        try {
+          result = await handleVisitorsBook(e, authtype, router);
+
+          if (!result.ok) {
+            setIsFetching(false);
+          }
+
+          setModal({
+            type: "primary",
+            title: result.title,
+            message: result.message,
+            url: result.url,
+            isShow: true,
+          });
+
+          !writerid ? setWriter("") : null;
+          setBookPassword("");
+          setContent("");
+        } catch (e) {}
       }}
     >
       <header className="book-write-head">
