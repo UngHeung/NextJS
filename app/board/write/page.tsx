@@ -4,20 +4,29 @@
 
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Form from "../common/Form";
-import { redirect } from "next/navigation";
-import { useRecoilValue } from "recoil";
-import { loginUser } from "@/recoil/atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { loginUser, modalData } from "@/recoil/atoms";
 import "../page.css";
 
 const PostWrite = () => {
   const user = useRecoilValue(loginUser);
+  const [modal, setModal] = useRecoilState(modalData);
 
-  if (!user.accountname) {
-    console.log("로그인이 필요합니다.");
-    redirect("/userAuth");
-  }
+  useEffect(() => {
+    !user.userid &&
+      setModal({
+        type: "primary",
+        title: "회원 전용",
+        message: "로그인이 필요합니다.",
+        url: "/userAuth",
+        isShow: true,
+      });
+
+    // console.log("로그인이 필요합니다.");
+    // redirect("/userAuth");
+  }, []);
 
   return (
     <>
