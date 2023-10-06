@@ -34,6 +34,11 @@ const Form = ({ type, data }: { type: PostRequestType; data: any }) => {
         setIsFetching(true);
         try {
           result = await handlePost(e, router, { reqType, title, content });
+          if (!result.ok) {
+            setIsFetching(false);
+            return;
+          }
+
           setModal({
             type: "primary",
             title: result.title,
@@ -41,10 +46,6 @@ const Form = ({ type, data }: { type: PostRequestType; data: any }) => {
             url: result.url,
             isShow: true,
           });
-
-          if (!result.ok) {
-            setIsFetching(false);
-          }
         } catch (e) {
           console.error(e);
         }
