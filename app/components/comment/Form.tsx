@@ -6,21 +6,36 @@
 
 import React, { useState } from "react";
 import handleCommentWrite from "./handleCommentWrite";
-import { useRouter } from "next/navigation";
 import { CommentFormProps } from "@/utils/interface/comment/commentInterface";
+import { useRecoilState } from "recoil";
+import { modalData } from "@/recoil/atoms";
+import { ModalOption } from "../modal/Modal";
 
 const Form = ({ postInfo }: { postInfo: CommentFormProps }) => {
   const [comment, setComment] = useState("");
   const [isFetching, setIsFetching] = useState(false);
-  const router = useRouter();
+  const [modal, setModal] = useRecoilState(modalData);
 
   return (
     <form
       className="comment-input-form-container"
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         setIsFetching(true);
-        handleCommentWrite(e, router);
-        setComment("");
+        let result: ModalOption;
+        try {
+          result = await handleCommentWrite(e);
+
+          if (!result.ok) {
+            setIsFetching(false);
+          }
+
+          setModal({ type: "primary", isShow: true, ...result });
+
+          setComment("");
+          setIsFetching(false);
+        } catch (e) {
+          console.error(e);
+        }
       }}
     >
       <input type="text" name="postid" defaultValue={postInfo.postid} style={{ display: "none" }} />

@@ -2,21 +2,27 @@ import fetchApi from "@/pages/api/apiConfig";
 import getDate from "@/utils/func/getDate";
 import { CommentProps } from "@/utils/interface/comment/commentInterface";
 import { FormEvent } from "@/utils/interface/eventType";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
+import { ModalOption } from "@/app/components/modal/Modal";
 
-const handleCommentWrite = async (e: FormEvent, router: AppRouterInstance) => {
+const handleCommentWrite = async (e: FormEvent) => {
   e.preventDefault();
 
   const formData = new FormData(e.currentTarget);
-
   const postid = formData.get("postid");
   const writerid = formData.get("writerid");
   const writer = formData.get("writer");
   const comment = formData.get("comment");
 
+  const result: ModalOption = {
+    ok: false,
+    title: "등록 실패",
+    message: "",
+    url: "",
+  };
+
   if (!comment) {
-    console.log("내용이 없습니다.");
-    return;
+    result.message = "내용을 입력해주세요.";
+    return result;
   }
 
   const data: CommentProps = {
@@ -30,12 +36,17 @@ const handleCommentWrite = async (e: FormEvent, router: AppRouterInstance) => {
   try {
     await fetchApi("POST", "/api/comment/post", data).then((response) => {
       if (response.ok) {
-        router.refresh();
-        router.push(response.url);
+        result.ok = true;
+        result.title = "등록 성공";
+        result.message = "등록되었습니다.";
+        result.url = response.url;
       }
     });
   } catch (e) {
-    console.log("comment_form_서버에 오류 발생\n" + e);
+    result.title = "서버 오류 발생";
+    result.message = "관리자에게 문의하세요";
+  } finally {
+    return result;
   }
 };
 

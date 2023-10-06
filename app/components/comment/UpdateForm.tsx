@@ -10,12 +10,16 @@ import handleRemoveItem from "./handleCommentDelete";
 import { useRouter } from "next/navigation";
 import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
 import { CommentProps } from "@/utils/interface/comment/commentInterface";
+import { useRecoilState } from "recoil";
+import { modalData } from "@/recoil/atoms";
+import { ModalOption } from "../modal/Modal";
 
 const UpdateForm = ({ user, item }: { user?: UserSessionProps; item: CommentProps }) => {
   const [updateState, setUpdateState] = useState(false);
   const [comment, setCommnet] = useState(item.comment);
   const [prevComment, setPrevComment] = useState(comment);
   const [isFetching, setIsFetching] = useState(false);
+  const [modal, setModal] = useRecoilState(modalData);
   const router = useRouter();
 
   useEffect(() => {
@@ -26,12 +30,25 @@ const UpdateForm = ({ user, item }: { user?: UserSessionProps; item: CommentProp
   return (
     <form
       className="comment-form-container"
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         const commentid = item._id!;
         setIsFetching(true);
-        handleCommentUpdate(e, router, commentid);
-        setPrevComment("");
-        setUpdateState(false);
+        let result: ModalOption;
+        try {
+          result = await handleCommentUpdate(e, commentid);
+
+          if (!result.ok) {
+            setIsFetching(false);
+          }
+
+          setModal({ type: "primary", isShow: true, ...result });
+
+          setPrevComment("");
+          setUpdateState(false);
+          setIsFetching(false);
+        } catch (e) {
+          console.error(e);
+        }
       }}
     >
       <input type="text" name="postid" defaultValue={item.postid} style={{ display: "none" }} />
