@@ -1,3 +1,7 @@
+/**
+ * 게시물 삭제 버튼
+ */
+
 "use client";
 
 import React, { useState } from "react";
@@ -6,12 +10,16 @@ import { useRouter } from "next/navigation";
 import { UserInfoProps } from "@/utils/interface/user/userInterfaces";
 import { CommonDeleteRequestProps, DeleteRequestType } from "@/utils/interface/common/commonInterfaces";
 import { ButtonEvent } from "@/utils/interface/eventType";
+import { useRecoilState } from "recoil";
+import { modalData } from "@/recoil/atoms";
 import "./Button.css";
+import { ModalOption } from "@/app/components/modal/Modal";
 
 const Button = (props: { postid: string; userdata: UserInfoProps; req: string; authtype?: boolean }) => {
   const postid = props?.postid;
   const userId = props?.userdata?.userid;
   const deleteType: DeleteRequestType = props.req as DeleteRequestType;
+  const [modal, setModal] = useRecoilState(modalData);
 
   const [bookPassword, setBookPassword] = useState("");
   const router = useRouter();
@@ -26,19 +34,31 @@ const Button = (props: { postid: string; userdata: UserInfoProps; req: string; a
 
   const handleRemove = async (e: ButtonEvent, data: CommonDeleteRequestProps) => {
     e.preventDefault();
+
+    let result: ModalOption = {
+      ok: false,
+      title: "삭제 실패",
+      message: "",
+      url: "",
+    };
+
     try {
       await fetchApi("DELETE", `/api/${deleteType}/delete`, data).then((response) => {
         if (response.ok) {
-          router.refresh();
-          router.push(response.url);
-        } else {
-          console.log(response.status);
+          result.ok = true;
+          result.title = "삭제 성공";
+          result.message = "게시물이 삭제되었습니다.";
+          result.url = response.url;
         }
       });
     } catch (e) {
-      console.error("common_delete_button_서버에 문제 발생\n" + e);
+      result.title = "서버 오류 발생";
+      result.message = "관리자에게 문의하세요.";
+    } finally {
+      return result;
     }
   };
+
   return (
     <>
       {!props.authtype && (
@@ -51,7 +71,25 @@ const Button = (props: { postid: string; userdata: UserInfoProps; req: string; a
           placeholder="비밀번호"
         />
       )}
-      <button className="button btn-delete" onClick={(e) => handleRemove(e, data)}>
+      <button
+        className="button btn-delete"
+        onClick={async (e) => {
+          let result: ModalOption;
+          try {
+            result = await handleRemove(e, data);
+
+            setModal({
+              type: "primary",
+              title: result.title,
+              message: result.message,
+              url: result.url,
+              isShow: true,
+            });
+          } catch (e) {
+            console.error(e);
+          }
+        }}
+      >
         삭제
       </button>
     </>
