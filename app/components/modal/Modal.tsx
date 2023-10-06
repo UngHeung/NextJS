@@ -14,6 +14,12 @@ import { useRouter } from "next/navigation";
 import "./Modal.css";
 
 export type ModalType = "primary" | "secondary" | "tertiary";
+export interface ModalOption {
+  ok: boolean;
+  title: string;
+  message: string;
+  url?: string;
+}
 
 const Modal = () => {
   const modal = useRecoilValue(modalData);

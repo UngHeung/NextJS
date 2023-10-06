@@ -12,6 +12,7 @@ import { getSession } from "next-auth/react";
 import { useRecoilState } from "recoil";
 import { loginUser, modalData } from "@/recoil/atoms";
 import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
+import { ModalOption } from "@/app/components/modal/Modal";
 
 const Login = () => {
   const router = useRouter();
@@ -23,7 +24,7 @@ const Login = () => {
   return (
     <form
       onSubmit={async (e) => {
-        let result: { ok: boolean; title: string; message: string };
+        let result: ModalOption;
         let user: UserSessionProps;
         try {
           result = await handleLogin(e, router);
