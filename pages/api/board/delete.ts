@@ -4,8 +4,8 @@
 
 import { ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
-import getDbCollection from "../getDatabase";
 import { PostProps } from "@/utils/interface/board/boardInterfaces";
+import getDbCollection from "../getDatabase";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const body = req.body as PostProps;

@@ -8,11 +8,10 @@ import React, { useState } from "react";
 import Link from "next/link";
 import handlePost from "./handlePost";
 import { PostRequestType } from "@/utils/interface/board/boardInterfaces";
-import { useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { modalData } from "@/recoil/atoms";
-import "./Form.css";
 import { ModalOption } from "@/app/components/modal/Modal";
+import "./Form.css";
 
 const Form = ({ type, data }: { type: PostRequestType; data: any }) => {
   const reqType = type;
@@ -24,7 +23,6 @@ const Form = ({ type, data }: { type: PostRequestType; data: any }) => {
   const [content, setContent] = useState(reqType === "write" ? "" : data?.content);
   const [isFetching, setIsFetching] = useState(false);
   const [modal, setModal] = useRecoilState(modalData);
-  const router = useRouter();
 
   return (
     <form
@@ -33,7 +31,7 @@ const Form = ({ type, data }: { type: PostRequestType; data: any }) => {
 
         setIsFetching(true);
         try {
-          result = await handlePost(e, router, { reqType, title, content });
+          result = await handlePost(e, { reqType, title, content });
           if (!result.ok) {
             setIsFetching(false);
             return;

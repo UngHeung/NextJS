@@ -2,7 +2,7 @@ import fetchApi from "@/pages/api/apiConfig";
 import { FormEvent } from "@/utils/interface/eventType";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 
-const handlePost = async (e: FormEvent, router: AppRouterInstance, { ...props }) => {
+const handlePost = async (e: FormEvent, { ...props }) => {
   e.preventDefault();
   const apiUrl = `/api/board/${props.reqType === "write" ? "post" : "update"}`;
   const formData = new FormData(e.currentTarget);
