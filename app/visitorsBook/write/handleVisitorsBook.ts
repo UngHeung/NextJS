@@ -2,14 +2,13 @@
  * 방명록 작성 핸들러
  */
 
-import { ModalOption } from "@/app/components/modal/Modal";
 import fetchApi from "@/pages/api/apiConfig";
 import getDate from "@/utils/func/getDate";
 import { FormEvent } from "@/utils/interface/eventType";
 import { VisitorsBookRequestProps } from "@/utils/interface/visitorsBook/visitorsbookInterfaces";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
+import { ModalOption } from "@/app/components/modal/Modal";
 
-const handleVisitorsBook = async (e: FormEvent, authtype: boolean, router: AppRouterInstance) => {
+const handleVisitorsBook = async (e: FormEvent, authtype: boolean) => {
   e.preventDefault();
 
   const formData = new FormData(e.currentTarget);

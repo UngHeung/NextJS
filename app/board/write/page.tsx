@@ -23,9 +23,6 @@ const PostWrite = () => {
         url: "/userAuth",
         isShow: true,
       });
-
-    // console.log("로그인이 필요합니다.");
-    // redirect("/userAuth");
   }, []);
 
   return (

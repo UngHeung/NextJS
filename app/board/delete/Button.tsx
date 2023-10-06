@@ -80,13 +80,7 @@ const Button = (props: { postid: string; userdata: UserInfoProps; req: string; a
           try {
             result = await handleRemove(e, data);
 
-            setModal({
-              type: "primary",
-              title: result.title,
-              message: result.message,
-              url: result.url,
-              isShow: true,
-            });
+            setModal({ type: "primary", isShow: true, ...result });
           } catch (e) {
             console.error(e);
           }

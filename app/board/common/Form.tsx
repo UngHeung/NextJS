@@ -37,13 +37,7 @@ const Form = ({ type, data }: { type: PostRequestType; data: any }) => {
             setIsFetching(false);
           }
 
-          setModal({
-            type: "primary",
-            title: result.title,
-            message: result.message,
-            url: result.url,
-            isShow: true,
-          });
+          setModal({ type: "primary", isShow: true, ...result });
         } catch (e) {
           console.error(e);
         }

@@ -9,8 +9,8 @@ import handleVisitorsBook from "./handleVisitorsBook";
 import { useRouter } from "next/navigation";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { loginUser, modalData } from "@/recoil/atoms";
-import "./Form.css";
 import { ModalOption } from "@/app/components/modal/Modal";
+import "./Form.css";
 
 export const Form = () => {
   const user = useRecoilValue(loginUser);
@@ -32,24 +32,20 @@ export const Form = () => {
         let result: ModalOption;
 
         try {
-          result = await handleVisitorsBook(e, authtype, router);
+          result = await handleVisitorsBook(e, authtype);
 
           if (!result.ok) {
             setIsFetching(false);
           }
 
-          setModal({
-            type: "primary",
-            title: result.title,
-            message: result.message,
-            url: result.url,
-            isShow: true,
-          });
+          setModal({ type: "primary", isShow: true, ...result });
 
           !writerid ? setWriter("") : null;
           setBookPassword("");
           setContent("");
-        } catch (e) {}
+        } catch (e) {
+          console.error(e);
+        }
       }}
     >
       <header className="book-write-head">

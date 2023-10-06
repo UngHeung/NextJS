@@ -19,8 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const validationPasswordCheck = await bcrypt.compare(inputPassword, comparePassword);
 
   if (!validationPasswordCheck) {
-    console.log("잘못된 비밀번호");
-    return;
+    return res.redirect(500, "/userAuth/userInfo/infoUpdate");
   }
 
   try {
