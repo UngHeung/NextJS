@@ -2,9 +2,9 @@
  * 방명록 삭제 서버 요청
  */
 
+import getDbCollection from "../getDatabase";
 import { ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
-import getDbCollection from "../getDatabase";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -21,7 +21,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.redirect(302, "/visitorsBook");
   } catch (e) {
-    console.error("visitorsbook_delete_서버요청 오류 발생\n" + e);
+    throw new Error("api/visitorsbook/delete.ts\n" + e);
   }
 };
 

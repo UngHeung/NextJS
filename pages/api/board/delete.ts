@@ -2,10 +2,10 @@
  * 게시물 삭제 서버 요청
  */
 
+import getDbCollection from "../getDatabase";
 import { ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 import { PostProps } from "@/utils/interface/board/boardInterfaces";
-import getDbCollection from "../getDatabase";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const body = req.body as PostProps;

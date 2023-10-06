@@ -1,5 +1,5 @@
 /**
- * 게시물 삭제 버튼
+ * 게시물, 방명록 삭제 버튼
  */
 
 "use client";
@@ -12,8 +12,8 @@ import { CommonDeleteRequestProps, DeleteRequestType } from "@/utils/interface/c
 import { ButtonEvent } from "@/utils/interface/eventType";
 import { useRecoilState } from "recoil";
 import { modalData } from "@/recoil/atoms";
-import "./Button.css";
 import { ModalOption } from "@/app/components/modal/Modal";
+import "./Button.css";
 
 const Button = (props: { postid: string; userdata: UserInfoProps; req: string; authtype?: boolean }) => {
   const postid = props?.postid;
