@@ -28,8 +28,10 @@ const Modal = () => {
   const [isShow, setIsShow] = useState(modal.isShow);
 
   useEffect(() => {
+    const checkBtn = document.querySelector(".on-focus") as HTMLButtonElement;
     setIsShow(modal.isShow);
-  }, [modal.isShow]);
+    isShow && checkBtn.focus();
+  }, [isShow, modal.isShow]);
 
   const checkModal = () => {
     resetModal();
@@ -41,7 +43,7 @@ const Modal = () => {
       case "primary":
         return (
           <button
-            className="button btn-normal"
+            className="button btn-normal on-focus"
             onClick={() => {
               if (modal.url) {
                 router.refresh();
@@ -61,7 +63,7 @@ const Modal = () => {
               확인
             </button>
 
-            <button className="button btn-normal" onClick={checkModal}>
+            <button className="button btn-normal on-focus" onClick={checkModal}>
               취소
             </button>
           </>
