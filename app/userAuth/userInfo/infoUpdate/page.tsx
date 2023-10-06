@@ -4,14 +4,13 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import handleUpdateInfo from "./handleUpdateInfo";
-import { useSession } from "next-auth/react";
-import { UserSessionProps } from "@/utils/interface/user/userInterfaces";
 import { useRouter } from "next/navigation";
-import "./page.css";
 import { useRecoilState } from "recoil";
-import { loginUser } from "@/recoil/atoms";
+import { loginUser, modalData } from "@/recoil/atoms";
+import { ModalOption } from "@/app/components/modal/Modal";
+import "./page.css";
 
 const InfoUpdate = () => {
   const router = useRouter();
@@ -21,24 +20,36 @@ const InfoUpdate = () => {
   const [updatePassword, setUpdatePassword] = useState(false);
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordCheck, setNewPasswordCheck] = useState("");
+  const [modal, setModal] = useRecoilState(modalData);
 
-  if (!user) {
-    console.log("회원이 아닙니다.");
-    router.push("/");
-    return;
-  }
+  useEffect(() => {
+    !user.userid &&
+      setModal({
+        type: "primary",
+        title: "회원 전용",
+        message: "로그인이 필요합니다.",
+        url: "/userAuth",
+        isShow: true,
+      });
+  }, []);
 
   return (
     <section className="info-update-input-wrap">
       <h3 className="title">회원정보수정</h3>
       <form
         onSubmit={async (e) => {
+          let result: ModalOption;
           try {
-            await handleUpdateInfo(e, router);
-            setUser({
-              ...user,
-              accountname: accountname,
-            });
+            result = await handleUpdateInfo(e);
+            console.log(result.url);
+            setModal({ ...result, type: "primary", url: result.ok ? result.url : "", isShow: true });
+
+            if (result.ok) {
+              setUser({
+                ...user,
+                accountname: accountname,
+              });
+            }
           } catch (e) {
             console.error(e);
           }

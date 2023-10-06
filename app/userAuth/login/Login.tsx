@@ -29,13 +29,7 @@ const Login = () => {
         try {
           result = await handleLogin(e, router);
           user = (await getSession())?.user as UserSessionProps;
-          setModal({
-            type: "primary",
-            title: result.title,
-            message: result.message,
-            url: result.ok ? "/" : "",
-            isShow: true,
-          });
+          setModal({ ...result, type: "primary", url: result.ok ? "/" : "", isShow: true });
 
           if (result.ok) {
             setUser(user);

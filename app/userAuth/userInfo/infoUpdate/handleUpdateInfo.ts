@@ -1,12 +1,20 @@
 import fetchApi from "@/pages/api/apiConfig";
+import { ModalOption } from "@/app/components/modal/Modal";
 import { FormEvent } from "@/utils/interface/eventType";
 import { UserInfoUpdateProps } from "@/utils/interface/user/userInterfaces";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 
-const handleUpdateInfo = async (e: FormEvent, router: AppRouterInstance) => {
+const handleUpdateInfo = async (e: FormEvent) => {
   e.preventDefault();
 
   const formData = new FormData(e.currentTarget);
+
+  const result: ModalOption = {
+    ok: false,
+    title: "업데이트 실패",
+    message: "",
+    url: "",
+  };
+
   const data: UserInfoUpdateProps = {
     _id: formData.get("userid") as string,
     accountname: formData.get("accountname") as string,
@@ -18,16 +26,19 @@ const handleUpdateInfo = async (e: FormEvent, router: AppRouterInstance) => {
   try {
     await fetchApi("POST", "/api/auth/update", data).then((response) => {
       if (response.ok) {
-        console.log("변경 성공");
-        router.refresh();
-        router.push(response.url);
-      } else {
-        console.log("변경 실패");
-        return;
+        console.log(response);
+        result.ok = true;
+        result.title = "업데이트 성공";
+        result.message = "정보가 업데이트 되었습니다.";
+        result.url = response.url;
+      } else if (response.status === 500) {
+        result.message = "비밀번호를 확인해주세요.";
       }
     });
   } catch (e) {
     throw new Error("userAuth_userInfo_infoUpdate_서버 에러 발생\n" + e);
+  } finally {
+    return result;
   }
 };
 
