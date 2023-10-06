@@ -12,12 +12,19 @@ const handlePost = async (e: FormEvent, router: AppRouterInstance, { ...props })
   const writerid = formData.get("writerid");
   const writer = formData.get("writer");
 
+  const result = {
+    ok: false,
+    title: "등록 실패",
+    message: "",
+    url: "",
+  };
+
   if (!title) {
-    console.log("제목이 없습니다.");
-    return;
+    result.message = "제목을 입력해주세요.";
+    return result;
   } else if (!content) {
-    console.log("내용이 없습니다.");
-    return;
+    result.message = "내용을 입력해주세요";
+    return result;
   }
 
   const data = {
@@ -32,12 +39,17 @@ const handlePost = async (e: FormEvent, router: AppRouterInstance, { ...props })
   try {
     await fetchApi("POST", apiUrl, data).then((response) => {
       if (response.ok) {
-        router.refresh();
-        router.push(response.url);
+        result.ok = true;
+        result.title = "등록 성공";
+        result.message = "등록되었습니다.";
+        result.url = response.url;
       }
     });
   } catch (e) {
-    console.log("common_form_서버에 오류 발생\n" + e);
+    result.title = "서버 오류 발생";
+    result.message = "관리자에게 문의하세요";
+  } finally {
+    return result;
   }
 };
 

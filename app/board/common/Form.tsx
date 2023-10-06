@@ -9,7 +9,10 @@ import Link from "next/link";
 import handlePost from "./handlePost";
 import { PostRequestType } from "@/utils/interface/board/boardInterfaces";
 import { useRouter } from "next/navigation";
+import { useRecoilState } from "recoil";
+import { modalData } from "@/recoil/atoms";
 import "./Form.css";
+import { ModalOption } from "@/app/components/modal/Modal";
 
 const Form = ({ type, data }: { type: PostRequestType; data: any }) => {
   const reqType = type;
@@ -20,13 +23,31 @@ const Form = ({ type, data }: { type: PostRequestType; data: any }) => {
   const [title, setTitle] = useState(reqType === "write" ? "" : data?.title);
   const [content, setContent] = useState(reqType === "write" ? "" : data?.content);
   const [isFetching, setIsFetching] = useState(false);
+  const [modal, setModal] = useRecoilState(modalData);
   const router = useRouter();
 
   return (
     <form
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
+        let result: ModalOption;
+
         setIsFetching(true);
-        handlePost(e, router, { reqType, title, content });
+        try {
+          result = await handlePost(e, router, { reqType, title, content });
+          setModal({
+            type: "primary",
+            title: result.title,
+            message: result.message,
+            url: result.url,
+            isShow: true,
+          });
+
+          if (!result.ok) {
+            setIsFetching(false);
+          }
+        } catch (e) {
+          console.error(e);
+        }
       }}
     >
       <section className="post-input-wrap">
