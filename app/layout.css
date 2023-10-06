@@ -130,6 +130,11 @@
   box-shadow: 0 0 10px rgba(147, 93, 180, .5);
 }
 
+.button:disabled {
+  background-color: var(--color-gray200);
+  color: var(--color-gray300);
+}
+
 .btn-normal {
   color: black;
 }
