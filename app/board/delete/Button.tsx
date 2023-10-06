@@ -49,6 +49,8 @@ const Button = (props: { postid: string; userdata: UserInfoProps; req: string; a
           result.title = "삭제 성공";
           result.message = "게시물이 삭제되었습니다.";
           result.url = response.url;
+        } else if (response.status === 500) {
+          result.message = "비밀번호를 확인해주세요.";
         }
       });
     } catch (e) {
