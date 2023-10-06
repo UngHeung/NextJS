@@ -21,7 +21,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.redirect(302, "/visitorsBook");
   } catch (e) {
-    throw new Error("api/visitorsbook/delete.ts\n" + e);
+    throw new Error("api/visitorsbook/delete.ts_서버요청 오류 발생\n" + e);
   }
 };
 

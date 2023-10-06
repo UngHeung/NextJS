@@ -11,7 +11,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.redirect(302, "/userAuth");
   } catch (e) {
-    console.log(e + "서버요청 오류 발생");
+    throw new Error("api/auth/post.ts_서버요청 오류 발생\n" + e);
   }
 };
 

@@ -9,7 +9,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       res.redirect(302, "/userAuth/signUp");
     }
   } catch (e) {
-    console.log(e + "서버요청 오류 발생");
+    throw new Error("api/auth/check.ts_서버 문제 발생\n" + e);
   }
 };
 

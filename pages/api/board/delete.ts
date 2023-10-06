@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.redirect(302, "/board");
   } catch (e) {
-    console.error("board_delete_서버요청 오류 발생\n" + e);
+    throw new Error("board_delete_서버요청 오류 발생\n" + e);
   }
 };
 

@@ -13,7 +13,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.redirect(302, `/board/detail/${newPost.insertedId}`);
   } catch (e) {
-    console.error("board_post_서버요청 오류 발생\n" + e);
+    throw new Error("board_post_서버요청 오류 발생\n" + e);
   }
 };
 

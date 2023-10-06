@@ -13,7 +13,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const user = await (await getDbCollection("userauth")).findOne({ _id: new ObjectId(body._id) });
     comparePassword = user.password;
   } catch (e) {
-    console.error("auth_update_서버 문제 발생\n" + e);
+    throw new Error("auth_update_서버 문제 발생\n" + e);
   }
 
   const validationPasswordCheck = await bcrypt.compare(inputPassword, comparePassword);
@@ -53,7 +53,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.redirect(302, "/userAuth/userInfo");
   } catch (e) {
-    console.error("auth_update_서버 문제 발생2\n" + e);
+    throw new Error("auth_update_서버 문제 발생2\n" + e);
   }
 };
 
