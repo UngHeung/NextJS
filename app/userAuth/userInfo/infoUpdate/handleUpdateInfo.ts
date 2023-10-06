@@ -1,3 +1,7 @@
+/**
+ * 회원정보 업데이트 핸들러
+ */
+
 import fetchApi from "@/pages/api/apiConfig";
 import { ModalOption } from "@/app/components/modal/Modal";
 import { FormEvent } from "@/utils/interface/eventType";
@@ -26,7 +30,6 @@ const handleUpdateInfo = async (e: FormEvent) => {
   try {
     await fetchApi("POST", "/api/auth/update", data).then((response) => {
       if (response.ok) {
-        console.log(response);
         result.ok = true;
         result.title = "업데이트 성공";
         result.message = "정보가 업데이트 되었습니다.";
