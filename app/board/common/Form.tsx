@@ -32,9 +32,9 @@ const Form = ({ type, data }: { type: PostRequestType; data: any }) => {
         setIsFetching(true);
         try {
           result = await handlePost(e, { reqType, title, content });
+
           if (!result.ok) {
             setIsFetching(false);
-            return;
           }
 
           setModal({
