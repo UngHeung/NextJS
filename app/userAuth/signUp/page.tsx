@@ -7,63 +7,86 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import handleSignUp from "../signUp/handleSignUp";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { loginUser, modalData } from "@/recoil/atoms";
 import "./page.css";
+import { ModalOption } from "@/app/components/modal/Modal";
 
 const Signup = () => {
-  const session = useSession();
-  const user = session.data?.user;
-  const redirect = useRouter();
-
-  useEffect(() => {
-    if (user) {
-      console.log("회원입니다.");
-      redirect.push("/");
-    }
-  }, [redirect, user]);
-
+  const user = useRecoilValue(loginUser);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
   const [emailCheck, setEmailCheck] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
   const [showEmailCheckMessage, setShowEmailCheckMessage] = useState("");
+  const [modal, setModal] = useRecoilState(modalData);
+
+  useEffect(() => {
+    if (user.userid) {
+      setModal({
+        type: "primary",
+        title: "오류",
+        message: "회원입니다.",
+        url: "/",
+        isShow: true,
+      });
+    }
+  }, []);
 
   const checkEmail = async (email: string) => {
+    setIsFetching(true);
     if (!email) {
-      console.log("이메일 미입력");
       setEmailCheck(false);
       setShowEmailCheckMessage("이메일을 입력해주세요.");
+      setIsFetching(false);
       return;
     }
 
     try {
-      await fetch("/api/auth/check", { method: "POST", body: email })
-        .then((res) => {
-          if (res.ok) {
-            console.log("중복확인 성공");
-            setEmailCheck(true);
-            setShowEmailCheckMessage("확인되었습니다.");
-          } else {
-            console.log("중복확인 실패");
-            setEmailCheck(false);
-            setShowEmailCheckMessage("중복되거나 잘못된 형식의 이메일입니다.");
-          }
-          return res.json();
-        })
-        .then(() => {
-          redirect.push("/userAuth");
-        });
+      await fetch("/api/auth/check", { method: "POST", body: email }).then((res) => {
+        if (res.ok) {
+          setEmailCheck(true);
+          setShowEmailCheckMessage("확인되었습니다.");
+        } else {
+          setEmailCheck(false);
+          setShowEmailCheckMessage("중복되거나 잘못된 형식의 이메일입니다.");
+        }
+        return res.json();
+      });
     } catch (e) {
       console.error(e);
+    } finally {
+      setIsFetching(false);
     }
   };
 
   return (
     <section className="signup-input-wrap">
       <h3 className="title">회원가입</h3>
-      <form onSubmit={(e) => handleSignUp(e, redirect)}>
+      <form
+        onSubmit={async (e) => {
+          e.preventDefault();
+
+          if (!emailCheck) {
+            setModal({
+              type: "primary",
+              title: "이메일 미확인",
+              message: "이메일 중복을 확인해주세요.",
+              isShow: true,
+            });
+            return;
+          }
+          let result: ModalOption;
+          try {
+            result = await handleSignUp(e);
+            setModal({ type: "primary", url: result.url, isShow: true, ...result });
+          } catch (e) {
+            console.error(e);
+          }
+        }}
+      >
         <section className="user-input-wrap">
           <div>
             <input
@@ -89,7 +112,7 @@ const Signup = () => {
             {showEmailCheckMessage ? (
               <span className={`check-message ${emailCheck ? "right" : "wrong"}`}>{showEmailCheckMessage}</span>
             ) : null}
-            <button type="button" className="button btn-normal" onClick={() => checkEmail(email)}>
+            <button type="button" className="button btn-normal" onClick={() => checkEmail(email)} disabled={isFetching}>
               중복확인
             </button>
           </div>

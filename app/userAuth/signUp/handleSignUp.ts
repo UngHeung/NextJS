@@ -6,15 +6,32 @@ import fetchApi from "@/pages/api/apiConfig";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 import { FormEvent } from "react";
 import bcrypt from "bcryptjs";
+import { ModalOption } from "@/app/components/modal/Modal";
 
-const handleSignUp = async (e: FormEvent<HTMLFormElement>, redirect: AppRouterInstance) => {
+const handleSignUp = async (e: FormEvent<HTMLFormElement>) => {
   e.preventDefault();
+
   const formData = new FormData(e.currentTarget);
   const email = formData.get("email");
   let password = formData.get("password") as string;
 
   const hashPassword = await bcrypt.hash(password, 10);
   password = hashPassword;
+
+  const result: ModalOption = {
+    ok: false,
+    title: "가입 실패",
+    message: "",
+    url: "",
+  };
+
+  if (!email) {
+    result.message = "아이디를 입력해주세요.";
+    return result;
+  } else if (!password) {
+    result.message = "비밀번호를 입력해주세요.";
+    return result;
+  }
 
   const data = {
     accountname: formData.get("accountname"),
@@ -23,17 +40,19 @@ const handleSignUp = async (e: FormEvent<HTMLFormElement>, redirect: AppRouterIn
     admin: false,
   };
 
-  if (!email || !password) {
-    console.log("아이디 또는 비밀번호 미입력");
-    return;
-  }
-
   try {
     await fetchApi("POST", "/api/auth/post", data).then((response) => {
-      redirect.push(response.url);
+      if (response.ok) {
+        result.ok = true;
+        result.title = "가입 성공";
+        result.message = "가입되었습니다.";
+        result.url = response.url;
+      }
     });
   } catch (e) {
-    throw new Error(e + "서버에 문제 발생");
+    throw new Error("userAuth_signUp_서버 에러 발생\n" + e);
+  } finally {
+    return result;
   }
 };
 
