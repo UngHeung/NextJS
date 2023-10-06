@@ -14,6 +14,7 @@ const handleLogin = async (e: FormEvent<HTMLFormElement>, router: AppRouterInsta
 
   const result = {
     ok: false,
+    title: "로그인 실패",
     message: "",
   };
 
@@ -37,6 +38,7 @@ const handleLogin = async (e: FormEvent<HTMLFormElement>, router: AppRouterInsta
     await signIn("credentials", data).then((response) => {
       if (response?.ok) {
         result.ok = true;
+        result.title = "로그인 성공";
         result.message = "로그인 되었습니다.";
       } else {
         result.message = "이메일 또는 비밀번호를 확인해주세요.";
@@ -45,7 +47,8 @@ const handleLogin = async (e: FormEvent<HTMLFormElement>, router: AppRouterInsta
       return response;
     });
   } catch (e) {
-    result.message = "이메일 또는 비밀번호를 확인해주세요.";
+    result.title = "서버 오류 발생";
+    result.message = "관리자에게 문의하세요";
   } finally {
     return result;
   }

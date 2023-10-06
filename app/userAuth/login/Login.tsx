@@ -23,14 +23,14 @@ const Login = () => {
   return (
     <form
       onSubmit={async (e) => {
-        let result: { ok: boolean; message: string };
+        let result: { ok: boolean; title: string; message: string };
         let user: UserSessionProps;
         try {
           result = await handleLogin(e, router);
           user = (await getSession())?.user as UserSessionProps;
           setModal({
             type: "primary",
-            title: result?.ok ? "로그인 성공" : "로그인 실패",
+            title: result.title,
             message: result.message,
             url: result.ok ? "/" : "",
             isShow: true,
